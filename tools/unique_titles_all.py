@@ -43,6 +43,24 @@ for i, s in enumerate(grams):
             dup[i] = dup[j] = True
             break
 
+import datetime
+BASE = datetime.date(2026, 10, 29)
+an = {r["채널이름"]: r for r in csv.DictReader(open("channels/최종_채널분석.csv", encoding="utf-8-sig"))}
+
+
+def last_upload(ch):
+    r = an.get(ch, {})
+    t = r.get("최근 업로드", "")
+    m = re.search(r"(\d+)\s*(초|분|시간|일|주|개월|년)", t)
+    if not m:
+        return "최근 업로드 확인 못 함"
+    d = int(m.group(1)) * {"초": 0, "분": 0, "시간": 0, "일": 1, "주": 7, "개월": 30, "년": 365}[m.group(2)]
+    date = BASE - datetime.timedelta(days=d)
+    approx = "" if m.group(2) in ("초", "분", "시간", "일") else "쯤"
+    state = "🟢 운영 중" if d <= 7 else ("🟡 최근 한 달 안에 활동" if d <= 30 else "🔴 업로드 멈춤")
+    return f"{state} · 최근 업로드 {t} ({date:%Y-%m-%d}{approx}) · 최근 30일 업로드 {r.get('최근 30일 업로드', '?')}개"
+
+
 by = defaultdict(list)
 for r, d in zip(rows, dup):
     if not d and r["채널이름"] in topset:
@@ -51,11 +69,18 @@ total = sum(len(v) for v in by.values())
 with open("channels/상_채널_중복없는_제목.txt", "w", encoding="utf-8") as fp:
     fp.write(f"상 채널 중복 없는 영상 제목 — 251개 채널 영상 {len(rows):,}개 전체와 비교해 한 번도 겹치지 않은 제목만 (총 {total:,}개)\n")
     fp.write("채널 순서: 기준 채널 → 구독자 많은 순 / 채널 안: 조회수 높은 순\n형식: 순위. 영상 제목 | 조회수\n")
+    fp.write("운영 상태(2026-10-29 기준): 🟢 운영 중 = 최근 7일 안에 업로드 / 🟡 최근 한 달 안에 활동 = 8~30일 전 / 🔴 업로드 멈춤 = 30일 넘게 업로드 없음\n")
+    fp.write("\n[채널 운영 상태 한눈에 보기]\n")
+    for ch in top:
+        if by.get(ch):
+            fp.write(f"- {ch}: {last_upload(ch)}\n")
     for ch in top:
         items = sorted(by.get(ch, []), key=lambda r: -r["v"])
         if not items:
             continue
-        fp.write(f"\n{'=' * 60}\n■ {ch} ({len(items)}개)\n{'=' * 60}\n")
+        fp.write(f"\n{'=' * 60}\n■ {ch} ({len(items)}개)\n  {last_upload(ch)}\n{'=' * 60}\n")
         for k, r in enumerate(items, 1):
             fp.write(f"{k}. {r['제목']} | {r['v']:,}회\n")
+import collections
+print(collections.Counter(last_upload(c).split(" · ")[0] for c in top if by.get(c)))
 print(total, sum(1 for c in top if by.get(c)), {c: len(by.get(c, [])) for c in top[:2]})
