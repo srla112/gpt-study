@@ -163,3 +163,24 @@ for base in ("세상만사", "사연만남 (@사연만남1짱)"):
     print(base, "전체", tot, "겹치는 묶음", len(gs), "다른 채널과 겹침", len(other))
     for g in other[:5]:
         print("  ", [(r["채널이름"], r["조회수"]) for r in g][:5], g[0]["제목"][:60])
+
+# 중복이 전혀 없는 제목만 채널별로 txt로 저장
+uniq = [g[0] for g in clusters.values() if len(g) == 1 and len(exact.get(g[0]["n"], [])) <= 1]
+order = []
+for r in rows:
+    if r["채널이름"] not in order:
+        order.append(r["채널이름"])
+by = defaultdict(list)
+for r in uniq:
+    by[r["채널이름"]].append(r)
+with open("channels/상_채널_중복없는_제목.txt", "w", encoding="utf-8") as fp:
+    fp.write(f"상 채널 중복 없는 영상 제목 (다른 영상과 겹치지 않는 제목만, 총 {len(uniq)}개)\n")
+    fp.write("형식: 영상 제목 | 조회수\n")
+    for ch in order:
+        items = sorted(by.get(ch, []), key=lambda r: -r["조회수"])
+        if not items:
+            continue
+        fp.write(f"\n{'=' * 60}\n■ {ch} ({len(items)}개)\n{'=' * 60}\n")
+        for r in items:
+            fp.write(f"{r['제목']} | {r['조회수']:,}회\n")
+print("uniq", len(uniq), "channels", sum(1 for c in order if by.get(c)))
