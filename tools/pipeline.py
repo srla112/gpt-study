@@ -145,17 +145,19 @@ def analyze():
         lens = [secs(v["length"]) for v in vids if secs(v["length"])]
         kw = sum(bool(KW.search(v["title"])) for v in vids) / n if n else 0
         lng = sum(1 for x in lens if x >= 3600) / len(lens) if lens else 0
+        mm = CFG.get("match_min_minutes", 50) * 60
+        match = sum(1 for v in vids if KW.search(v["title"]) and (secs(v["length"]) or 0) >= mm) / n if n else 0
         rv = [views(v["views"]) for v in vids[:10] if views(v["views"]) is not None]
         recent = [v for v in vids if days_ago(v["published"]) is not None and days_ago(v["published"]) <= 30]
         top = max(vids, key=lambda v: views(v["views"]) or 0) if vids else None
         last = days_ago(vids[0]["published"]) if vids else None
         st = "⚪" if last is None else ("🟢" if last <= 7 else ("🟡" if last <= 30 else "🔴"))
         bench = info.get("list_category") == "기준"
-        g = "기준 채널" if bench else ("상" if kw >= hi and lng >= 0.5 else ("중" if kw >= lo else "하"))
+        g = "기준 채널" if bench else ("상" if match >= 0.5 else ("중" if match >= 0.25 or kw >= hi else "하"))
         r = {"채널이름": info.get("name") or info.get("list_name"), "채널링크": info.get("channel_url"),
              "구독자": (info.get("subscribers") or "").replace("구독자 ", "").replace("명", ""),
              "영상 수": (info.get("video_count") or "").replace("동영상 ", "").replace("개", "") or str(n),
-             "유사도": g, "운영": st, f"{CFG['name']} 소재 비율": f"{kw:.0%}", "1시간 이상 영상 비율": f"{lng:.0%}",
+             "유사도": g, "운영": st, "같은 종류 영상 비율": f"{match:.0%}", f"{CFG['name']} 소재 비율": f"{kw:.0%}", "1시간 이상 영상 비율": f"{lng:.0%}",
              "평균 길이": fmt_len(statistics.mean(lens)) if lens else "", "최근 30일 업로드": len(recent),
              "최근 업로드": vids[0]["published"] if vids else "", "최근 10개 평균 조회수": f"{statistics.mean(rv):,.0f}" if rv else "",
              "조회수 1위 영상": top["title"] if top else "", "조회수 1위 링크": "https://www.youtube.com/watch?v=" + top["id"] if top else "",
@@ -180,7 +182,7 @@ def analyze():
         for r in excluded:
             w.writerow([r["채널이름"], r["채널링크"], r["구독자"], r["제외 이유"]])
     # 유사도별 엑셀 (기준 채널은 '상' 시트 맨 위)
-    cols = ["채널이름", "운영", "구독자", "영상 수", f"{name} 소재 비율", "1시간 이상 영상 비율", "평균 길이", "최근 30일 업로드", "최근 업로드", "최근 10개 평균 조회수", "조회수 1위 영상"]
+    cols = ["채널이름", "운영", "구독자", "영상 수", "같은 종류 영상 비율", f"{name} 소재 비율", "1시간 이상 영상 비율", "평균 길이", "최근 30일 업로드", "최근 업로드", "최근 10개 평균 조회수", "조회수 1위 영상"]
     wb = Workbook(); wb.remove(wb.active)
     colors = {"상": "E2EFDA", "중": "FFF2CC", "하": "FCE4D6"}
     for gname in ("상", "중", "하"):
@@ -195,11 +197,11 @@ def analyze():
             ws.cell(row=row, column=1).hyperlink = r["채널링크"]
             ws.cell(row=row, column=1).font = Font(color="0563C1", underline="single", bold=True)
             if r["조회수 1위 링크"]:
-                ws.cell(row=row, column=11).hyperlink = r["조회수 1위 링크"]
-                ws.cell(row=row, column=11).font = Font(color="0563C1", underline="single")
+                ws.cell(row=row, column=12).hyperlink = r["조회수 1위 링크"]
+                ws.cell(row=row, column=12).font = Font(color="0563C1", underline="single")
             if r["유사도"] == "기준 채널":
                 ws.cell(row=row, column=1).value = r["채널이름"] + " ★기준"
-        for i, wdt in enumerate([30, 6, 10, 9, 13, 16, 12, 14, 12, 16, 70], 1):
+        for i, wdt in enumerate([30, 6, 10, 9, 16, 13, 16, 12, 14, 12, 16, 70], 1):
             ws.column_dimensions[ws.cell(row=1, column=i).column_letter].width = wdt
         ws.freeze_panes = "B2"; ws.auto_filter.ref = ws.dimensions
         with open(f"{P}/{name}_유사도_{gname}.csv", "w", encoding="utf-8-sig", newline="") as fp:
@@ -246,9 +248,10 @@ def crawl():
     for f in glob.glob(f"{RAW}/[0-9]*.json"):
         d = json.load(open(f, encoding="utf-8"))
         vids = d["videos"]
-        kw = sum(bool(KW.search(v["title"])) for v in vids) / len(vids) if vids else 0
+        mm = CFG.get("match_min_minutes", 50) * 60
+        match = sum(1 for v in vids if KW.search(v["title"]) and (secs(v["length"]) or 0) >= mm) / len(vids) if vids else 0
         have_names.add(d["info"].get("name"))
-        if d["info"].get("list_category") == "기준" or kw >= CFG.get("grade_hi", 0.6):
+        if d["info"].get("list_category") == "기준" or match >= 0.5:
             top = sorted(vids, key=lambda v: -(views(v["views"]) or 0))[:CFG.get("crawl_per_channel", 8)]
             seeds += [v["id"] for v in top + vids[:3]]
     seeds = [v for v in dict.fromkeys(seeds) if v not in seen][:CFG.get("crawl_max", 400)]
