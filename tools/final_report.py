@@ -189,7 +189,7 @@ for g in glist:
             cidx[key] = len(chs); chs.append(list(key))
 chunk, part, size, parts = [], 0, 0, []
 for k, g in enumerate(glist, 1):
-    item = [k, [[v["title"], cidx[(v["channel"], v["status"])], fdate(v), v["views"], v["id"]] for v in g]]
+    item = [k, [[v["title"].replace("\ufffd", ""), cidx[(v["channel"], v["status"])], fdate(v), v["views"], v["id"]] for v in g]]
     s = len(json.dumps(item, ensure_ascii=False).encode())
     if size + s > 7_000_000 and chunk:
         parts.append(chunk); chunk, size = [], 0
