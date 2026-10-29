@@ -5,11 +5,15 @@ from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, "tools")
 from yt_scrape import get
 
-CACHE = "channels/raw/_dates.json"
-rows = list(csv.DictReader(open("channels/전체_영상제목.csv", encoding="utf-8-sig")))
-gid = json.load(open("channels/raw/_groups.json"))
-sizes = Counter(gid)
-ids = [r["영상 링크"].split("v=")[1] for i, r in enumerate(rows) if sizes[gid[i]] > 1 and re.search(r"주|개월|년", r["업로드"])]
+D = os.environ.get("PROJ", "channels")
+CACHE = f"{D}/raw/_dates.json"
+if len(sys.argv) > 1:
+    ids = []
+else:
+    rows = list(csv.DictReader(open("channels/전체_영상제목.csv", encoding="utf-8-sig")))
+    gid = json.load(open("channels/raw/_groups.json"))
+    sizes = Counter(gid)
+    ids = [r["영상 링크"].split("v=")[1] for i, r in enumerate(rows) if sizes[gid[i]] > 1 and re.search(r"주|개월|년", r["업로드"])]
 if len(sys.argv) > 1:  # final_report.py가 남긴 목록으로 추가 수집
     ids = json.load(open(sys.argv[1]))
 dates = json.load(open(CACHE)) if os.path.exists(CACHE) else {}

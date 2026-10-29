@@ -9,9 +9,11 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 
 BASE = datetime.date(2026, 10, 29)
+D = os.environ.get("PROJ", "channels")
+ANALYSIS = os.environ.get("ANALYSIS", f"{D}/최종_채널분석.csv")
 UNIT = {"초": 0, "분": 0, "시간": 0, "일": 1, "주": 7, "개월": 30, "년": 365}
 
-an = list(csv.DictReader(open("channels/최종_채널분석.csv", encoding="utf-8-sig")))
+an = list(csv.DictReader(open(ANALYSIS, encoding="utf-8-sig")))
 keep = {}
 for r in an:
     cid = r["채널링크"].rsplit("/", 1)[-1]
@@ -42,9 +44,9 @@ def views(s):
     return int(round(float(m.group(1)) * {"천": 1e3, "만": 1e4, "억": 1e8, None: 1}[m.group(2)])) if m else 0
 
 
-dates = json.load(open("channels/raw/_dates.json")) if os.path.exists("channels/raw/_dates.json") else {}
+dates = json.load(open(f"{D}/raw/_dates.json")) if os.path.exists(f"{D}/raw/_dates.json") else {}
 videos = []
-for f in sorted(glob.glob("channels/raw/[0-9]*.json")):
+for f in sorted(glob.glob(f"{D}/raw/[0-9]*.json")):
     d = json.load(open(f, encoding="utf-8"))
     cid = d["info"].get("channel_id")
     if cid not in keep:
@@ -127,7 +129,7 @@ def fdate(v):
 
 
 HEAD = [
-    "251개 채널 전체 영상 제목 — 조회수 많이 나온 순서 (2026-10-29 기준)",
+    f"{len(keep)}개 채널 전체 영상 제목 — 조회수 많이 나온 순서 (2026-10-29 기준)",
     "",
     "번호 순서: 같은 제목 묶음 안에서 가장 높은 조회수가 큰 순서",
     "묶음 안 순서: 먼저 올린 영상이 위 (업로드 날짜 빠른 순)",
@@ -150,8 +152,8 @@ def write(path, only_dup):
                 fp.write(f"{v['title']}, {v['channel']}{v['status']}, {fdate(v)}, {v['views']:,}회\n")
 
 
-write("channels/최종_전체제목_조회수순.txt", False)
-write("channels/최종_중복제목만_조회수순.txt", True)
+write(f"{D}/최종_전체제목_조회수순.txt", False)
+write(f"{D}/최종_중복제목만_조회수순.txt", True)
 
 wb = Workbook()
 ws = wb.active
@@ -170,16 +172,16 @@ for col, w in zip("ABCDEFGH", [8, 9, 100, 26, 6, 18, 12, 14]):
     ws.column_dimensions[col].width = w
 ws.freeze_panes = "A2"
 ws.auto_filter.ref = ws.dimensions
-wb.save("channels/최종_전체제목_조회수순.xlsx")
+wb.save(f"{D}/최종_전체제목_조회수순.xlsx")
 need = [v["id"] for g in glist if len(g) > 1 for v in g if v["approx"]]
-json.dump(need, open("channels/raw/_need_dates.json", "w"))
+json.dump(need, open(f"{D}/raw/_need_dates.json", "w"))
 print("need exact dates", len(need))
 print("groups", len(glist), "dup groups", sum(1 for g in glist if len(g) > 1),
       "exact dates", sum(1 for v in videos if not v["approx"]), "approx", sum(1 for v in videos if v["approx"]))
 
 # 웹페이지용 데이터: 채널 목록 + 묶음(조회수 순) — 여러 파일로 나눠 저장
-os.makedirs("channels/web", exist_ok=True)
-for f in glob.glob("channels/web/data-*.json"):
+os.makedirs(f"{D}/web", exist_ok=True)
+for f in glob.glob(f"{D}/web/data-*.json"):
     os.remove(f)
 chs, cidx = [], {}
 for g in glist:
@@ -197,8 +199,8 @@ for k, g in enumerate(glist, 1):
 if chunk:
     parts.append(chunk)
 for n, c in enumerate(parts, 1):
-    json.dump(c, open(f"channels/web/data-{n}.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    json.dump(c, open(f"{D}/web/data-{n}.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 json.dump({"channels": chs, "parts": len(parts), "groups": len(glist), "videos": len(videos),
            "dupGroups": sum(1 for g in glist if len(g) > 1), "date": "2026-10-29"},
-          open("channels/web/meta.json", "w", encoding="utf-8"), ensure_ascii=False)
+          open(f"{D}/web/meta.json", "w", encoding="utf-8"), ensure_ascii=False)
 print("web parts", len(parts))
