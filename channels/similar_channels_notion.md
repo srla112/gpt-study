@@ -1,10 +1,11 @@
-# 세상만사 유사 채널 목록
+# 세상만사·사연만남1짱 유사 채널 최종 목록
 
-> 구독자 수는 통계 사이트의 예전 수치이거나 확인이 필요한 값입니다. 링크가 '검색으로 찾기'인 곳은 채널 주소를 확인하지 못해 YouTube 채널 검색 결과로 연결됩니다.
+> 구독자 수는 통계 사이트의 예전 수치이거나 확인이 필요한 값입니다. '검색으로 찾기' 링크는 채널 주소를 확인하지 못해 YouTube 채널 검색 결과로 연결됩니다.
 
 | 채널이름 | 채널링크 | 구독자 | 분류 | 예시 영상 |
 |---|---|---|---|---|
 | 세상만사 (기준 채널) | [채널 열기](https://www.youtube.com/@%EC%84%B8%EC%83%81%EB%A7%8C%EC%82%AC-y4r) | 2.27만 | 기준 |  |
+| 사연만남1짱 (직접 알려주신 채널) | [채널 열기](https://www.youtube.com/@%EC%82%AC%EC%97%B0%EB%A7%8C%EB%82%A81%EC%A7%B1) | 확인 필요 (비슷한 이름 '사연만남' 약 3.4만, 같은 채널인지 미확인) | 기준 |  |
 | 커피엔톡 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%BB%A4%ED%94%BC%EC%97%94%ED%86%A1&sp=EgIQAg%3D%3D) | 약 46.9만 (예전 수치) | ① 거의 같음 | [영상](https://www.youtube.com/watch?v=WqwwwePxLx8) |
 | 톡톡사연 | [채널 열기](https://www.youtube.com/@tt1234) | 약 35.1만 | ① 거의 같음 | [영상](https://www.youtube.com/watch?v=q2TWgq2loP8) |
 | 사연열차 | [채널 열기](https://www.youtube.com/channel/UCaWrmIPpQNJKEX4nT1dyjcw) | 확인 필요 | ① 거의 같음 | [영상](https://www.youtube.com/watch?v=Qe6g3eaZMnI) |
@@ -66,3 +67,29 @@
 | 사연공감tv | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%82%AC%EC%97%B0%EA%B3%B5%EA%B0%90tv&sp=EgIQAg%3D%3D) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 재벌 며느리 반전 |  |
 | 쥐쥐극장 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%A5%90%EC%A5%90%EA%B7%B9%EC%9E%A5&sp=EgIQAg%3D%3D) | 약 20.7만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 형식 다름 (영상툰) |  |
 | 복실이총각 | [채널 열기](https://www.youtube.com/channel/UCxVhPg6I2i9T109SMy0ttZw) | 약 26.8만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 형식 다름 (숏드라마) |  |
+| 한수연사연낭독 | [검색으로 찾기](https://www.youtube.com/results?search_query=%ED%95%9C%EC%88%98%EC%97%B0%EC%82%AC%EC%97%B0%EB%82%AD%EB%8F%85&sp=EgIQAg%3D%3D) | 확인 필요 ('한수연의 사연 채널' 약 3.1만일 가능성) | ④ 추가 발견 · 영상 확인 · 거의 같음 | [영상](https://www.youtube.com/watch?v=BBxGeMp-j0U) |
+| 두근이 영상툰 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EB%91%90%EA%B7%BC%EC%9D%B4%20%EC%98%81%EC%83%81%ED%88%B0&sp=EgIQAg%3D%3D) | 확인 필요 | ④ 추가 발견 · 영상 확인 · 형식 다름 (영상툰) | [영상](https://www.youtube.com/watch?v=s27JuGYyBsQ) |
+| 당당이의 하루 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EB%8B%B9%EB%8B%B9%EC%9D%B4%EC%9D%98%20%ED%95%98%EB%A3%A8&sp=EgIQAg%3D%3D) | 약 11.2만 | ④ 추가 발견 · 영상 확인 · 형식 다름 (숏드라마 몰아보기) | [영상](https://www.youtube.com/watch?v=oIwMK7vxUBo) |
+| 숨막히는 가족 이야기 | [채널 열기](https://www.youtube.com/channel/UC2tRz6pp_c9DJTOh1VZqt8w) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 시댁 갈등·부부 문제 |  |
+| 사연 아리랑 | [채널 열기](https://www.youtube.com/channel/UC0Nu3QcIYtFAtM9zKV0ClgA) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 며느리 대나무숲, 고부·시댁 |  |
+| 앨리스몽 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%95%A8%EB%A6%AC%EC%8A%A4%EB%AA%BD%20%EC%82%AC%EC%97%B0&sp=EgIQAg%3D%3D) | 약 2.7만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 시댁이야기 사연라디오 (세모사모와 관련 가능) |  |
+| 썰의정원 | [채널 열기](https://www.youtube.com/channel/UC4woDQO2gb52GuiP7b2C2UQ) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 결혼·시댁·친정 썰 |  |
+| 황혼암호통신 | [채널 열기](https://www.youtube.com/channel/UCkG-Wby2C6lPLi5Zmj_6_Ng) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 고부갈등 참교육 |  |
+| 꽃편지사연 | [채널 열기](https://www.youtube.com/channel/UCAtaud87oJ2VrMDnpyxE0pg) | 약 6.42만 (2025-12 개설) | ⑤ 추가 발견 · 설명만 확인 (후보) · 빠르게 성장한 신생 사연 채널 |  |
+| 인생사 사연속으로 | [채널 열기](https://www.youtube.com/channel/UCGR7IXjD7QRUlOKNOWIAdlQ) | 약 2.39만 | ⑤ 추가 발견 · 설명만 확인 (후보) · AI 창작 사연 |  |
+| 썰담집 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%8D%B0%EB%8B%B4%EC%A7%91&sp=EgIQAg%3D%3D) | 약 5.6만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 시댁·며느리 갈등 포함 |  |
+| 썰모아 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EC%8D%B0%EB%AA%A8%EC%95%84%20%EC%82%AC%EC%97%B0&sp=EgIQAg%3D%3D) | 약 6.3만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 네이트판형 사이다 사연 |  |
+| 442사람사는이야기 | [검색으로 찾기](https://www.youtube.com/results?search_query=442%EC%82%AC%EB%9E%8C%EC%82%AC%EB%8A%94%EC%9D%B4%EC%95%BC%EA%B8%B0&sp=EgIQAg%3D%3D) | 약 5.4만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 실화·사이다 사연 |  |
+| 시어머니와 며느리 | [채널 열기](https://www.youtube.com/channel/UCeUmuw4gOtzepy_8ChGU5Lw) | 약 1.9만 (불확실) | ⑤ 추가 발견 · 설명만 확인 (후보) · 고부 갈등·화해 |  |
+| 구독좋아요감동사연 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EA%B5%AC%EB%8F%85%EC%A2%8B%EC%95%84%EC%9A%94%EA%B0%90%EB%8F%99%EC%82%AC%EC%97%B0&sp=EgIQAg%3D%3D) | 약 15.3만 | ⑤ 추가 발견 · 설명만 확인 (후보) · 형식 다름 (짧은 드라마) |  |
+| 봉자 카페 | [검색으로 찾기](https://www.youtube.com/results?search_query=%EB%B4%89%EC%9E%90%20%EC%B9%B4%ED%8E%98%20%EC%82%AC%EC%97%B0&sp=EgIQAg%3D%3D) | 확인 필요 | ⑤ 추가 발견 · 설명만 확인 (후보) · 구독자 사연 각색 |  |
+| 세월의 사연 드라마 라디오 | [채널 열기](https://www.youtube.com/channel/UCoqT0sr19ROC4Q6O39FpFBw) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 사이다인생사연 | [채널 열기](https://www.youtube.com/channel/UCKT4vIStLOdhb77vZYLKH0g) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 노후 사연 라디오 | [채널 열기](https://www.youtube.com/channel/UC_7wZf1w3qOH5x8A_f5ElPg) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 인생사연달항아리 | [채널 열기](https://www.youtube.com/channel/UCe8C-xFyrrSBTKUd3NkVLug) | 약 9.7천 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 인생드라마 톡톡 | [채널 열기](https://www.youtube.com/channel/UCv9HQHTAKpFUPjvHU0EYrtw) | 약 6.9천 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 황혼이나르샤 | [채널 열기](https://www.youtube.com/channel/UCNRW4O0TAeSai_90VeJcb0w) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 인생사연 TV | [채널 열기](https://www.youtube.com/channel/UCee6yZrJFnZ6GIdyY8ymz-A) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 드라마인생 | [채널 열기](https://www.youtube.com/channel/UCgtV79e2_uw6bvehTd22Mgw) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 사연곳간 | [채널 열기](https://www.youtube.com/channel/UCNvxpJNXFXYFouJgcGgGT2g) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
+| 시니어 인생사연극장 | [채널 열기](https://www.youtube.com/channel/UCxnhoTBebWC9_nQtgXJJavA) | 확인 필요 | ⑥ 참고 · 시어머니 시점/시니어 위주 |  |
