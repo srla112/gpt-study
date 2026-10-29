@@ -154,6 +154,13 @@ def analyze():
         st = "⚪" if last is None else ("🟢" if last <= 7 else ("🟡" if last <= 30 else "🔴"))
         bench = info.get("list_category") == "기준"
         g = "기준 채널" if bench else ("상" if match >= 0.5 else ("중" if match >= 0.25 or kw >= hi else "하"))
+        # 이야기 표시는 거의 없고 역사 다큐 제목이 많은 채널, 요즘 사연 제목이 많은 채널은 다른 장르로 본다
+        ratio = lambda rx: sum(bool(re.search(rx, v["title"])) for v in vids) / n if n and rx else 0
+        other = None
+        if not bench and CFG.get("history_regex") and ratio(CFG.get("story_tag_regex", "")) < 0.3 and ratio(CFG["history_regex"]) >= 0.2:
+            other = "역사 다큐 채널"
+        if not bench and CFG.get("modern_regex") and ratio(CFG["modern_regex"]) >= 0.4:
+            other = "요즘 사연 채널"
         r = {"채널이름": info.get("name") or info.get("list_name"), "채널링크": info.get("channel_url"),
              "구독자": (info.get("subscribers") or "").replace("구독자 ", "").replace("명", ""),
              "영상 수": (info.get("video_count") or "").replace("동영상 ", "").replace("개", "") or str(n),
@@ -164,6 +171,8 @@ def analyze():
              "조회수 1위 조회수": top["views"] if top else "", "최신 영상 제목": vids[0]["title"] if vids else ""}
         if not bench and n == 0:
             r["제외 이유"] = "공개 영상 없음"; excluded.append(r); continue
+        if other:
+            r["제외 이유"] = f"다른 장르 ({other})"; excluded.append(r); continue
         if not bench and kw < ex:
             r["제외 이유"] = f"{CFG['name']} 소재 거의 없음 ({kw:.0%})"; excluded.append(r); continue
         summary.append(r)
