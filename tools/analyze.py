@@ -61,7 +61,7 @@ for f in sorted(glob.glob("channels/raw/[0-9]*.json")):
     g, sc = grade(sid, lng, quo) if n else ("-", 0)
     top = max(vids, key=lambda v: views(v["views"]) or 0) if vids else None
     summary.append({
-        "채널이름": info.get("name") or info["list_name"],
+        "채널이름": (info.get("name") + " (@사연만남1짱)") if "사연만남1짱" in info["list_name"] else (info.get("name") or info["list_name"]),
         "채널링크": info.get("channel_url", info["input_link"]),
         "구독자": (info.get("subscribers") or "").replace("구독자 ", "").replace("명", ""),
         "영상 수": (info.get("video_count") or "").replace("동영상 ", "").replace("개", "") or str(n),
@@ -77,25 +77,68 @@ for f in sorted(glob.glob("channels/raw/[0-9]*.json")):
         "조회수 1위 조회수": top["views"] if top else "",
         "최신 영상 제목": vids[0]["title"] if vids else "",
         "기존 분류": info["list_category"],
-        "_score": sc,
+        "_score": sc, "_n": n, "_sid": sid,
     })
     for v in vids:
         allv.append({"채널이름": summary[-1]["채널이름"], "제목": v["title"], "영상 링크": "https://www.youtube.com/watch?v=" + v["id"],
                      "조회수": v["views"], "길이": v["length"], "업로드": v["published"],
                      "시댁 소재": "O" if SIDAE.search(v["title"]) else ""})
 fails = [r for r in idx if r.get("status") != "ok"]
+excluded = []
+keep = []
+for r in summary:
+    base = r["기존 분류"] == "기준"
+    if not base and r["_n"] == 0:
+        r["제외 이유"] = "공개 영상 없음"; excluded.append(r)
+    elif not base and r["_sid"] < 0.15:
+        r["제외 이유"] = f"시댁 소재 거의 없음 ({r['시댁 소재 비율']})"; excluded.append(r)
+    else:
+        keep.append(r)
+summary = keep
 order = {"기준": 0, "상": 1, "중": 2, "하": 3, "-": 4}
 summary.sort(key=lambda r: (0 if r["기존 분류"] == "기준" else order[r["유사도"]], -r["_score"]))
 for r in summary:
     if r["기존 분류"] == "기준":
         r["유사도"] = "기준 채널"
-    del r["_score"]
+    for k in ("_score", "_n", "_sid"):
+        del r[k]
 with open("channels/최종_채널분석.csv", "w", encoding="utf-8-sig", newline="") as fp:
     w = csv.DictWriter(fp, fieldnames=list(summary[0].keys())); w.writeheader(); w.writerows(summary)
 with open("channels/전체_영상제목.csv", "w", encoding="utf-8-sig", newline="") as fp:
     w = csv.DictWriter(fp, fieldnames=list(allv[0].keys())); w.writeheader(); w.writerows(allv)
+for r in excluded:
+    for k in ("_score", "_n", "_sid"):
+        r.pop(k, None)
+with open("channels/제외한_채널.csv", "w", encoding="utf-8-sig", newline="") as fp:
+    w = csv.writer(fp); w.writerow(["채널이름", "채널링크", "구독자", "제외 이유", "기존 분류"])
+    for r in excluded:
+        w.writerow([r["채널이름"], r["채널링크"], r["구독자"], r["제외 이유"], r["기존 분류"]])
+    for r in fails:
+        w.writerow([r["list_name"], r["input_link"], "", "채널을 찾지 못함: " + str(r.get("status")), r["list_category"]])
 with open("channels/찾지못한_채널.csv", "w", encoding="utf-8-sig", newline="") as fp:
     w = csv.writer(fp); w.writerow(["목록 이름", "분류", "원래 링크", "상태", "검색 후보"])
     for r in fails:
         w.writerow([r["list_name"], r["list_category"], r["input_link"], r.get("status"), ", ".join(r.get("search_candidates", []))])
-print(len(summary), len(allv), len(fails))
+print(len(summary), len(allv), len(excluded), len(fails))
+
+from openpyxl import Workbook
+from openpyxl.styles import Font
+wb = Workbook()
+for title, path in [("채널 분석", "channels/최종_채널분석.csv"), ("전체 영상 제목", "channels/전체_영상제목.csv"), ("제외한 채널", "channels/제외한_채널.csv")]:
+    ws = wb.create_sheet(title)
+    rows = list(csv.reader(open(path, encoding="utf-8-sig")))
+    for r in rows:
+        ws.append(r)
+    for c in ws[1]:
+        c.font = Font(bold=True)
+    hdr = rows[0]
+    for col, name in enumerate(hdr, 1):
+        if "링크" in name:
+            for row in range(2, len(rows) + 1):
+                cell = ws.cell(row=row, column=col)
+                if cell.value and str(cell.value).startswith("http"):
+                    cell.hyperlink = cell.value
+                    cell.font = Font(color="0563C1", underline="single")
+    ws.freeze_panes = "A2"
+del wb["Sheet"]
+wb.save("channels/최종_채널분석.xlsx")
