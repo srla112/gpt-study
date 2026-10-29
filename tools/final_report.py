@@ -176,3 +176,29 @@ json.dump(need, open("channels/raw/_need_dates.json", "w"))
 print("need exact dates", len(need))
 print("groups", len(glist), "dup groups", sum(1 for g in glist if len(g) > 1),
       "exact dates", sum(1 for v in videos if not v["approx"]), "approx", sum(1 for v in videos if v["approx"]))
+
+# 웹페이지용 데이터: 채널 목록 + 묶음(조회수 순) — 여러 파일로 나눠 저장
+os.makedirs("channels/web", exist_ok=True)
+for f in glob.glob("channels/web/data-*.json"):
+    os.remove(f)
+chs, cidx = [], {}
+for g in glist:
+    for v in g:
+        key = (v["channel"], v["status"])
+        if key not in cidx:
+            cidx[key] = len(chs); chs.append(list(key))
+chunk, part, size, parts = [], 0, 0, []
+for k, g in enumerate(glist, 1):
+    item = [k, [[v["title"], cidx[(v["channel"], v["status"])], fdate(v), v["views"], v["id"]] for v in g]]
+    s = len(json.dumps(item, ensure_ascii=False).encode())
+    if size + s > 7_000_000 and chunk:
+        parts.append(chunk); chunk, size = [], 0
+    chunk.append(item); size += s
+if chunk:
+    parts.append(chunk)
+for n, c in enumerate(parts, 1):
+    json.dump(c, open(f"channels/web/data-{n}.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+json.dump({"channels": chs, "parts": len(parts), "groups": len(glist), "videos": len(videos),
+           "dupGroups": sum(1 for g in glist if len(g) > 1), "date": "2026-10-29"},
+          open("channels/web/meta.json", "w", encoding="utf-8"), ensure_ascii=False)
+print("web parts", len(parts))

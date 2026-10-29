@@ -1,0 +1,234 @@
+<title>시댁 사연 제목 순위</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* 레이아웃: 위에 고정 검색 막대, 아래로 '조회수 순위 묶음' 목록이 이어지는 한 단 구조 */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #1d2430;
+  --muted: #5d6676;
+  --line: #e2e5eb;
+  --accent: #b4232f;
+  --accent-soft: #fbe9ea;
+  --chip: #eef0f4;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1f27; --ink: #e7eaf0; --muted: #9aa3b2; --line: #2b323d;
+    --accent: #ff6b74; --accent-soft: #3a1f23; --chip: #232a34; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1f27; --ink: #e7eaf0; --muted: #9aa3b2; --line: #2b323d;
+  --accent: #ff6b74; --accent-soft: #3a1f23; --chip: #232a34; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 28px 64px; }
+header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
+.stats b { color: var(--ink); font-family: var(--font-num); font-weight: 500; }
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 14px 12px; margin-top: 18px; border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+input[type="search"], select {
+  font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 9px 12px; min-width: 0;
+}
+input[type="search"] { flex: 1 1 260px; }
+select { flex: 0 1 240px; }
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chip {
+  font: inherit; font-size: 0.88rem; border: 1px solid var(--line); background: var(--chip); color: var(--ink);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.legend { font-size: 0.82rem; color: var(--muted); }
+.found { font-size: 0.85rem; color: var(--muted); }
+.list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.group { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.ghead { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.rank { font-family: var(--font-num); font-weight: 500; font-size: 1rem; }
+.dup { font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+.dup.none { color: var(--muted); font-weight: 400; }
+ul.vids { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+ul.vids li { display: grid; grid-template-columns: 1fr auto; gap: 2px 14px; padding: 7px 0; border-top: 1px dashed var(--line); }
+ul.vids li:first-child { border-top: 0; }
+ul.vids li.dim { opacity: 0.45; }
+.t { min-width: 0; overflow-wrap: anywhere; }
+.t a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.t a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.meta { grid-column: 1; font-size: 0.85rem; color: var(--muted); }
+.v { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 0.92rem; white-space: nowrap; text-align: right; }
+.more { margin: 18px auto 0; display: block; font: inherit; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.state { padding: 28px; text-align: center; color: var(--muted); background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; }
+@media (max-width: 520px) {
+  header h1 { font-size: 1.4rem; }
+  ul.vids li { grid-template-columns: 1fr; }
+  .v { grid-column: 1; grid-row: auto; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>시댁 사연 제목 순위</h1>
+    <p>251개 사연 채널의 영상 제목을 같은 제목끼리 묶고, 묶음에서 가장 높은 조회수 순서로 번호를 매겼습니다. 제목을 누르면 새 창에서 영상이 열립니다.</p>
+    <div class="stats" id="stats">
+      <span>기준일 <b>2026-10-29</b></span>
+      <span>영상 <b id="s-videos">–</b>개</span>
+      <span>제목 묶음 <b id="s-groups">–</b>개</span>
+      <span>2회 이상 중복 <b id="s-dups">–</b>묶음</span>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="row">
+      <input type="search" id="q" placeholder="제목이나 채널 이름으로 찾기 (예: 시누, 세상만사)" aria-label="제목이나 채널 이름으로 찾기">
+      <select id="ch" aria-label="채널 고르기"><option value="">모든 채널</option></select>
+    </div>
+    <div class="row" role="group" aria-label="보기 조건">
+      <button class="chip" id="f-dup" aria-pressed="false">2회 이상 중복만</button>
+      <button class="chip" data-st="🟢" aria-pressed="false">🟢 운영 중</button>
+      <button class="chip" data-st="🟡" aria-pressed="false">🟡 한 달 안 활동</button>
+      <button class="chip" data-st="🔴" aria-pressed="false">🔴 업로드 멈춤</button>
+    </div>
+    <div class="legend">번호 = 묶음 안 최고 조회수 순위 · 묶음 안은 먼저 올린 영상이 위 · 🟢 7일 안에 업로드 · 🟡 8~30일 전 · 🔴 30일 넘게 없음 · '쯤'은 YouTube가 대략적으로만 보여 준 날짜</div>
+    <div class="found" id="found">데이터를 불러오는 중입니다…</div>
+  </div>
+
+  <div class="list" id="list">
+    <div class="state" id="loading">조회수 순위 데이터를 불러오는 중입니다. 잠시만 기다려 주세요.</div>
+  </div>
+  <button class="more" id="more" hidden>더 보기</button>
+</div>
+
+<script>
+(function () {
+  var PAGE = 60;
+  var meta = null, channels = [], groups = [], loadedParts = 0;
+  var filtered = [], shown = 0;
+  var q = document.getElementById("q"), chSel = document.getElementById("ch");
+  var list = document.getElementById("list"), more = document.getElementById("more"), found = document.getElementById("found");
+  var dupBtn = document.getElementById("f-dup");
+  var stBtns = Array.prototype.slice.call(document.querySelectorAll("[data-st]"));
+
+  function fmt(n) { return n.toLocaleString("ko-KR"); }
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function filters() {
+    return {
+      text: q.value.trim().toLowerCase(),
+      ch: chSel.value === "" ? -1 : Number(chSel.value),
+      dup: dupBtn.getAttribute("aria-pressed") === "true",
+      st: stBtns.filter(function (b) { return b.getAttribute("aria-pressed") === "true"; }).map(function (b) { return b.dataset.st; })
+    };
+  }
+  function rowMatch(v, f) {
+    if (f.ch >= 0 && v[1] !== f.ch) return false;
+    if (f.st.length && f.st.indexOf(channels[v[1]][1]) < 0) return false;
+    if (f.text && v[0].toLowerCase().indexOf(f.text) < 0 && channels[v[1]][0].toLowerCase().indexOf(f.text) < 0) return false;
+    return true;
+  }
+  function active(f) { return f.text || f.ch >= 0 || f.st.length; }
+
+  function apply() {
+    var f = filters();
+    filtered = [];
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i];
+      if (f.dup && g[1].length < 2) continue;
+      if (!active(f) || g[1].some(function (v) { return rowMatch(v, f); })) filtered.push(g);
+    }
+    shown = 0;
+    list.innerHTML = "";
+    var note = loadedParts < meta.parts ? " (아직 불러오는 중: " + loadedParts + "/" + meta.parts + ")" : "";
+    found.textContent = "조건에 맞는 묶음 " + fmt(filtered.length) + "개" + note;
+    if (!filtered.length) {
+      list.innerHTML = '<div class="state">조건에 맞는 제목이 없습니다. 검색어를 줄이거나 조건을 꺼 보세요.</div>';
+    }
+    render();
+  }
+
+  function render() {
+    var f = filters(), on = active(f), html = [];
+    var end = Math.min(filtered.length, shown + PAGE);
+    for (var i = shown; i < end; i++) {
+      var g = filtered[i], n = g[1].length;
+      html.push('<section class="group"><div class="ghead"><span class="rank">' + g[0] + '.</span>' +
+        (n > 1 ? '<span class="dup">(중복횟수 총 ' + n + '회)</span>' : '<span class="dup none">(중복 없음)</span>') + '</div><ul class="vids">');
+      for (var j = 0; j < n; j++) {
+        var v = g[1][j], c = channels[v[1]];
+        var dim = on && !rowMatch(v, f) ? ' class="dim"' : "";
+        html.push('<li' + dim + '><span class="t"><a href="https://www.youtube.com/watch?v=' + v[4] + '" target="_blank" rel="noopener noreferrer">' +
+          esc(v[0]) + '</a></span><span class="meta">' + esc(c[0]) + c[1] + ' · ' + esc(v[2]) + '</span><span class="v">' + fmt(v[3]) + '회</span></li>');
+      }
+      html.push("</ul></section>");
+    }
+    list.insertAdjacentHTML("beforeend", html.join(""));
+    shown = end;
+    more.hidden = shown >= filtered.length;
+  }
+
+  more.addEventListener("click", render);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !more.hidden) render(); }, { rootMargin: "600px" }).observe(more);
+  }
+  var timer;
+  q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(apply, 250); });
+  chSel.addEventListener("change", apply);
+  [dupBtn].concat(stBtns).forEach(function (b) {
+    b.addEventListener("click", function () { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); apply(); });
+  });
+
+  function loadPart(n) {
+    return fetch("data-" + n + ".json").then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function (part) {
+      groups = groups.concat(part);
+      loadedParts = n;
+      var keepShown = shown;
+      if (n === 1) { apply(); }
+      else {
+        var f = filters(), added = 0;
+        part.forEach(function (g) {
+          if (f.dup && g[1].length < 2) return;
+          if (!active(f) || g[1].some(function (v) { return rowMatch(v, f); })) { filtered.push(g); added++; }
+        });
+        var note = n < meta.parts ? " (아직 불러오는 중: " + n + "/" + meta.parts + ")" : "";
+        found.textContent = "조건에 맞는 묶음 " + fmt(filtered.length) + "개" + note;
+        more.hidden = keepShown >= filtered.length;
+      }
+      if (n < meta.parts) return loadPart(n + 1);
+    });
+  }
+
+  fetch("meta.json").then(function (r) { return r.json(); }).then(function (m) {
+    meta = m; channels = m.channels;
+    document.getElementById("s-videos").textContent = fmt(m.videos);
+    document.getElementById("s-groups").textContent = fmt(m.groups);
+    document.getElementById("s-dups").textContent = fmt(m.dupGroups);
+    var opts = channels.map(function (c, i) { return [c[0], i, c[1]]; })
+      .sort(function (a, b) { return a[0].localeCompare(b[0], "ko"); });
+    chSel.insertAdjacentHTML("beforeend", opts.map(function (o) { return '<option value="' + o[1] + '">' + esc(o[0]) + " " + o[2] + "</option>"; }).join(""));
+    return loadPart(1);
+  }).catch(function () {
+    list.innerHTML = '<div class="state">데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.</div>';
+    found.textContent = "";
+  });
+})();
+</script>
