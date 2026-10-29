@@ -96,7 +96,12 @@ for r in summary:
         keep.append(r)
 summary = keep
 order = {"기준": 0, "상": 1, "중": 2, "하": 3, "-": 4}
-summary.sort(key=lambda r: (0 if r["기존 분류"] == "기준" else order[r["유사도"]], -r["_score"]))
+def subs(r):
+    m = re.match(r"([\d.]+)\s*(천|만)?", r["구독자"] or "")
+    return float(m.group(1)) * {"천": 1e3, "만": 1e4, None: 1}[m.group(2)] if m else 0
+
+
+summary.sort(key=lambda r: (0 if r["기존 분류"] == "기준" else order[r["유사도"]], -subs(r)))
 for r in summary:
     if r["기존 분류"] == "기준":
         r["유사도"] = "기준 채널"
