@@ -8,7 +8,7 @@ COLS = ["채널이름", "구독자", "영상 수", "시댁 소재 비율", "1시
         "최근 30일 업로드", "최근 10개 평균 조회수", "조회수 1위 영상", "채널링크", "조회수 1위 링크"]
 WIDTH = {"채널이름": 28, "구독자": 10, "영상 수": 9, "시댁 소재 비율": 13, "1시간 이상 영상 비율": 17, "평균 길이": 13,
          "최근 30일 업로드": 15, "최근 10개 평균 조회수": 18, "조회수 1위 영상": 70, "채널링크": 14, "조회수 1위 링크": 14}
-GROUPS = [("기준 채널", "기준 채널", "D9E1F2"), ("상", "상 (거의 같음)", "E2EFDA"), ("중", "중 (비슷함)", "FFF2CC"), ("하", "하 (일부만 비슷)", "FCE4D6")]
+GROUPS = [("상", "상 (거의 같음)", "E2EFDA"), ("중", "중 (비슷함)", "FFF2CC"), ("하", "하 (일부만 비슷)", "FCE4D6")]
 
 wb = Workbook()
 guide = wb.active
@@ -17,8 +17,7 @@ lines = [
     ("세상만사·사연만남과 비슷한 채널 목록", True),
     ("", False),
     ("시트 구성", True),
-    (f"· 기준 채널: 세상만사, 사연만남 ({sum(r['유사도']=='기준 채널' for r in rows)}개)", False),
-    (f"· 상 (거의 같음): 시댁 소재 60% 이상 + 1시간 넘는 영상 50% 이상 ({sum(r['유사도']=='상' for r in rows)}개)", False),
+    (f"· 상 (거의 같음): 세상만사·사연만남 2개 + 시댁 소재 60% 이상이고 1시간 넘는 영상 50% 이상인 채널 {sum(r['유사도']=='상' for r in rows)}개 = 총 {sum(r['유사도'] in ('상', '기준 채널') for r in rows)}개", False),
     (f"· 중 (비슷함): 시댁 소재 40% 이상이지만 영상이 짧거나 다른 사연이 섞임 ({sum(r['유사도']=='중' for r in rows)}개)", False),
     (f"· 하 (일부만 비슷): 시댁 소재 15~40% ({sum(r['유사도']=='하' for r in rows)}개)", False),
     ("", False),
@@ -38,8 +37,8 @@ for t, bold in lines:
 guide.column_dimensions["A"].width = 100
 
 for key, title, color in GROUPS:
-    part = [r for r in rows if r["유사도"] == key]
-    ws = wb.create_sheet(title.split(" ")[0] if key != "기준 채널" else "기준 채널")
+    part = [r for r in rows if r["유사도"] == key or (key == "상" and r["유사도"] == "기준 채널")]
+    ws = wb.create_sheet(f"{key} ({len(part)}개)")
     ws.append(COLS[:-2])
     fill = PatternFill("solid", fgColor=color)
     for c in ws[1]:
@@ -52,6 +51,10 @@ for key, title, color in GROUPS:
         name = ws.cell(row=row, column=1)
         name.hyperlink = r["채널링크"]
         name.font = Font(color="0563C1", underline="single", bold=True)
+        if r["유사도"] == "기준 채널":
+            for c in ws[row]:
+                c.fill = PatternFill("solid", fgColor="D9E1F2")
+            name.value = name.value + " ★기준"
         top = ws.cell(row=row, column=9)
         if r["조회수 1위 링크"]:
             top.hyperlink = r["조회수 1위 링크"]
@@ -60,7 +63,7 @@ for key, title, color in GROUPS:
         ws.column_dimensions[ws.cell(row=1, column=i).column_letter].width = WIDTH[c]
     ws.freeze_panes = "B2"
     ws.auto_filter.ref = ws.dimensions
-    with open(f"channels/유사도_{key.replace(' 채널', '')}.csv", "w", encoding="utf-8-sig", newline="") as fp:
+    with open(f"channels/유사도_{key}.csv", "w", encoding="utf-8-sig", newline="") as fp:
         w = csv.writer(fp)
         w.writerow(["채널이름", "채널링크"] + COLS[1:9] + ["조회수 1위 링크"])
         for r in part:
