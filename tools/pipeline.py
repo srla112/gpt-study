@@ -210,4 +210,91 @@ def analyze():
     print("남은 채널", len(summary), Counter(r["유사도"] for r in summary), "제외", len(excluded), "영상", len(allv))
 
 
-{"discover": discover, "collect": collect, "analyze": analyze}[sys.argv[2]]()
+def related(vid):
+    """영상 옆 '관련 영상' 목록: [(영상ID, 채널이름, 제목)]"""
+    body = json.dumps({"context": {"client": {"clientName": "WEB", "clientVersion": "2.20241001.00.00", "hl": "ko", "gl": "KR"}}, "videoId": vid}).encode()
+    d = json.loads(get("https://www.youtube.com/youtubei/v1/next?prettyPrint=false", body))
+    out = []
+    for v in walk(d, "lockupViewModel"):
+        if v.get("contentType") != "LOCKUP_CONTENT_TYPE_VIDEO":
+            continue
+        meta = v.get("metadata", {}).get("lockupMetadataViewModel", {})
+        rows = [text(p.get("text")) for p in walk(meta, "metadataParts") for p in (p if isinstance(p, list) else [p])]
+        if rows:
+            out.append((v.get("contentId"), rows[0], text(meta.get("title"))))
+    return out
+
+
+def channel_of(vid):
+    """영상 ID로 채널 주소 찾기 (oEmbed)"""
+    try:
+        d = json.loads(get("https://www.youtube.com/oembed?format=json&url=" + urllib.parse.quote("https://www.youtube.com/watch?v=" + vid)))
+        return d.get("author_url")
+    except Exception:
+        return None
+
+
+def crawl():
+    """기준·상위 채널 영상의 관련 영상을 따라가며 비슷한 채널을 찾는다."""
+    from concurrent.futures import ThreadPoolExecutor
+    state_f = f"{RAW}/_crawl.json"
+    st = json.load(open(state_f, encoding="utf-8")) if os.path.exists(state_f) else {"seen_videos": [], "channels": {}}
+    seen = set(st["seen_videos"])
+    chans = st["channels"]  # 채널이름 -> {"titles": {영상ID: 제목}, "url": None}
+    have_names = set()
+    seeds = []
+    for f in glob.glob(f"{RAW}/[0-9]*.json"):
+        d = json.load(open(f, encoding="utf-8"))
+        vids = d["videos"]
+        kw = sum(bool(KW.search(v["title"])) for v in vids) / len(vids) if vids else 0
+        have_names.add(d["info"].get("name"))
+        if d["info"].get("list_category") == "기준" or kw >= CFG.get("grade_hi", 0.6):
+            top = sorted(vids, key=lambda v: -(views(v["views"]) or 0))[:CFG.get("crawl_per_channel", 8)]
+            seeds += [v["id"] for v in top + vids[:3]]
+    seeds = [v for v in dict.fromkeys(seeds) if v not in seen][:CFG.get("crawl_max", 400)]
+    print("관련 영상 조사할 영상", len(seeds), flush=True)
+
+    def one(vid):
+        try:
+            return vid, related(vid)
+        except Exception:
+            return vid, []
+    with ThreadPoolExecutor(4) as ex:
+        for k, (vid, rel) in enumerate(ex.map(one, seeds), 1):
+            seen.add(vid)
+            for rid, name, title in rel:
+                c = chans.setdefault(name, {"titles": {}, "url": None})
+                c["titles"][rid] = title
+            if k % 50 == 0:
+                print(k, "채널 후보", len(chans), flush=True)
+    # 주제 제목이 2개 이상인 새 채널만 주소 찾기
+    new = [(n, c) for n, c in chans.items() if n not in have_names and not c["url"]
+           and sum(bool(KW.search(t)) for t in c["titles"].values()) >= CFG.get("min_hits", 2)]
+    print("주소 찾을 새 채널", len(new), flush=True)
+    for n, c in new:
+        c["url"] = channel_of(next(iter(c["titles"])))
+    st = {"seen_videos": sorted(seen), "channels": chans}
+    json.dump(st, open(state_f, "w", encoding="utf-8"), ensure_ascii=False)
+    # collect 단계가 읽는 후보 목록(_discovered.json)에 합치기
+    disc_f = f"{RAW}/_discovered.json"
+    disc = json.load(open(disc_f, encoding="utf-8")) if os.path.exists(disc_f) else []
+    by = {r["channel_id"]: r for r in disc}
+    for n, c in chans.items():
+        if not c.get("url"):
+            continue
+        cid = c.get("cid")
+        if not cid:
+            try:
+                info, _ = channel_videos(c["url"], max_pages=0)
+                cid = c["cid"] = info.get("channel_id") if info else None
+            except Exception:
+                cid = None
+        if cid and cid not in by:
+            titles = list(c["titles"].values())
+            by[cid] = {"channel_id": cid, "name": n, "titles": titles, "queries": ["관련 영상"], "n_kw": sum(bool(KW.search(t)) for t in titles)}
+    json.dump(list(by.values()), open(disc_f, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump({"seen_videos": sorted(seen), "channels": chans}, open(state_f, "w", encoding="utf-8"), ensure_ascii=False)
+    print("후보 채널 총", len(by), flush=True)
+
+
+{"discover": discover, "collect": collect, "analyze": analyze, "crawl": crawl}[sys.argv[2]]()
