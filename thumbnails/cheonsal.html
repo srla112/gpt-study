@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Dokdo;src:url(fonts/EastSeaDokdo-Regular.ttf)}
+@font-face{font-family:BHS;src:url(fonts/BlackHanSans-Regular.ttf)}
+@font-face{font-family:SerifKR;src:url("fonts/NotoSerifKR[wght].ttf");font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1280px;height:720px;overflow:hidden;background:#090706}
+#c{position:relative;width:1280px;height:720px;overflow:hidden;
+  background:
+   radial-gradient(ellipse 520px 420px at 1060px 230px, rgba(120,10,10,.55), transparent 70%),
+   radial-gradient(ellipse 700px 500px at 250px 300px, rgba(60,20,12,.35), transparent 70%),
+   #090706}
+.abs{position:absolute}
+/* 핏빛 달 */
+#moon{left:880px;top:30px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle at 40% 38%, #b0262a 0%, #7e1216 45%, #4a0709 80%, #2a0405 100%);
+  box-shadow:0 0 90px 30px rgba(170,20,20,.45), 0 0 220px 80px rgba(120,0,0,.25)}
+#moonTex{left:880px;top:30px;opacity:.55;mix-blend-mode:multiply}
+/* 방위판 */
+#dial{left:628px;top:236px;width:310px;height:310px;opacity:.97}
+/* 영자 자리 (원본 받으면 교체) */
+#yeongja{left:930px;top:170px;width:367px;height:550px}
+/* 텍스트 공통: 두꺼운 검정 외곽선 + 오른쪽 아래 그림자 */
+.ol{text-shadow:
+  -5px -5px 0 #000,5px -5px 0 #000,-5px 5px 0 #000,5px 5px 0 #000,
+  0 -6px 0 #000,0 6px 0 #000,-6px 0 0 #000,6px 0 0 #000,
+  10px 11px 0 #000}
+#tag{left:48px;top:36px;background:#b5121b;color:#fff3dc;font-family:BHS;font-size:56px;
+  line-height:1;padding:12px 20px 14px;letter-spacing:-1px;box-shadow:6px 7px 0 #000}
+#big{left:46px;top:104px;font-family:Dokdo;line-height:1;white-space:nowrap}
+#big .k{font-size:300px;color:#e01b22;letter-spacing:-6px;
+  text-shadow:
+  -6px -6px 0 #f4e6c6,6px -6px 0 #f4e6c6,-6px 6px 0 #f4e6c6,6px 6px 0 #f4e6c6,
+  0 -8px 0 #f4e6c6,0 8px 0 #f4e6c6,-8px 0 0 #f4e6c6,8px 0 0 #f4e6c6,
+  14px 15px 0 #000}
+#big .s{font-size:180px;color:#f4e6c6;margin-left:14px;letter-spacing:-4px}
+#lineC{left:52px;top:410px;font-family:BHS;font-size:108px;line-height:1;color:#fff;letter-spacing:-2px;white-space:nowrap}
+#lineC .q{color:#ffd23a}
+#lineD{left:52px;top:548px;font-family:BHS;font-size:104px;line-height:1;color:#fff;letter-spacing:-2px;white-space:nowrap;display:flex;align-items:center;gap:18px}
+#seal{display:inline-block;background:#c8141c;color:#f7ead0;font-size:84px;line-height:1;padding:10px 12px 12px;
+  border:5px solid #f7ead0;outline:6px solid #000;transform:rotate(-5deg);text-shadow:none;letter-spacing:-3px}
+/* 말풍선 */
+#bubble{left:640px;top:34px;width:272px;padding:20px 22px 22px;background:#ecdcb8;
+  background-image:radial-gradient(circle at 20% 30%, rgba(120,80,30,.18), transparent 45%),radial-gradient(circle at 85% 80%, rgba(120,80,30,.22), transparent 50%);
+  border-radius:18px;box-shadow:6px 8px 0 rgba(0,0,0,.85);font-family:SerifKR;font-weight:900;font-size:44px;line-height:1.12;color:#2a1a10;letter-spacing:-2px}
+#bubble:after{content:"";position:absolute;right:-34px;top:62px;border:22px solid transparent;border-left:40px solid #ecdcb8;border-right:0}
+#nak{position:absolute;right:-12px;bottom:-16px;width:58px;height:58px;background:#b5121b;color:#f7ead0;border-radius:6px;
+  font-family:SerifKR;font-weight:900;font-size:22px;line-height:1.05;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(6deg)}
+</style></head><body><div id="c">
+
+<div id="moon" class="abs"></div>
+<svg id="moonTex" class="abs" width="420" height="420"><defs>
+ <filter id="t"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="4" seed="7"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .02  0 0 0 0 .02  0 0 0 1.4 -.45"/></filter>
+ <clipPath id="mc"><circle cx="210" cy="210" r="210"/></clipPath></defs>
+ <rect width="420" height="420" filter="url(#t)" clip-path="url(#mc)"/></svg>
+
+<!-- 12지 방위판: 子가 12시. 천살 자리 축(1시)·진(4시)·미(7시)·술(10시) -->
+<svg id="dial" class="abs" width="440" height="440" viewBox="-220 -220 440 440">
+ <defs><radialGradient id="dg"><stop offset="0" stop-color="#2b1d12"/><stop offset="1" stop-color="#160e09"/></radialGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="6"/></filter></defs>
+ <circle r="205" fill="url(#dg)" stroke="#8a6a3a" stroke-width="5"/>
+ <circle r="160" fill="none" stroke="#6b5230" stroke-width="2"/>
+ <circle r="70" fill="none" stroke="#6b5230" stroke-width="2"/>
+ <g id="ticks"></g>
+ <circle r="16" fill="#8a6a3a"/>
+</svg>
+
+<!-- 영자 원본 자리 -->
+<svg id="yeongja" class="abs" viewBox="0 0 400 600">
+ <defs><linearGradient id="yg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c2622"/><stop offset="1" stop-color="#15110f"/></linearGradient></defs>
+ <path d="M200 40c62 0 104 48 104 118 0 46-18 84-46 106 66 18 118 60 132 130l10 206H0l10-206c14-70 66-112 132-130-28-22-46-60-46-106 0-70 42-118 104-118z" fill="url(#yg)" stroke="#d8c39a" stroke-width="3" stroke-dasharray="12 10"/>
+ <text x="200" y="380" text-anchor="middle" fill="#d8c39a" font-family="SerifKR" font-weight="900" font-size="34">영자 원본 자리</text>
+ <text x="200" y="420" text-anchor="middle" fill="#a8946c" font-family="SerifKR" font-weight="700" font-size="20">서늘한 얼굴 · 한쪽 그늘</text>
+</svg>
+
+<!-- 먹물 튄 자국 -->
+<svg class="abs" style="left:0;top:80px" width="760" height="360" id="ink"></svg>
+<div id="tag" class="abs">내 띠는 몇 시 방향?</div>
+<div id="big" class="abs"><span class="k">천살</span><span class="s ol">방향</span></div>
+<div id="lineC" class="abs ol"><span class="q">'이 4곳'</span>은</div>
+<div id="lineD" class="abs ol"><span id="seal">절대</span><span>피하지 마세요</span></div>
+
+<div id="bubble" class="abs">모시는<br>자리예요<div id="nak">영자</div></div>
+
+</div>
+<script>
+// 방위판 눈금과 지지
+const Z=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const hot=[1,4,7,10];
+const g=document.getElementById('ticks');let s='';
+for(let i=0;i<12;i++){
+  const a=(i*30-90)*Math.PI/180, a2=((i*30)+15-90)*Math.PI/180;
+  s+=`<line x1="${70*Math.cos(a2)}" y1="${70*Math.sin(a2)}" x2="${205*Math.cos(a2)}" y2="${205*Math.sin(a2)}" stroke="#6b5230" stroke-width="2"/>`;
+  const x=182*Math.cos(a),y=182*Math.sin(a),isHot=hot.includes(i);
+  if(isHot) s+=`<circle cx="${x}" cy="${y}" r="30" fill="#e0141c" filter="url(#glow)" opacity=".9"/><circle cx="${x}" cy="${y}" r="24" fill="#c8121a" stroke="#ffd9a8" stroke-width="3"/>`;
+  s+=`<text x="${x}" y="${y+11}" text-anchor="middle" font-family="SerifKR" font-weight="900" font-size="30" fill="${isHot?'#fff3dc':'#9c8158'}">${Z[i]}</text>`;
+  if(isHot){const x2=118*Math.cos(a),y2=118*Math.sin(a);
+    s+=`<line x1="0" y1="0" x2="${x2}" y2="${y2}" stroke="#d01a1f" stroke-width="7" stroke-linecap="round"/>`;}
+}
+g.innerHTML=s;
+// 먹물 튐 (천살 주변)
+const ink=document.getElementById('ink');let r='',seed=11;
+const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+for(let i=0;i<46;i++){const cx=20+rnd()*560, cy=10+rnd()*320, rr=1.5+Math.pow(rnd(),3)*16;
+  if(cx>40&&cx<520&&cy>40&&cy<300&&rr<10) continue;
+  r+=`<circle cx="${cx}" cy="${cy}" r="${rr}" fill="#8e0d12" opacity="${.55+rnd()*.4}"/>`;}
+ink.innerHTML=r;
+</script>
+</body></html>
