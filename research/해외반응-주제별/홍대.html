@@ -1,0 +1,62 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>홍대 해외반응 순위</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--blue:#2f5fb3;
+--body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--blue:#86aef5;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:22px 12px}h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0;max-width:78ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search]{flex:1 1 240px;min-width:0;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.more{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.count{color:var(--muted);font-size:13px;padding-block:10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.rank{font-family:var(--num);color:var(--accent);font-size:15px;min-width:2.5em;text-align:right}
+.t{font-weight:700;color:var(--fg);text-decoration:none;word-break:break-word}.t:hover{color:var(--accent);text-decoration:underline}
+.info{color:var(--muted);font-size:12.5px;margin-top:2px}.info b{color:var(--accent);font-family:var(--num);font-weight:500}
+ul{list-style:none;margin:8px 0 0;padding:0 0 0 calc(2.5em + 10px);display:flex;flex-direction:column;gap:3px}
+li.v{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;font-size:13.5px}
+.ch{color:var(--fg);font-weight:500;text-decoration:none}a.ch:hover{text-decoration:underline;color:var(--blue)}
+.dt{color:var(--muted);font-family:var(--num);font-size:12.5px}
+.vw{color:var(--muted);text-decoration:none;font-family:var(--num);font-size:12.5px}.vw:hover{color:var(--accent);text-decoration:underline}
+.more{display:block;margin:14px auto 40px}
+@media (max-width:600px){ul{padding-left:0}}
+</style></head><body>
+<header class="wrap"><h1>홍대 해외반응 순위</h1>
+<p class="sub">‘홍대’ 주제의 해외반응 롱폼 영상 중 조회수 5만 회 이상 29개를, 80% 이상 비슷한 제목끼리 묶어 조회수 순으로 정리했습니다(구독자 수와 관계없이 조회수만 기준, 2026년 11월 1일 기준). 제목에 들어간 말: 홍대. 한 영상에 여러 주제가 겹치면 제목에서 먼저 나오는 주제 하나에만 넣었습니다. 묶음 아래에는 올린 채널을 먼저 올린 순서로 적었고, 채널명을 누르면 채널이, 조회수를 누르면 영상이 새 탭에서 열립니다.</p></header>
+<div class="bar"><div class="wrap">
+<input type="search" id="q" placeholder="제목·채널명 검색" aria-label="검색">
+<div class="seg" id="f" role="group" aria-label="보기"><button data-v="" aria-pressed="true">모든 제목</button><button data-v="2" aria-pressed="false">2번 이상 올라온 제목</button><button data-v="c" aria-pressed="false">여러 채널이 올린 제목</button></div>
+</div></div>
+<main class="wrap"><div class="count" id="count"></div><ol id="list"></ol><button class="more" id="more" hidden>더 보기</button></main>
+<script type="application/json" id="data">{"g":[{"t":"한국인이 우크라이나 여자랑 다니면 생기는 일ㅋㅋ 홍대에서 마주친 진상녀 참교육, 외국인 반응","id":"3huwENLNZts","max":1338331,"v":[["CKOONY","2024.4.1",1338331,"3huwENLNZts"]],"nc":1},{"t":"직접 겪은 일본 성 문화의 충격적인 진실 | 상국열차 EP.2 (JM, 코노미, 홍대의 대표)","id":"f-PqkmpLMfk","max":791746,"v":[["지식인사이드","2025.10.1",791746,"f-PqkmpLMfk"]],"nc":1},{"t":"현재 일본에서 한-일 국제결혼으로 난리 난 이유  | 상국열차 EP.1 (JM, 코노미, 홍대의 대표)","id":"JF7sTcAr3o0","max":517912,"v":[["지식인사이드","2025.9.22",517912,"JF7sTcAr3o0"]],"nc":1},{"t":"춤추는곰돌【(2)7월4일 홍대! 대박! 외국인 뱅뱅뱅! 빅뱅인줄!!!】","id":"z_aCuzHjdLU","max":473185,"v":[["춤추는곰돌","2015.7.5",473185,"z_aCuzHjdLU"]],"nc":1},{"t":"홍대미녀 등에 들러붙은 상구는 좋겠네! | 쇼킴거리마술 | Street Magic Reaction","id":"l5w87w5NVpQ","max":424241,"v":[["쇼킴매직 Show Kim Magic","2020.6.29",424241,"l5w87w5NVpQ"]],"nc":1},{"t":"홍대에서 홍콩인들과 중국인들이 맞붙었다..이 마찰에 대한 외국인들의 반응 \"한국은 현대에와서도..\"","id":"11y4888iOsM","max":415719,"v":[["토픽맨","2019.11.16",415719,"11y4888iOsM"]],"nc":1},{"t":"중국반응│더글로리 박연진 코스프레로 뜬 중국 인플루언서│연진이 모습으로 한국방문 한국 홍대거리 라방│한국인들의 반응 보고 울컥한 중국│중국어로[路]","id":"jhuxxBR8rxY","max":381711,"v":[["중국어로 [路]","2023.6.7",381711,"jhuxxBR8rxY"]],"nc":1},{"t":"홍대 길거리를 처음 가본 베트남 직원들이 충격받은 이유...","id":"b8DK-HcZE0A","max":363267,"v":[["코이티비 KOITV","2026.4.5",363267,"b8DK-HcZE0A"]],"nc":1},{"t":"홍대 미녀 외국인에게 마술하면 어떤 반응을 보일까? | Hongdae Street Magic","id":"-xxwJOvSKlM","max":312312,"v":[["쇼킴매직 Show Kim Magic","2020.6.8",312312,"-xxwJOvSKlM"]],"nc":1},{"t":"월드오브댄스(WOD) 초미녀심사도 깜짝놀란 연예인댄서가 한국에 나타났다!ㅣ팝핀존-POPPIN JOHN의 홍대버스킹 레전드무대!ㅣ소마의리뷰리액션!","id":"s0eyUKhpU4Q","max":309720,"v":[["소마의댄스월드☆SOMA DANCEWORLD","2021.1.12",309720,"s0eyUKhpU4Q"]],"nc":1},{"t":"한국이 살기 좋다던 외국인들, 왜 좋냐고 물었더니ㅋㅋ찐 외국인 반응 로드쇼 홍대편 EPI1","id":"-Is6Y2bXdIM","max":284461,"v":[["CKOONY","2022.9.27",284461,"-Is6Y2bXdIM"]],"nc":1},{"t":"중국반응│비자보복? 한국인 비자 제한했는데 피해는 중국인만?│중국 상해에 서울 홍대 닮은 거리 있다며 성지순례중인 중국인들│얼마나 한국에 오고 싶었으면...│중국어로[路]","id":"nppPUHA_-cg","max":257825,"v":[["중국어로 [路]","2023.1.11",257825,"nppPUHA_-cg"]],"nc":1},{"t":"[국제커플] 한국의 홍대 번화가 밤거리 첫 경험한 🇫🇷프랑스가족이 충격받은 이유?(홍대에 반해버린 프랑스 가족+🇰🇷서울 홍대 젊음의 거리에서 살아있음을 느낀 프랑스 장인장모님 😎)","id":"W0VDAeNkAmc","max":257203,"v":[["solalatv 솔랄라티비","2023.10.6",257203,"W0VDAeNkAmc"]],"nc":1},{"t":"홍대 놀러온 외국인 마술 보여주기! | 외국인 리액션 | Street Magic Reactions","id":"H3nk4qn18Hk","max":245089,"v":[["쇼킴매직 Show Kim Magic","2020.10.11",245089,"H3nk4qn18Hk"]],"nc":1},{"t":"처음보는 외국인 친구들을 홍대 클럽에 데려갔더니 반응이 ㅋㅋㅋㅋㅋ feat.허팝 [ 공대생 변승주 ]","id":"mSEgGPktb4w","max":235256,"v":[["대생이","2018.8.26",235256,"mSEgGPktb4w"]],"nc":1},{"t":"[ENG] 홍대 버스킹 처음본 미국 아미들 경악한 이유는?? American Dancers experience Hongdae Busking!!(한류/Koreanwave)","id":"vIAM-Yv6Y9k","max":225411,"v":[["MAGIC KOREA","2019.9.17",225411,"vIAM-Yv6Y9k"]],"nc":1},{"t":"실제상황!이태원 클럽 확진자 후 한국의 2차 상황을 본 해외반응 & 홍대, 이태원의 진짜모습(외국인 인터뷰, 거리인터뷰)","id":"yWBtQpkxyVU","max":207558,"v":[["CKOONY","2020.5.16",207558,"yWBtQpkxyVU"]],"nc":1},{"t":"외국인 모델들이 가본 한국의 핫플레이스 feat. 홍대, 이태원, 강남 [외국인리액션ㅣ코리안브로스]","id":"BR5CRCrvt7c","max":179813,"v":[["리더뉴 | RE, THE NEW","2019.7.8",179813,"BR5CRCrvt7c"]],"nc":1},{"t":"한국인이 미국 가면 충격먹는 진짜 이유😂외국인 반응, 로드쇼 홍대 Epi2 (핀란드, 호주, 미국)","id":"s7tFNA5mMqI","max":175042,"v":[["CKOONY","2022.9.30",175042,"s7tFNA5mMqI"]],"nc":1},{"t":"홍대미녀 거리마술 리액션! | Street Magic Reactions!","id":"DemiNxN5BO0","max":143055,"v":[["쇼킴매직 Show Kim Magic","2019.6.23",143055,"DemiNxN5BO0"]],"nc":1},{"t":"[국제커플] 홍대에 온 튀르키예 아내의 반응은? 🇹🇷🇰🇷","id":"I-3JWYC62WM","max":138762,"v":[["핫뮤튜브 Hatmyutube","2023.9.14",138762,"I-3JWYC62WM"]],"nc":1},{"t":"[ENG]한국관광 온 미국 여대생 홍대 버스킹 처음 보고 길가에서 춤춘 놀라운 사연?한류 시작은 버스킹 문화다?미국에 홍대 버스킹 문화가 정착되야하는 진짜 이유?BTS 대한민국","id":"aSPsxeDrNjs","max":128547,"v":[["MAGIC KOREA","2022.6.25",128547,"aSPsxeDrNjs"]],"nc":1},{"t":"“여보... 이게 정상이야?!” 태어나서 처음 한국에 여행온 영국/브라질 부부 새벽 4시 홍대에서 라이브 켜자 30만 경악","id":"cKFU6SfWwzs","max":120283,"v":[["대한해설사","2026.8.13",120283,"cKFU6SfWwzs"]],"nc":1},{"t":"작별 전날인데..웃음이 빵빵 터진 이유는? 홍대에 처음 간 외국인 가족의 한국에서 제일 웃겼던 하루","id":"X_8FnMdnEWA","max":106487,"v":[["까밀라댁 Kamila","2024.11.15",106487,"X_8FnMdnEWA"]],"nc":1},{"t":"미국 모델이 홍대 스타일 옷을 처음 입어본 반응?! 네 번째 날! (308/365) American Model Tries Korean Street Clothes! Day 4!","id":"taqRlCrTm1g","max":101513,"v":[["에밀튜브 - EmilTUBE","2017.10.14",101513,"taqRlCrTm1g"]],"nc":1},{"t":"홍대에서 마법쓰다가 사진찍힘ㅋ | 쇼킴 거리마술 | Street Magic Reactions","id":"KJxi8d8FJkY","max":95788,"v":[["쇼킴매직 Show Kim Magic","2020.12.12",95788,"KJxi8d8FJkY"]],"nc":1},{"t":"홍대에 처음 가본 일본인 반응!(feat.순대/조폭떡볶이/스타일난다)","id":"vrcy8LTPaXM","max":89654,"v":[["OKUN일본오쿤","2019.1.19",89654,"vrcy8LTPaXM"]],"nc":1},{"t":"홍대 미녀 외국인 마술반응 | 마술로 말걸기 | Korea Street Magic","id":"fyLziOUroqk","max":57501,"v":[["쇼킴매직 Show Kim Magic","2020.1.12",57501,"fyLziOUroqk"]],"nc":1},{"t":"새벽 2시 서울 홍대거리를 본 프랑스 여성이 경악한 진짜 이유?","id":"smPm7m6oJuQ","max":55672,"v":[["코리아원정대","2026.9.4",55672,"smPm7m6oJuQ"]],"nc":1}],"c":{"대한해설사":"https://www.youtube.com/channel/UCJ-3Goygao2itTQntzNzaGg","지식인사이드":"https://www.youtube.com/channel/UCA_hgsFzmynpv1zkvA5A7jA","코리아원정대":"https://www.youtube.com/channel/UCwuxqcbYx1x3bC10C00a1qQ","CKOONY":"https://www.youtube.com/channel/UCg3YdmrYGa2O1IySuWvBT0w","쇼킴매직 Show Kim Magic":"https://www.youtube.com/channel/UCeSHilNPc6AYwx556asjujQ","대생이":"https://www.youtube.com/channel/UChE5nZAIhWS5vYTRjsUgRpQ","리더뉴 | RE, THE NEW":"https://www.youtube.com/channel/UCIB_oNqi62rKnPFb3Toaozw","solalatv 솔랄라티비":"https://www.youtube.com/channel/UC48HrtY4Gp90BYBSxylIFLg","춤추는곰돌":"https://www.youtube.com/channel/UCFhvPGzMa67wJTx_wiVIcSQ","토픽맨":"https://www.youtube.com/channel/UCR2vpLrtjHa0Cj5dxnrkDCg","까밀라댁 Kamila":"https://www.youtube.com/channel/UC98nHfafUbls99bA51OSrXg","코이티비 KOITV":"https://www.youtube.com/channel/UCLvaHVogti2o0AkXoNZzeKA","에밀튜브 - EmilTUBE":"https://www.youtube.com/channel/UC3sVRlvglIebwSpVGCMB--w","MAGIC KOREA":"https://www.youtube.com/channel/UC6kHD41Nogfpidnwzqcb80Q","OKUN일본오쿤":"https://www.youtube.com/channel/UCfCRbatXcic6yBCrKh8_YKg","소마의댄스월드☆SOMA DANCEWORLD":"https://www.youtube.com/channel/UCzFrAoi6lcrtv83MZIAcm2w","중국어로 [路]":"https://www.youtube.com/channel/UCxV6HwAqpzkAN1J2s9LolgQ","핫뮤튜브 Hatmyutube":"https://www.youtube.com/channel/UCPU8eG3HGtAqFG-bj3Exwfw"}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent), G=D.g, C=D.c;
+G.forEach((g,i)=>{g.r=i+1;g.s=(g.t+' '+g.v.map(x=>x[0]).join(' ')).toLowerCase();});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('ko-KR')+'회';
+let mode='',shown=0,cur=[];const STEP=150;
+$('f').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('f').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));mode=b.dataset.v;render();});
+$('q').addEventListener('input',render);
+$('more').addEventListener('click',()=>draw(false));
+function render(){const q=$('q').value.trim().toLowerCase();
+ cur=G.filter(g=>(!mode||(mode==='2'?g.v.length>1:g.nc>1))&&(!q||g.s.includes(q)));
+ $('count').textContent=`제목 묶음 ${cur.length.toLocaleString('ko-KR')}개 (조회수 높은 순)`; shown=0; $('list').innerHTML=''; draw(true);}
+function draw(reset){const part=cur.slice(shown,shown+STEP);shown+=part.length;
+ $('list').insertAdjacentHTML('beforeend',part.map(g=>`<li class="grp"><div class="head"><span class="rank">${g.r}</span><div>
+  <a class="t" href="https://www.youtube.com/watch?v=${g.id}" target="_blank" rel="noopener">${esc(g.t)}</a>
+  <div class="info">최고 <b>${fmt(g.max)}</b> · 영상 ${g.v.length}개 · 채널 ${g.nc}개</div></div></div>
+  <ul>${g.v.map(x=>`<li class="v">${C[x[0]]?`<a class="ch" href="${esc(C[x[0]])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:`<span class="ch">${esc(x[0])}</span>`}<span class="dt">(${esc(x[1])})</span><a class="vw" href="https://www.youtube.com/watch?v=${x[3]}" target="_blank" rel="noopener">${fmt(x[2])}</a></li>`).join('')}</ul></li>`).join(''));
+ $('more').hidden=shown>=cur.length; if(!$('more').hidden)$('more').textContent=`더 보기 (${(cur.length-shown).toLocaleString('ko-KR')}개 남음)`;}
+render();
+})();
+</script></body></html>

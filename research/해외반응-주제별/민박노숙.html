@@ -1,0 +1,62 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>민박노숙 해외반응 순위</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--blue:#2f5fb3;
+--body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--blue:#86aef5;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:22px 12px}h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0;max-width:78ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search]{flex:1 1 240px;min-width:0;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.more{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.count{color:var(--muted);font-size:13px;padding-block:10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.rank{font-family:var(--num);color:var(--accent);font-size:15px;min-width:2.5em;text-align:right}
+.t{font-weight:700;color:var(--fg);text-decoration:none;word-break:break-word}.t:hover{color:var(--accent);text-decoration:underline}
+.info{color:var(--muted);font-size:12.5px;margin-top:2px}.info b{color:var(--accent);font-family:var(--num);font-weight:500}
+ul{list-style:none;margin:8px 0 0;padding:0 0 0 calc(2.5em + 10px);display:flex;flex-direction:column;gap:3px}
+li.v{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;font-size:13.5px}
+.ch{color:var(--fg);font-weight:500;text-decoration:none}a.ch:hover{text-decoration:underline;color:var(--blue)}
+.dt{color:var(--muted);font-family:var(--num);font-size:12.5px}
+.vw{color:var(--muted);text-decoration:none;font-family:var(--num);font-size:12.5px}.vw:hover{color:var(--accent);text-decoration:underline}
+.more{display:block;margin:14px auto 40px}
+@media (max-width:600px){ul{padding-left:0}}
+</style></head><body>
+<header class="wrap"><h1>민박노숙 해외반응 순위</h1>
+<p class="sub">‘민박노숙’ 주제의 해외반응 롱폼 영상 중 조회수 5만 회 이상 20개를, 80% 이상 비슷한 제목끼리 묶어 조회수 순으로 정리했습니다(구독자 수와 관계없이 조회수만 기준, 2026년 11월 1일 기준). 제목에 들어간 말: 민박, 노숙, 게스트 하우스, 홈스테이. 한 영상에 여러 주제가 겹치면 제목에서 먼저 나오는 주제 하나에만 넣었습니다. 묶음 아래에는 올린 채널을 먼저 올린 순서로 적었고, 채널명을 누르면 채널이, 조회수를 누르면 영상이 새 탭에서 열립니다.</p></header>
+<div class="bar"><div class="wrap">
+<input type="search" id="q" placeholder="제목·채널명 검색" aria-label="검색">
+<div class="seg" id="f" role="group" aria-label="보기"><button data-v="" aria-pressed="true">모든 제목</button><button data-v="2" aria-pressed="false">2번 이상 올라온 제목</button><button data-v="c" aria-pressed="false">여러 채널이 올린 제목</button></div>
+</div></div>
+<main class="wrap"><div class="count" id="count"></div><ol id="list"></ol><button class="more" id="more" hidden>더 보기</button></main>
+<script type="application/json" id="data">{"g":[{"t":"\"최근 한국 노숙자 사진이 올라오자\" 충격 그 자체, 해외 네티즌 상황","id":"R778LdYIOOA","max":514584,"v":[["[글리] 글로벌리플","2020.6.8",514584,"R778LdYIOOA"]],"nc":1},{"t":"\"한국인이 갑자기 짐을 다 뺏어갔어요\" 새벽 3시 한국 길바닥에서 노숙하던 이탈리아 가족 시골마을서 한국인무리에 둘러싸이자 난리난 상황","id":"YUueetkbCQ4","max":423978,"v":[["단독튜브","2026.9.8",423978,"YUueetkbCQ4"]],"nc":1},{"t":"\"한국은 불쌍한 노숙자의 나라\" 일본의 한국 조롱에 외국인들이 분노하는 이유 // \"아시아의 진정한 선진국은 한국\" [외국인반응]","id":"131TZsyzOC0","max":415594,"v":[["존크TV","2020.12.11",415594,"131TZsyzOC0"]],"nc":1},{"t":"한국이 치안 좋다고 촬영왔다가 한국 노숙자와 맞닥뜨린 외국인의 반응","id":"tdXw_IMwPr4","max":272245,"v":[["메이드인 코리아 Made In KOREA","2023.2.1",272245,"tdXw_IMwPr4"]],"nc":1},{"t":"한국여행왔다가 노숙자 가득한 모습보고 실망한 외국인 1시간뒤 경악한 이유","id":"fq-il3AnavQ","max":246146,"v":[["꿀튜브","2022.11.5",246146,"fq-il3AnavQ"]],"nc":1},{"t":"\"일본,연속된 자연재해에 국가체계 박살난일본 한국에 재난협정 요청하는상황\"태풍피해 복구작업 시작조차 되지않자 길거리 노숙하는 일본인들//\"한국이 재난협정 맺어줘야 돼요\"[일본반응]","id":"S5fzylVO_AE","max":158047,"v":[["푸른시선","2021.9.20",158047,"S5fzylVO_AE"]],"nc":1},{"t":"일본 불매운동 6개월!! 후쿠오카 유후인 현지 게스트 하우스 사장님 인터뷰!! 일본 인터뷰 반응 日本 福岡県 由布院 湯の坪街道 japan fukuoka yufuin beppu 벳부","id":"6XK1Gu58il8","max":144568,"v":[["진상처리반 [jinsang TV]","2019.12.1",144568,"6XK1Gu58il8"]],"nc":1},{"t":"\"아니, 한국은 그냥 깔고 누우면 된다고요?\" 노숙자 천국인 한국 가기는 죽기보다 싫다던 외국인이 마지못해 온 한국에서 서울역 지하도 통과하다가 깜짝 놀란 이유","id":"TisVFBbSRWo","max":116395,"v":[["세모튜브 - 세계모든반응","2024.4.9",116395,"TisVFBbSRWo"]],"nc":1},{"t":"\"내가 한국인이라면 노숙자로 살겠다\" 정류장 사진에 한탄하는 외국인 반응 // \"도대체 한국인들은 얼마나 부자인거야?\" [외국인반응]","id":"buGzJv5rMiE","max":108740,"v":[["존크TV","2020.12.28",108740,"buGzJv5rMiE"]],"nc":1},{"t":"\"노숙자가 없는 게 어떻게 가능해?\" 한국 노인복지에 충격 먹은 외국인들 // \"이 모든 게 공짜라니 믿을 수 없어!!\" [외국인반응]","id":"zM72ybkek64","max":108149,"v":[["존크TV","2021.2.24",108149,"zM72ybkek64"]],"nc":1},{"t":"수영장씨... 나한테... 왜 그래요? (ft. 한국의 소보로빵을 먹고 놀란 직원들?, 필리핀 세부 게스트하우스)","id":"1KWgpYC6ftU","max":89410,"v":[["세부부부","2025.7.5",89410,"1KWgpYC6ftU"]],"nc":1},{"t":"한국 여행 중 외딴 민박에 묵게 된 독일 여대생이 한밤중 눈을 떴다가 눈앞에서 벌어진 일에 경악하는데...","id":"0ZfP3kKoAt8","max":86806,"v":[["클립뉴스","2023.9.4",86806,"0ZfP3kKoAt8"]],"nc":1},{"t":"가난이 싫다며 한국으로 떠난 영국 노숙자 딸이, 10년 만에 돌아오자 가족들이 경기를 일으키며 충격받은 이유","id":"WXMukt6P8hg","max":84787,"v":[["월드맵튜브","2023.8.8",84787,"WXMukt6P8hg"]],"nc":1},{"t":"일본 손님이 게스트하우스를 보더니... 반응이??  (한국 자전거경험, 일본 라멘의 오해와 진실 등 일본 이야기)","id":"ezTACQ75WNI","max":69974,"v":[["세부부부","2025.2.7",69974,"ezTACQ75WNI"]],"nc":1},{"t":"[해외감동사연] 입양되었다 버려진 한국 수학 천재 노숙 소년. MIT교수가 되기까지 미국 충격!","id":"dqSwY35Oyvo","max":68895,"v":[["감동제이-해외감동사연","2025.3.2",68895,"dqSwY35Oyvo"]],"nc":1},{"t":"|중국반응| 중국커플의 기대만땅 몽골 현지 민박 여행! 하지만 한국인만 환영받고 가는 곳마다 이어진 냉대에 결국 마치지 못하고만 일정...","id":"iG_vu0nO7sE","max":67623,"v":[["OKASHU","2024.5.1",67623,"iG_vu0nO7sE"]],"nc":1},{"t":"[단독일본인반응] 일본 노인들이 길바닥에 노숙까지하며 한국 부러워하는 충격적인 이유","id":"1y1OGuVmIpI","max":63981,"v":[["존크TV","2021.7.3",63981,"1y1OGuVmIpI"]],"nc":1},{"t":"[단독해외반응] BBC가 보도한 일본 노숙자 관련 충격 실태에 분노한 외국인반응 // \"진짜 가난한 나라는 한국이 아닌 일본이었다\"","id":"UYYd-aVX_Nw","max":58949,"v":[["존크TV","2021.11.16",58949,"UYYd-aVX_Nw"]],"nc":1},{"t":"(해외반응)외국인이 한국 노숙자와 나눈 대화 경험담","id":"QvkJDztkAzA","max":51362,"v":[["세계를 배우다","2021.8.11",51362,"QvkJDztkAzA"]],"nc":1},{"t":"단일 프로그램 역대최고 실시간 시청률83.9% 미국CNN특집방송 한국 노숙자! 미국 CNN 미녀기자의 한마디에 미국전역이 경악!  해외감동사연 미국반응 외국인반응 해외반응","id":"cWy6PSu9fjU","max":50078,"v":[["늑대튜브","2024.11.4",50078,"cWy6PSu9fjU"]],"nc":1}],"c":{"클립뉴스":"https://www.youtube.com/channel/UC0HCIk1UhLoS1ZKysmRVYlg","메이드인 코리아 Made In KOREA":"https://www.youtube.com/channel/UCr902O0hesUwEbEZDndTqNg","존크TV":"https://www.youtube.com/channel/UCitaXlLp5Oy0aKmH2_y0xFw","세계를 배우다":"https://www.youtube.com/channel/UCKL4XL4GfYd2JEWG5necV2g","감동제이-해외감동사연":"https://www.youtube.com/channel/UCuzqMyLbJl5tduNrdmY8k8A","늑대튜브":"https://www.youtube.com/channel/UCBQWTqT6E7Ik9EMmol6KUfA","단독튜브":"https://www.youtube.com/channel/UC0julKgIDzqKV0T6aabO5bA","세부부부":"https://www.youtube.com/channel/UC5QCza-qtDmujX_lzIs9SJw","진상처리반 [jinsang TV]":"https://www.youtube.com/channel/UCsEphGNFU7nkVrgXsX-R7zg","꿀튜브":"https://www.youtube.com/channel/UCWBhajLdX4Go7KHzDWyBHXw","세모튜브 - 세계모든반응":"https://www.youtube.com/channel/UChVVN2RScvKk896qf7jMT-w","푸른시선":"https://www.youtube.com/channel/UCM13V7yhj9sXqNwQm8xFtgQ","[글리] 글로벌리플":"https://www.youtube.com/channel/UCY7Qmb-fbFHozWtuy5P5i4g","월드맵튜브":"https://www.youtube.com/channel/UCqBQlJY4tnVdibkFUsChbig","OKASHU":"https://www.youtube.com/channel/UCPWE1vJybVDM9L82OqsXFzg"}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent), G=D.g, C=D.c;
+G.forEach((g,i)=>{g.r=i+1;g.s=(g.t+' '+g.v.map(x=>x[0]).join(' ')).toLowerCase();});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('ko-KR')+'회';
+let mode='',shown=0,cur=[];const STEP=150;
+$('f').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('f').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));mode=b.dataset.v;render();});
+$('q').addEventListener('input',render);
+$('more').addEventListener('click',()=>draw(false));
+function render(){const q=$('q').value.trim().toLowerCase();
+ cur=G.filter(g=>(!mode||(mode==='2'?g.v.length>1:g.nc>1))&&(!q||g.s.includes(q)));
+ $('count').textContent=`제목 묶음 ${cur.length.toLocaleString('ko-KR')}개 (조회수 높은 순)`; shown=0; $('list').innerHTML=''; draw(true);}
+function draw(reset){const part=cur.slice(shown,shown+STEP);shown+=part.length;
+ $('list').insertAdjacentHTML('beforeend',part.map(g=>`<li class="grp"><div class="head"><span class="rank">${g.r}</span><div>
+  <a class="t" href="https://www.youtube.com/watch?v=${g.id}" target="_blank" rel="noopener">${esc(g.t)}</a>
+  <div class="info">최고 <b>${fmt(g.max)}</b> · 영상 ${g.v.length}개 · 채널 ${g.nc}개</div></div></div>
+  <ul>${g.v.map(x=>`<li class="v">${C[x[0]]?`<a class="ch" href="${esc(C[x[0]])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:`<span class="ch">${esc(x[0])}</span>`}<span class="dt">(${esc(x[1])})</span><a class="vw" href="https://www.youtube.com/watch?v=${x[3]}" target="_blank" rel="noopener">${fmt(x[2])}</a></li>`).join('')}</ul></li>`).join(''));
+ $('more').hidden=shown>=cur.length; if(!$('more').hidden)$('more').textContent=`더 보기 (${(cur.length-shown).toLocaleString('ko-KR')}개 남음)`;}
+render();
+})();
+</script></body></html>

@@ -1,0 +1,62 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>캠핑장 해외반응 순위</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--blue:#2f5fb3;
+--body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--blue:#86aef5;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:22px 12px}h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0;max-width:78ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search]{flex:1 1 240px;min-width:0;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.more{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.count{color:var(--muted);font-size:13px;padding-block:10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.rank{font-family:var(--num);color:var(--accent);font-size:15px;min-width:2.5em;text-align:right}
+.t{font-weight:700;color:var(--fg);text-decoration:none;word-break:break-word}.t:hover{color:var(--accent);text-decoration:underline}
+.info{color:var(--muted);font-size:12.5px;margin-top:2px}.info b{color:var(--accent);font-family:var(--num);font-weight:500}
+ul{list-style:none;margin:8px 0 0;padding:0 0 0 calc(2.5em + 10px);display:flex;flex-direction:column;gap:3px}
+li.v{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;font-size:13.5px}
+.ch{color:var(--fg);font-weight:500;text-decoration:none}a.ch:hover{text-decoration:underline;color:var(--blue)}
+.dt{color:var(--muted);font-family:var(--num);font-size:12.5px}
+.vw{color:var(--muted);text-decoration:none;font-family:var(--num);font-size:12.5px}.vw:hover{color:var(--accent);text-decoration:underline}
+.more{display:block;margin:14px auto 40px}
+@media (max-width:600px){ul{padding-left:0}}
+</style></head><body>
+<header class="wrap"><h1>캠핑장 해외반응 순위</h1>
+<p class="sub">‘캠핑장’ 주제의 해외반응 롱폼 영상 중 조회수 5만 회 이상 23개를, 80% 이상 비슷한 제목끼리 묶어 조회수 순으로 정리했습니다(구독자 수와 관계없이 조회수만 기준, 2026년 11월 1일 기준). 제목에 들어간 말: 캠핑, 차박. 한 영상에 여러 주제가 겹치면 제목에서 먼저 나오는 주제 하나에만 넣었습니다. 묶음 아래에는 올린 채널을 먼저 올린 순서로 적었고, 채널명을 누르면 채널이, 조회수를 누르면 영상이 새 탭에서 열립니다.</p></header>
+<div class="bar"><div class="wrap">
+<input type="search" id="q" placeholder="제목·채널명 검색" aria-label="검색">
+<div class="seg" id="f" role="group" aria-label="보기"><button data-v="" aria-pressed="true">모든 제목</button><button data-v="2" aria-pressed="false">2번 이상 올라온 제목</button><button data-v="c" aria-pressed="false">여러 채널이 올린 제목</button></div>
+</div></div>
+<main class="wrap"><div class="count" id="count"></div><ol id="list"></ol><button class="more" id="more" hidden>더 보기</button></main>
+<script type="application/json" id="data">{"g":[{"t":"한국산 명품 캠핑장비를 선물받은 캠핑 매니아 미국인 삼촌의 반응은?! ㅋㅋ","id":"i8TdO9D4kbg","max":2134083,"v":[["레이진 [Raye & Jin]","2023.3.24",2134083,"i8TdO9D4kbg"]],"nc":1},{"t":"[해외반응] 솔로 캠핑으로 한국 치안 실험한 미국 기자 / 외국인반응","id":"Jg8LGlHt2i8","max":1542639,"v":[["픽업뉴스 PICK UP NEWS","2022.5.3",1542639,"Jg8LGlHt2i8"]],"nc":1},{"t":"미국 캠핑장) 김치 라면 처음 먹어본 외국인 남편의  반응은?!  캠핑장에 김치 도둑이?!","id":"4sQ7bDKlgOY","max":777053,"v":[["디디패밀리DeeDee Family","2020.8.20",777053,"4sQ7bDKlgOY"]],"nc":1},{"t":"캠핑중 일본인아내에게 아기 갖자고 했더니 반응이..?충격[한일커플/커플vlog]韓国人旦那が本気で子供が欲しいと言われたら、彼女の反応は？【日韓カップル】","id":"aUczHaq_SLo","max":667705,"v":[["제주커플jeju-couple","2021.8.24",667705,"aUczHaq_SLo"]],"nc":1},{"t":"술 못 마시는 한국 사위를 봤을 때 장모님 반응?! 북마케도니아 오흐리드 여행 캠핑 #3 [국제커플]","id":"qLWy8_dWmHw","max":608238,"v":[["NB couple엔비커플","2022.6.26",608238,"qLWy8_dWmHw"]],"nc":1},{"t":"\"한국인이 갑자기 차를 막아요\" 전재산 팔고 산 캠핑카로 한국 여행하던 50대 영국인 부부, 어느 한적한 시골길에서 한국인 무리가 막아세우자 난리난 상황","id":"Qa4dZdeA72I","max":538477,"v":[["생생반응","2026.8.2",538477,"Qa4dZdeA72I"]],"nc":1},{"t":"“한국은 그냥 미친나라에요” 캠핑장 탈출한 호주 잼버리 참가자 충격고백","id":"wwiDNk934LM","max":384877,"v":[["단골이슈","2023.8.11",384877,"wwiDNk934LM"]],"nc":1},{"t":"캠핑장에서 솥뚜껑에 삼겹살을 처음 먹어 본 베트남 직원들의 반응? 캠핑장 사장님 냄새로 고문...","id":"uhBj8GuVOLE","max":362608,"v":[["코이티비 KOITV","2024.8.5",362608,"uhBj8GuVOLE"]],"nc":1},{"t":"\"진짜 한국인들은 이런식인가요?\" 2살 미국인 아기 한국 캠핑장 3분 영상에 경악한 이유","id":"aKOfKZHRAQM","max":247872,"v":[["아름다운대한민국","2026.2.25",247872,"aKOfKZHRAQM"]],"nc":1},{"t":"12년동안 한국에 살면서 처음 캠핑온 외국인들의 반응은?  ‪@life.h‬​","id":"S2MRKdAttbU","max":243013,"v":[["크리스 이슈 Kris Issue","2023.7.6",243013,"S2MRKdAttbU"]],"nc":1},{"t":"\"한국에 이런 게 있었다고?\" 한국은 빌딩뿐인 줄 알았던 영국 캠핑카 부부, 한국인 말만 믿고 따라간 그곳에서 끝내 경악한 이유","id":"wXRYGGfjXIg","max":213842,"v":[["한국이좋아","2026.9.20",213842,"wXRYGGfjXIg"]],"nc":1},{"t":"한국에서 처음 캠핑을 해보는 튀르키예녀의 반응은? 😆 🇹🇷🇰🇷","id":"fYMmyEEzjmI","max":208064,"v":[["핫뮤튜브 Hatmyutube","2024.2.13",208064,"fYMmyEEzjmI"]],"nc":1},{"t":"캠핑장에서 처음 먹는 막창!!! 인생 처음으로 막창을 먹어 본 일본인 친구들의 반응은?! #한일커플 #한국요리 #막창 #봉이막창 #불막창","id":"Xus7Iyl3XlI","max":168078,"v":[["웅짱TVうんちゃんTV","2023.5.8",168078,"Xus7Iyl3XlI"]],"nc":1},{"t":"외국인이 충격받는 한국의 독특한 캠핑 장비 6가지 / K 캠핑 / 캠핑장비 / 캠핑용품 / 외국인 반응 / Camping in Korea (SUB)","id":"d910u6TDP-Q","max":162628,"v":[["슬기로운 캠핑생활","2021.5.14",162628,"d910u6TDP-Q"]],"nc":1},{"t":"국내 최초 국산 픽업 트럭 캠퍼 가이아 미국 수출 시작 해외 반응이 굉장히 뜨겁습니다 한국 오버랜딩 오프로드 튜닝 아웃도어 오지 캠핑의 모든것","id":"kZZGBzH_wn0","max":137866,"v":[["굿잡TV (GoodjobTV)","2022.5.24",137866,"kZZGBzH_wn0"]],"nc":1},{"t":"캠핑에서 흔히 먹는 한국음식 해주자 외국인들의 놀라운 반응","id":"LxI-JdjtW9U","max":92652,"v":[["크리스 이슈 Kris Issue","2023.8.10",92652,"LxI-JdjtW9U"]],"nc":1},{"t":"고기맛 실화!? 캠핑가서 삼겹살 바베큐를 처음 맛본 외국인 [외국인코리아]","id":"HxLzrWmRU0s","max":87974,"v":[["Den 덴","2018.10.15",87974,"HxLzrWmRU0s"]],"nc":1},{"t":"캠핑장에서 먹는 기름떡볶이!! 처음으로 기름떡볶이를 먹어 본 일본인 친구들의 반응은?! #한일커플 #한국요리 #기름떡볶이","id":"Oi9F9fA_oGc","max":81439,"v":[["웅짱TVうんちゃんTV","2023.5.10",81439,"Oi9F9fA_oGc"]],"nc":1},{"t":"[해외반응] \"한국에서는 이게 가능하다고?\"한국의 흔한 캠핑 모습에 경악하는 외국인들 \"이런 나라는 한국뿐일꺼야..\"","id":"vJLyQjm02RY","max":70036,"v":[["한눈에 세계를","2023.3.31",70036,"vJLyQjm02RY"]],"nc":1},{"t":"“이딴 걸로 요리를 한다고요” 미국 상남자 아웃도어 유튜버가 영하 20도 캠핑장 서 꺼낸 이것에 ‘발칵’ 미국 캠핑 필수품 된 한국 전통 주방용품","id":"FnDzZKGWWBk","max":70018,"v":[["why?와이튜브","2026.10.5",70018,"FnDzZKGWWBk"]],"nc":1},{"t":"[해외반응] \"한국은 이게 이렇게 쉽다고?\"한국에서 캠핑한 외국인들이 경악한 이유 \"유독 한국만 다른 이유가 뭐죠?\"","id":"oYxyx15yifc","max":67284,"v":[["존크TV","2023.3.31",67284,"oYxyx15yifc"]],"nc":1},{"t":"한국 캠핑카 처음 본 유럽인의 리얼 반응! 한국차와 비교해봤습니다 (영국🇬🇧) #28","id":"JBawAPCEr-A","max":58210,"v":[["하늘이지용 세계여행","2026.2.21",58210,"JBawAPCEr-A"]],"nc":1},{"t":"[외국인반응] \"프랑스엔 절대 없어!\" 🇰🇷한국 '미친 시설' 캠핑장 가보고 '한우' 마블링에 기절한 아내 (남편 천재?)","id":"dc_L2Ozs3DA","max":57671,"v":[["solalatv 솔랄라티비","2026.4.3",57671,"dc_L2Ozs3DA"]],"nc":1}],"c":{"픽업뉴스 PICK UP NEWS":"https://www.youtube.com/channel/UCwItUD732tg36rv5JhC7mIg","단골이슈":"https://www.youtube.com/channel/UCmEx0Z66HZdOrYqQhM46w3A","아름다운대한민국":"https://www.youtube.com/channel/UC5qQIXRHIIdWgVjwnNff3_w","굿잡TV (GoodjobTV)":"https://www.youtube.com/channel/UC79JHSfuZQHatDsvr1lA_Hw","한눈에 세계를":"https://www.youtube.com/channel/UCcyb7lGFW1o5YrqzVvOSlcQ","존크TV":"https://www.youtube.com/channel/UCitaXlLp5Oy0aKmH2_y0xFw","solalatv 솔랄라티비":"https://www.youtube.com/channel/UC48HrtY4Gp90BYBSxylIFLg","레이진 [Raye & Jin]":"https://www.youtube.com/channel/UCSknObj2PGGK6KCkTyc5Kkw","디디패밀리DeeDee Family":"https://www.youtube.com/channel/UCG3dFw4AE5BDK-9k_1IouFg","크리스 이슈 Kris Issue":"https://www.youtube.com/channel/UCGWhMp-M0m1lCE-tSkEolaw","슬기로운 캠핑생활":"https://www.youtube.com/channel/UCz_Ny4VP2kVss2DX7UfTukQ","생생반응":"https://www.youtube.com/channel/UCuXyU2sGtQLnCiQkYjTb_wg","why?와이튜브":"https://www.youtube.com/channel/UCLDTnLB3i7rUXBcxGrcKAZA","Den 덴":"https://www.youtube.com/channel/UCWAFtWIMxR_Qpjh_sWbmwyA","제주커플jeju-couple":"https://www.youtube.com/channel/UCD2KROktGHeRad9_Eolc3EQ","웅짱TVうんちゃんTV":"https://www.youtube.com/channel/UCQADnOfZo748epEm-PVgtLg","하늘이지용 세계여행":"https://www.youtube.com/channel/UCcWU7BnaJWx8U0xlY3k1wOg","한국이좋아":"https://www.youtube.com/channel/UCo43DsD6QxG6ItBOI-hwrmw","코이티비 KOITV":"https://www.youtube.com/channel/UCLvaHVogti2o0AkXoNZzeKA","NB couple엔비커플":"https://www.youtube.com/channel/UCEHYQlrn01RoUMjC5ubcNHQ","핫뮤튜브 Hatmyutube":"https://www.youtube.com/channel/UCPU8eG3HGtAqFG-bj3Exwfw"}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent), G=D.g, C=D.c;
+G.forEach((g,i)=>{g.r=i+1;g.s=(g.t+' '+g.v.map(x=>x[0]).join(' ')).toLowerCase();});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('ko-KR')+'회';
+let mode='',shown=0,cur=[];const STEP=150;
+$('f').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('f').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));mode=b.dataset.v;render();});
+$('q').addEventListener('input',render);
+$('more').addEventListener('click',()=>draw(false));
+function render(){const q=$('q').value.trim().toLowerCase();
+ cur=G.filter(g=>(!mode||(mode==='2'?g.v.length>1:g.nc>1))&&(!q||g.s.includes(q)));
+ $('count').textContent=`제목 묶음 ${cur.length.toLocaleString('ko-KR')}개 (조회수 높은 순)`; shown=0; $('list').innerHTML=''; draw(true);}
+function draw(reset){const part=cur.slice(shown,shown+STEP);shown+=part.length;
+ $('list').insertAdjacentHTML('beforeend',part.map(g=>`<li class="grp"><div class="head"><span class="rank">${g.r}</span><div>
+  <a class="t" href="https://www.youtube.com/watch?v=${g.id}" target="_blank" rel="noopener">${esc(g.t)}</a>
+  <div class="info">최고 <b>${fmt(g.max)}</b> · 영상 ${g.v.length}개 · 채널 ${g.nc}개</div></div></div>
+  <ul>${g.v.map(x=>`<li class="v">${C[x[0]]?`<a class="ch" href="${esc(C[x[0]])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:`<span class="ch">${esc(x[0])}</span>`}<span class="dt">(${esc(x[1])})</span><a class="vw" href="https://www.youtube.com/watch?v=${x[3]}" target="_blank" rel="noopener">${fmt(x[2])}</a></li>`).join('')}</ul></li>`).join(''));
+ $('more').hidden=shown>=cur.length; if(!$('more').hidden)$('more').textContent=`더 보기 (${(cur.length-shown).toLocaleString('ko-KR')}개 남음)`;}
+render();
+})();
+</script></body></html>

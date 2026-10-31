@@ -1,0 +1,62 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>한국 골목 해외반응 순위</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--blue:#2f5fb3;
+--body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--blue:#86aef5;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:22px 12px}h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0;max-width:78ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search]{flex:1 1 240px;min-width:0;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.more{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.count{color:var(--muted);font-size:13px;padding-block:10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.rank{font-family:var(--num);color:var(--accent);font-size:15px;min-width:2.5em;text-align:right}
+.t{font-weight:700;color:var(--fg);text-decoration:none;word-break:break-word}.t:hover{color:var(--accent);text-decoration:underline}
+.info{color:var(--muted);font-size:12.5px;margin-top:2px}.info b{color:var(--accent);font-family:var(--num);font-weight:500}
+ul{list-style:none;margin:8px 0 0;padding:0 0 0 calc(2.5em + 10px);display:flex;flex-direction:column;gap:3px}
+li.v{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;font-size:13.5px}
+.ch{color:var(--fg);font-weight:500;text-decoration:none}a.ch:hover{text-decoration:underline;color:var(--blue)}
+.dt{color:var(--muted);font-family:var(--num);font-size:12.5px}
+.vw{color:var(--muted);text-decoration:none;font-family:var(--num);font-size:12.5px}.vw:hover{color:var(--accent);text-decoration:underline}
+.more{display:block;margin:14px auto 40px}
+@media (max-width:600px){ul{padding-left:0}}
+</style></head><body>
+<header class="wrap"><h1>한국 골목 해외반응 순위</h1>
+<p class="sub">‘한국 골목’ 주제의 해외반응 롱폼 영상 중 조회수 5만 회 이상 30개를, 80% 이상 비슷한 제목끼리 묶어 조회수 순으로 정리했습니다(구독자 수와 관계없이 조회수만 기준, 2026년 11월 1일 기준). 제목에 들어간 말: 골목. 한 영상에 여러 주제가 겹치면 제목에서 먼저 나오는 주제 하나에만 넣었습니다. 묶음 아래에는 올린 채널을 먼저 올린 순서로 적었고, 채널명을 누르면 채널이, 조회수를 누르면 영상이 새 탭에서 열립니다.</p></header>
+<div class="bar"><div class="wrap">
+<input type="search" id="q" placeholder="제목·채널명 검색" aria-label="검색">
+<div class="seg" id="f" role="group" aria-label="보기"><button data-v="" aria-pressed="true">모든 제목</button><button data-v="2" aria-pressed="false">2번 이상 올라온 제목</button><button data-v="c" aria-pressed="false">여러 채널이 올린 제목</button></div>
+</div></div>
+<main class="wrap"><div class="count" id="count"></div><ol id="list"></ol><button class="more" id="more" hidden>더 보기</button></main>
+<script type="application/json" id="data">{"g":[{"t":"외국인은 기겁하는 번데기, 한국인만 골목에서 사 먹은 진짜 이유","id":"LZymAsdSoNY","max":569446,"v":[["세상천지","2026.10.16",569446,"LZymAsdSoNY"]],"nc":1},{"t":"한국의 치안에 놀란 독일여자ㅣ골목에 들어갔더니 벌어진 일","id":"Ujf2PiCeYIw","max":547948,"v":[["뉴사이드","2020.8.12",547948,"Ujf2PiCeYIw"]],"nc":1},{"t":"\"왜 시키지도 않은걸 또 갖고와요?\" 난생처음 한국식 치킨 먹으러 온 외국인 부부, 서울 뒷골목 치킨집 3분 영상에 전세계가 경악","id":"f_aq0hImSLw","max":469087,"v":[["글로벌한국","2026.9.22",469087,"f_aq0hImSLw"]],"nc":1},{"t":"미국인들은 서울에서 진정한 닭한마리의 맛을 반응입니다! 우리가 그 동대문 닭한마리 골목에서 가장 좋은 맛집을 찾았나요?!? Feat. 수제 떡, 칼국수, 닭죽, & 맥주한잔!","id":"wcv7U-VD1ds","max":402260,"v":[["오스틴! 주는대로먹는다 (Eating What is Given)","2023.3.10",402260,"wcv7U-VD1ds"]],"nc":1},{"t":"[실시간영상] '한국은 소국' 아시아 골목대장 노리다 몰래 미국에 SOS 날린 시진핑, 싼샤댐 실시간 영상 조작, 일부 붕괴 일파만파 싼샤댐 파편 경악 반응","id":"_XCZI-Jx6qs","max":400511,"v":[["와트맨","2020.7.30",400511,"_XCZI-Jx6qs"]],"nc":1},{"t":"이탈리아에서는 법으로 안되는데 한국은 골목마다 몰려있는 이거 보고 놀란 이탈리아 여자.","id":"0FdpY8-Qoag","max":353493,"v":[["크리스 이슈 Kris Issue","2021.1.6",353493,"0FdpY8-Qoag"]],"nc":1},{"t":"\"한국은 새벽에 혼자 다녀도 돼요?\" 한국 새벽 골목 혼자 걷는 영상 올린 미국 여성에 전 세계 3억명 경악","id":"_eLaj-lP-Ac","max":310157,"v":[["가마솥비빔밥","2026.4.5",310157,"_eLaj-lP-Ac"]],"nc":1},{"t":"영화 홍보한다는 핑계로 한국 오더니 서울 골목에서 포착돼 전세계 언론이 발칵 뒤집힘ㅎㄷㄷ","id":"-llHQ9GnRrk","max":301311,"v":[["광화문브리핑","2022.8.20",301311,"-llHQ9GnRrk"]],"nc":1},{"t":"'여기로 가도 돼?' 밤에도 안전한 한국 골목에 놀란 외국인들ㅋㅋ(feat. 닭갈비 먹방) | #어서와한국은처음이지 | EP.86회","id":"U4hqNOcbZF8","max":291939,"v":[["어서와 한국은 처음이지","2026.5.14",291939,"U4hqNOcbZF8"]],"nc":1},{"t":"겨울을 맞아 굴보쌈을 먹으러 종로보쌈골목에 간 프랑스인 친구!! 한국 굴 가격에 깜짝 놀라네요ㅋㅋㅋ","id":"-1aLCNianzc","max":275592,"v":[["리얼리제이 RealLeeJay","2023.11.22",275592,"-1aLCNianzc"]],"nc":1},{"t":"아니 이게 Kpop 이라고? 길거리에서 호주인 아무나 붙잡음 “노을(Noel) - 늦은 밤 너의 집 앞 골목길에서(Late Night)” |Reaction |해외반응","id":"m9KHkNg9w7g","max":259201,"v":[["커버챌린지[CoverChallenge]","2019.11.22",259201,"m9KHkNg9w7g"]],"nc":1},{"t":"[해외반응] 한국인 1명 때문에 프랑스 뒷골목 주름잡던 깡패 13명이 실신한 이유 // \"한국 무술 진짜 살벌하네 살벌해...\"","id":"4Yt-7Z-jR5I","max":255837,"v":[["한눈에 세계를","2022.2.5",255837,"4Yt-7Z-jR5I"]],"nc":1},{"t":"전주 막걸리골목 안주 먹방!! 안주가 코스로!? 술상 외국인 반응 in 전라북도 (feat. 통영 생굴) Jeonju Makgeolli Course!","id":"8DDGCjBFYpA","max":241233,"v":[["오스틴! 주는대로먹는다 (Eating What is Given)","2019.12.20",241233,"8DDGCjBFYpA"]],"nc":1},{"t":"늦은밤 술 한잔한 일본여자가 한국 골목을 걷다 충격받은 이유","id":"vWJp6dEQBT4","max":187825,"v":[["세상모든이야기","2022.6.17",187825,"vWJp6dEQBT4"]],"nc":1},{"t":"\"부모님이 보시면 심장마비 오실 거예요\" 평생 미국 밖을 나가 본 적 없던 청년, 서울 도착 첫날 밤 골목을 걷다 경악한 이유","id":"W87KpCwLZVQ","max":137952,"v":[["한국에, 반했대요","2026.10.10",137952,"W87KpCwLZVQ"]],"nc":1},{"t":"일본 요리계를 쥐락펴락하는 최고의 셰프가 한국의 허름한 시장 골목 갔다가 충격에 휩싸인 이유","id":"PnzNwSLnvYc","max":109701,"v":[["위대한언니","2022.6.26",109701,"PnzNwSLnvYc"]],"nc":1},{"t":"\"보셨죠? 한국은 수준이 달라요\" 전세계 100만 경악한 한국 밤골목 영상","id":"Af8Ba5Z-1qQ","max":106270,"v":[["고고해외반응","2025.12.3",106270,"Af8Ba5Z-1qQ"]],"nc":1},{"t":"[단독외국인반응] \"한국에서 그곳만은 절대 가지마!!\" 한국 새벽 골목 영상에 외국인들이 경악하는 이유","id":"zy60iBoTryM","max":102455,"v":[["존크TV","2021.1.8",102455,"zy60iBoTryM"]],"nc":1},{"t":"한국의 평범한 골목길 영상을 본 이탈리아아빠가 충격받은 이유","id":"w1LCrH7zpLM","max":97519,"v":[["어썸코리아 Awesome Korea","2020.8.20",97519,"w1LCrH7zpLM"]],"nc":1},{"t":"“한국인들은 기본조차 안 되어있네요” 우연히 계획에 없었던 한국 오게된 외국인이 한국 골목에서 기겁하는데..","id":"AOC0AbDWLtE","max":81266,"v":[["세모튜브 - 세계모든반응","2023.9.16",81266,"AOC0AbDWLtE"]],"nc":1},{"t":"[해외반응] 이탈리아 뒷골목에서 한식을 팔기 시작하자 난리 나버린 현지 상황 // \"이것 보세요 놀랍지 않아요?\"","id":"Zhys9wu8x8w","max":78100,"v":[["한눈에 세계를","2022.5.31",78100,"Zhys9wu8x8w"]],"nc":1},{"t":"[해외반응] 전 세계에서 오직 한국에서만 볼 수 있다는 골목길 풍경","id":"yuDnXfW9lkc","max":70952,"v":[["세모튜브 - 세계모든반응","2022.5.12",70952,"yuDnXfW9lkc"]],"nc":1},{"t":"[한국여행]한국 가면 달동네, 옛 골목 한 번 가보고 싶다던 일본아내 첫방문 반응:)","id":"NJ8qclKkHLQ","max":67076,"v":[["NaNaSoNa Yoon","2024.9.22",67076,"NJ8qclKkHLQ"]],"nc":1},{"t":"[해외반응] 아일랜드 뒷골목에 한국 간식 판매를 시작하자 전국이 발칵 뒤집힌 상황 // \"내가 찾던 한국 음식이 바로 이겁니다\"","id":"G79yeeITBeI","max":65412,"v":[["한눈에 세계를","2022.8.9",65412,"G79yeeITBeI"]],"nc":1},{"t":"1분마다 기억이 초기화되는 딸과 한국에 방문한 프랑스 엄마, 밤골목을 지나다가 한국인이 딸을 질질 끌고가자 충격을 받은 이유","id":"lUTGPPSmVh4","max":55323,"v":[["세모튜브 - 세계모든반응","2023.3.23",55323,"lUTGPPSmVh4"]],"nc":1},{"t":"\"아니, 한국 학생들은 전부 어김없던데?\" 한국으로 가족여행 온 외국인이 골목길에서의 한국 학생들 모습에 당황한 이유","id":"cJUIHZQfZZU","max":54671,"v":[["세모튜브 - 세계모든반응","2023.12.8",54671,"cJUIHZQfZZU"]],"nc":1},{"t":"[해외반응] \"이건 오로지 한국이기에 가능하다\" 한국의 새벽 골목길 풍경에 한국의 치안 부러워 미치는 외국인반응","id":"mc7islw45yY","max":54069,"v":[["존크TV","2023.2.9",54069,"mc7islw45yY"]],"nc":1},{"t":"[반응은?] 일본인 주부에게 먹여보았다! 인생 첫 한국 조개찜 小사이즈 | 서울 청량리 경동시장 뒷골목 맛집 먹방","id":"OOAAPLgHm3A","max":52887,"v":[["맛집오타쿠 | 일본교포 3세의 한국노포 탐방","2026.5.23",52887,"OOAAPLgHm3A"]],"nc":1},{"t":"“여기가 한국 먹자골목이랍니다” 런던 한복판에 한국 그대로 옮겨놓자 경악한 영국방송 // “여기가 한국이야 영국이야?”","id":"4YcyiwYcEmc","max":52066,"v":[["꿀튜브","2026.10.23",52066,"4YcyiwYcEmc"]],"nc":1},{"t":"\"유럽인들 한국 평범한 골목길 걷다가 깜짝 놀라는 이유\" 현재 유럽 인터넷 발칵 뒤집히게 만든 한국 골목길 사진","id":"Ig5V7VoIHTI","max":50897,"v":[["마농의 시선","2026.10.20",50897,"Ig5V7VoIHTI"]],"nc":1}],"c":{"한국에, 반했대요":"https://www.youtube.com/channel/UCDLgpyjgVmiIrmczuN2NbnQ","꿀튜브":"https://www.youtube.com/channel/UCWBhajLdX4Go7KHzDWyBHXw","가마솥비빔밥":"https://www.youtube.com/channel/UCnShpGhv4IQFRl-JITLw4Eg","리얼리제이 RealLeeJay":"https://www.youtube.com/channel/UC_52O__gc0p8ivOHQPRXTjw","어서와 한국은 처음이지":"https://www.youtube.com/channel/UC4i1qf8CUH93DLSbD9efqig","오스틴! 주는대로먹는다 (Eating What is Given)":"https://www.youtube.com/channel/UC_lPYQ5ddh506aZ9CcEUIig","세상천지":"https://www.youtube.com/channel/UC0Vt_TfId217rJXeFZtindA","세상모든이야기":"https://www.youtube.com/channel/UCDih-87kuRMA8uFcrx10Wlw","존크TV":"https://www.youtube.com/channel/UCitaXlLp5Oy0aKmH2_y0xFw","어썸코리아 Awesome Korea":"https://www.youtube.com/channel/UC9HNi_aAXBgpI2zhibOAfAA","와트맨":"https://www.youtube.com/channel/UCCMxAf6uEc0csVVdW1dkkxw","위대한언니":"https://www.youtube.com/channel/UCYKYTbPYaMIIyYuhWYdxmVw","NaNaSoNa Yoon":"https://www.youtube.com/channel/UCDWuauI9su9-SpSiuw1Yq8g","글로벌한국":"https://www.youtube.com/channel/UCvZhBe0Of9gbevwYhqkfeKw","커버챌린지[CoverChallenge]":"https://www.youtube.com/channel/UCPDP-FGtPRuvay92E8lTfBA","마농의 시선":"https://www.youtube.com/channel/UCtJB07V9jTQqej10XlL89Ww","세모튜브 - 세계모든반응":"https://www.youtube.com/channel/UChVVN2RScvKk896qf7jMT-w","뉴사이드":"https://www.youtube.com/channel/UCudezj2i6R94QOPqGJhbZwg","한눈에 세계를":"https://www.youtube.com/channel/UCcyb7lGFW1o5YrqzVvOSlcQ","광화문브리핑":"https://www.youtube.com/channel/UCN5O0KlZW-_nspNJkxX7wEQ","고고해외반응":"https://www.youtube.com/channel/UC1iMYwKImmqeEQ1GRPd3ZxQ","맛집오타쿠 | 일본교포 3세의 한국노포 탐방":"https://www.youtube.com/channel/UCwyaafBJhy77UoFc8PrMLiA","크리스 이슈 Kris Issue":"https://www.youtube.com/channel/UCGWhMp-M0m1lCE-tSkEolaw"}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent), G=D.g, C=D.c;
+G.forEach((g,i)=>{g.r=i+1;g.s=(g.t+' '+g.v.map(x=>x[0]).join(' ')).toLowerCase();});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('ko-KR')+'회';
+let mode='',shown=0,cur=[];const STEP=150;
+$('f').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('f').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));mode=b.dataset.v;render();});
+$('q').addEventListener('input',render);
+$('more').addEventListener('click',()=>draw(false));
+function render(){const q=$('q').value.trim().toLowerCase();
+ cur=G.filter(g=>(!mode||(mode==='2'?g.v.length>1:g.nc>1))&&(!q||g.s.includes(q)));
+ $('count').textContent=`제목 묶음 ${cur.length.toLocaleString('ko-KR')}개 (조회수 높은 순)`; shown=0; $('list').innerHTML=''; draw(true);}
+function draw(reset){const part=cur.slice(shown,shown+STEP);shown+=part.length;
+ $('list').insertAdjacentHTML('beforeend',part.map(g=>`<li class="grp"><div class="head"><span class="rank">${g.r}</span><div>
+  <a class="t" href="https://www.youtube.com/watch?v=${g.id}" target="_blank" rel="noopener">${esc(g.t)}</a>
+  <div class="info">최고 <b>${fmt(g.max)}</b> · 영상 ${g.v.length}개 · 채널 ${g.nc}개</div></div></div>
+  <ul>${g.v.map(x=>`<li class="v">${C[x[0]]?`<a class="ch" href="${esc(C[x[0]])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:`<span class="ch">${esc(x[0])}</span>`}<span class="dt">(${esc(x[1])})</span><a class="vw" href="https://www.youtube.com/watch?v=${x[3]}" target="_blank" rel="noopener">${fmt(x[2])}</a></li>`).join('')}</ul></li>`).join(''));
+ $('more').hidden=shown>=cur.length; if(!$('more').hidden)$('more').textContent=`더 보기 (${(cur.length-shown).toLocaleString('ko-KR')}개 남음)`;}
+render();
+})();
+</script></body></html>

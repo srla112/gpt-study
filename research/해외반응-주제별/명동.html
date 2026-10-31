@@ -1,0 +1,62 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>명동 해외반응 순위</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--blue:#2f5fb3;
+--body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--blue:#86aef5;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:22px 12px}h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0;max-width:78ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search]{flex:1 1 240px;min-width:0;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.more{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.count{color:var(--muted);font-size:13px;padding-block:10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.rank{font-family:var(--num);color:var(--accent);font-size:15px;min-width:2.5em;text-align:right}
+.t{font-weight:700;color:var(--fg);text-decoration:none;word-break:break-word}.t:hover{color:var(--accent);text-decoration:underline}
+.info{color:var(--muted);font-size:12.5px;margin-top:2px}.info b{color:var(--accent);font-family:var(--num);font-weight:500}
+ul{list-style:none;margin:8px 0 0;padding:0 0 0 calc(2.5em + 10px);display:flex;flex-direction:column;gap:3px}
+li.v{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;font-size:13.5px}
+.ch{color:var(--fg);font-weight:500;text-decoration:none}a.ch:hover{text-decoration:underline;color:var(--blue)}
+.dt{color:var(--muted);font-family:var(--num);font-size:12.5px}
+.vw{color:var(--muted);text-decoration:none;font-family:var(--num);font-size:12.5px}.vw:hover{color:var(--accent);text-decoration:underline}
+.more{display:block;margin:14px auto 40px}
+@media (max-width:600px){ul{padding-left:0}}
+</style></head><body>
+<header class="wrap"><h1>명동 해외반응 순위</h1>
+<p class="sub">‘명동’ 주제의 해외반응 롱폼 영상 중 조회수 5만 회 이상 18개를, 80% 이상 비슷한 제목끼리 묶어 조회수 순으로 정리했습니다(구독자 수와 관계없이 조회수만 기준, 2026년 11월 1일 기준). 제목에 들어간 말: 명동. 한 영상에 여러 주제가 겹치면 제목에서 먼저 나오는 주제 하나에만 넣었습니다. 묶음 아래에는 올린 채널을 먼저 올린 순서로 적었고, 채널명을 누르면 채널이, 조회수를 누르면 영상이 새 탭에서 열립니다.</p></header>
+<div class="bar"><div class="wrap">
+<input type="search" id="q" placeholder="제목·채널명 검색" aria-label="검색">
+<div class="seg" id="f" role="group" aria-label="보기"><button data-v="" aria-pressed="true">모든 제목</button><button data-v="2" aria-pressed="false">2번 이상 올라온 제목</button><button data-v="c" aria-pressed="false">여러 채널이 올린 제목</button></div>
+</div></div>
+<main class="wrap"><div class="count" id="count"></div><ol id="list"></ol><button class="more" id="more" hidden>더 보기</button></main>
+<script type="application/json" id="data">{"g":[{"t":"비가 쏟아지는 날, 명동에 가본 미국 처갓집 대박반응 ㅋㅋㅋㅋ","id":"-GLUQ6L3L1A","max":759425,"v":[["조시의 유학","2024.6.1",759425,"-GLUQ6L3L1A"]],"nc":1},{"t":"[Eng]명동 처음 가본 본 미국가족!! (feat.문화체험) ||American family visits MyeongDong for the first time||","id":"UDEvDZt2bpY","max":664223,"v":[["삼척킴패밀리 SamcheokKimFamily","2019.6.5",664223,"UDEvDZt2bpY"]],"nc":1},{"t":"요즘 일본 관광객들이 싹쓸이 중이라는 한국 제품?ㅣ짜장면 맛에 문화충격 받는 이유ㅣ일본 배우 하린ㅣ명동편","id":"jcg6uQoleSU","max":506677,"v":[["세상모든이야기","2025.2.28",506677,"jcg6uQoleSU"]],"nc":1},{"t":"외국인들 명동에 대폭발! 그런데 새벽 3시의 풍경에 감동  myeong-dong street in korea","id":"56xc1fz898I","max":504164,"v":[["KOREA-KIMPD","2024.9.7",504164,"56xc1fz898I"]],"nc":1},{"t":"외국인들이 한국에 와서 깜짝 놀라고 감동먹는 진짜 이유ㅋㅋ 로드쇼 명동편","id":"D4NKntKORCI","max":336627,"v":[["CKOONY","2022.12.13",336627,"D4NKntKORCI"]],"nc":1},{"t":"시카고 흑인(외국인) 명동 갈비찜 반응 - 강남면옥 먹방토크 eng sub - when a black guy ate korean food","id":"4kTI6ZkvT58","max":268239,"v":[["CKOONY","2017.5.3",268239,"4kTI6ZkvT58"]],"nc":1},{"t":"말로만 듣던 명동에 처음 가본 우즈벡 여자들 (우즈베키스탄 국제커플)","id":"mYM2PE5BEUc","max":247339,"v":[["우즈벡 라이프 UZBEK LIFE 우라티비","2026.8.16",247339,"mYM2PE5BEUc"]],"nc":1},{"t":"봐도봐도 끝이 없는 명동 길거리 음식에 깜짝 놀란 이탈리아 장인어른과 아저씨 ㅋㅋ","id":"a3K6UgyxcJg","max":224151,"v":[["모짜렐라걸과 오빠","2025.11.19",224151,"a3K6UgyxcJg"]],"nc":1},{"t":"명동 엄청난 폭설! 눈폭탄에 외국인들은 난리가 났네요! 함박눈 잔치에 함박웃음 가득! 서울여행워커.","id":"gs4oEpvJYAQ","max":199580,"v":[["서울여행워커 Seoul Travel Walker","2026.1.24",199580,"gs4oEpvJYAQ"]],"nc":1},{"t":"[해외반응] \"한국 아줌마들 미친 줄 알았어\" 명동 투어하던 미국 모녀가 경악한 이유 // \"무려 루이뷔통이었다니까요..?\"","id":"Sk_AwhgEv70","max":172610,"v":[["한눈에 세계를","2022.4.25",172610,"Sk_AwhgEv70"]],"nc":1},{"t":"[354근황_#369] 한국 살이 도합 60년! 외국인들이 명동에 가서 놀란 이유는?","id":"dxWMjufCGXE","max":135418,"v":[["354 삼오사","2026.6.12",135418,"dxWMjufCGXE"]],"nc":1},{"t":"서울 명동 근처에 온 외국인,이것을 먹어보기 위해 왔는데 그런데 이 풍경에 감동/해외반응 극찬 나오는 이유","id":"Ak2swrGUtE8","max":135090,"v":[["지구본 뉴스","2025.3.18",135090,"Ak2swrGUtE8"]],"nc":1},{"t":"한국 며느리 놀라게 하는 캐나다 시어머니|명동 칼국수와 육개장 라면 먹방","id":"vdxoZyz5T2U","max":122266,"v":[["캐나다시골댁K-Wife","2026.1.17",122266,"vdxoZyz5T2U"]],"nc":1},{"t":"|중국반응| 중:\"중국 관광객 없어서 한국은 다 망해가겠지?! ㅎ\", 하지만! 명동에 가봤더니 세계 각국에서 온 외국인으로 북적북적!","id":"DcoSiM5SmCk","max":110394,"v":[["OKASHU","2022.12.19",110394,"DcoSiM5SmCk"]],"nc":1},{"t":"명동거리를 갔다가 깜짝 놀란 필리핀 가족들 😆 눈물까지 보인 장모님","id":"4WOSrJFMTR4","max":95725,"v":[["조와부부 필리핀 JOWATV","2024.12.3",95725,"4WOSrJFMTR4"]],"nc":1},{"t":"일본여자가 직접 말하는 명동에서 헌팅당할때 반응 !? [ 한일커플 한일부부 ]","id":"yBD_EO_CBS8","max":61343,"v":[["사라패밀리SarahFamily","2021.1.15",61343,"yBD_EO_CBS8"]],"nc":1},{"t":"[해외반응] 명동 길거리 빙빙 돌아다니던 미국 여성이 유모차 보고 경악한 이유 // \"한국인들 전부 제정신 아니죠..?\"","id":"hGcK5bzUYE0","max":57984,"v":[["존크TV","2022.6.1",57984,"hGcK5bzUYE0"]],"nc":1},{"t":"와..서울 명동이 이렇게 됐다고요? 직접 가보았습니다 외국인 여자 반응","id":"R9o65vmsU6w","max":56315,"v":[["호주사라 HojuSara","2021.6.11",56315,"R9o65vmsU6w"]],"nc":1}],"c":{"존크TV":"https://www.youtube.com/channel/UCitaXlLp5Oy0aKmH2_y0xFw","지구본 뉴스":"https://www.youtube.com/channel/UCSfd9_deRjVAk0V9G7idgUg","서울여행워커 Seoul Travel Walker":"https://www.youtube.com/channel/UCzoQzoOfHQCCouHbjrDEvPQ","354 삼오사":"https://www.youtube.com/channel/UCL_8O4S2CTAOTo7a_KAbJAg","호주사라 HojuSara":"https://www.youtube.com/channel/UCXB0UOASLMQiXBv-q0H-eow","KOREA-KIMPD":"https://www.youtube.com/channel/UCgmxGIrxwdgu46FW3uQUZDg","조시의 유학":"https://www.youtube.com/channel/UCUTILrcak54H05HoCtgFNHg","한눈에 세계를":"https://www.youtube.com/channel/UCcyb7lGFW1o5YrqzVvOSlcQ","세상모든이야기":"https://www.youtube.com/channel/UCDih-87kuRMA8uFcrx10Wlw","사라패밀리SarahFamily":"https://www.youtube.com/channel/UC42bpP43b5FBLKl6z3IAJ1g","우즈벡 라이프 UZBEK LIFE 우라티비":"https://www.youtube.com/channel/UCBIPuIG_7iA9NBIKxIR80wA","캐나다시골댁K-Wife":"https://www.youtube.com/channel/UC_HuTtDholwrt2jBHvg5gwQ","삼척킴패밀리 SamcheokKimFamily":"https://www.youtube.com/channel/UCq0o3sbbptcXuybPCevhbvw","CKOONY":"https://www.youtube.com/channel/UCg3YdmrYGa2O1IySuWvBT0w","모짜렐라걸과 오빠":"https://www.youtube.com/channel/UCYgA4AOMCmg6vepDmkcOEgA","OKASHU":"https://www.youtube.com/channel/UCPWE1vJybVDM9L82OqsXFzg","조와부부 필리핀 JOWATV":"https://www.youtube.com/channel/UCkV-bcB8uGY7u2Gl4yiMKsQ"}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent), G=D.g, C=D.c;
+G.forEach((g,i)=>{g.r=i+1;g.s=(g.t+' '+g.v.map(x=>x[0]).join(' ')).toLowerCase();});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('ko-KR')+'회';
+let mode='',shown=0,cur=[];const STEP=150;
+$('f').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('f').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));mode=b.dataset.v;render();});
+$('q').addEventListener('input',render);
+$('more').addEventListener('click',()=>draw(false));
+function render(){const q=$('q').value.trim().toLowerCase();
+ cur=G.filter(g=>(!mode||(mode==='2'?g.v.length>1:g.nc>1))&&(!q||g.s.includes(q)));
+ $('count').textContent=`제목 묶음 ${cur.length.toLocaleString('ko-KR')}개 (조회수 높은 순)`; shown=0; $('list').innerHTML=''; draw(true);}
+function draw(reset){const part=cur.slice(shown,shown+STEP);shown+=part.length;
+ $('list').insertAdjacentHTML('beforeend',part.map(g=>`<li class="grp"><div class="head"><span class="rank">${g.r}</span><div>
+  <a class="t" href="https://www.youtube.com/watch?v=${g.id}" target="_blank" rel="noopener">${esc(g.t)}</a>
+  <div class="info">최고 <b>${fmt(g.max)}</b> · 영상 ${g.v.length}개 · 채널 ${g.nc}개</div></div></div>
+  <ul>${g.v.map(x=>`<li class="v">${C[x[0]]?`<a class="ch" href="${esc(C[x[0]])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:`<span class="ch">${esc(x[0])}</span>`}<span class="dt">(${esc(x[1])})</span><a class="vw" href="https://www.youtube.com/watch?v=${x[3]}" target="_blank" rel="noopener">${fmt(x[2])}</a></li>`).join('')}</ul></li>`).join(''));
+ $('more').hidden=shown>=cur.length; if(!$('more').hidden)$('more').textContent=`더 보기 (${(cur.length-shown).toLocaleString('ko-KR')}개 남음)`;}
+render();
+})();
+</script></body></html>
