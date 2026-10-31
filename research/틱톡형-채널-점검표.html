@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>틱톡형 채널 점검표</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky control bar over a dense, scannable channel list; one row per channel, status chip on the left */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --fg:#1a1d23; --muted:#5d6472; --line:#e1e4ea;
+  --accent:#d6402b; --accent-soft:#fbe9e6;
+  --good:#1f7a4d; --good-soft:#e2f3ea; --skip:#7a7f89; --skip-soft:#eceef2; --seen:#2f5fb3; --seen-soft:#e6eefb;
+  --font-body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121418; --surface:#1b1e24; --fg:#e7e9ee; --muted:#9aa1ae; --line:#2c3039;
+  --accent:#ff7a63; --accent-soft:#3a201b;
+  --good:#5fd39a; --good-soft:#173326; --skip:#8f95a1; --skip-soft:#262a31; --seen:#86aef5; --seen-soft:#1c2840; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121418; --surface:#1b1e24; --fg:#e7e9ee; --muted:#9aa1ae; --line:#2c3039;
+  --accent:#ff7a63; --accent-soft:#3a201b;
+  --good:#5fd39a; --good-soft:#173326; --skip:#8f95a1; --skip-soft:#262a31; --seen:#86aef5; --seen-soft:#1c2840; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:14px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1180px;margin:0 auto}
+header{padding-block:22px 14px}
+h1{font-size:22px;margin:0 0 4px;text-wrap:balance;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0;max-width:70ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 1px 0 var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-block:10px}
+input[type=search],select{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-width:0}
+input[type=search]{flex:1 1 220px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.btn{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.btn:hover,.seg button:hover{border-color:var(--muted)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.progress{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-block:12px;color:var(--muted);font-size:13px}
+.progress b{color:var(--fg);font-family:var(--font-num);font-weight:500}
+.meter{flex:1 1 160px;height:6px;background:var(--line);border-radius:3px;overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.list{display:flex;flex-direction:column;gap:6px;padding-bottom:40px}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.row.st-good{border-color:var(--good)}
+.row.st-skip{opacity:.62}
+.chip{font-size:11px;letter-spacing:.04em;padding:2px 8px;border-radius:999px;white-space:nowrap;margin-top:3px;background:var(--skip-soft);color:var(--skip)}
+.st-seen .chip{background:var(--seen-soft);color:var(--seen)}
+.st-good .chip{background:var(--good-soft);color:var(--good)}
+.main{min-width:0;display:flex;flex-direction:column;gap:3px}
+.name{font-weight:700;font-size:15px;color:var(--fg);text-decoration:none;word-break:break-word}
+.name:hover{color:var(--accent);text-decoration:underline}
+.name::after{content:" ↗";color:var(--muted);font-weight:400;font-size:12px}
+.meta{display:flex;flex-wrap:wrap;gap:2px 12px;color:var(--muted);font-size:12.5px}
+.meta .num{font-family:var(--font-num);color:var(--fg)}
+.new{color:var(--accent);font-weight:500}
+.vid{color:var(--muted);font-size:13px;text-decoration:none;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.vid:hover{color:var(--fg);text-decoration:underline}
+.vid b{font-family:var(--font-num);font-weight:500;color:var(--accent)}
+.act{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.act button{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:6px;padding:4px 9px;cursor:pointer}
+.act button.on-good{background:var(--good);border-color:var(--good);color:var(--surface)}
+.act button.on-skip{background:var(--skip);border-color:var(--skip);color:var(--surface)}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--surface);padding:8px 14px;border-radius:8px;font-size:13px}
+@media (max-width:640px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .chip{justify-self:start}
+  .act{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.grade{font-size:11.5px;border-radius:999px;padding:0 8px;background:var(--accent-soft);color:var(--accent)}
+.grade.g-mid{background:var(--seen-soft);color:var(--seen)}.grade.g-low,.grade.g-none{background:var(--skip-soft);color:var(--skip)}
+.no{font-family:var(--font-num);color:var(--muted);font-size:12px}
+#cat button{font-weight:500}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>틱톡형 채널 점검표</h1>
+  <p class="sub">틱톡형 채널 16개입니다. 이전 세션에서 사연 목록 251개 중 틱톡형으로 나누신 번호(5, 37, 38번 등)를 모았습니다. 유사도 상·중·하는 사연 기준 채널(사연만남, 세상만사)과 얼마나 비슷한 영상을 올리는지 나타냅니다. 운영 상태 표시는 🟢 7일 안에 업로드, 🟡 30일 안에 업로드, 🔴 30일 넘게 업로드 없음입니다. 채널명을 누르면 새 탭에서 열리고 ‘열어봄’으로 표시됩니다. 수치는 조사 당시(2026년 10월 말) 기준이고, 표시는 이 브라우저에만 저장됩니다.</p>
+</header>
+<div class="bar"><div class="wrap">
+  <div class="seg" id="cat" role="group" aria-label="분류" hidden><button data-v="tiktok" aria-pressed="true">틱톡형</button></div>
+  <input type="search" id="q" placeholder="채널명·영상 제목 검색" aria-label="검색">
+  <select id="sort" aria-label="정렬">
+    <option value="no">번호 순</option><option value="subsD">구독자 많은 순</option><option value="subsA">구독자 적은 순</option>
+    <option value="avg">최근 평균 조회수 높은 순</option><option value="tv">최고 조회수 높은 순</option><option value="recent">최근 업로드 순</option>
+  </select>
+  <div class="seg" id="gradeSeg" role="group" aria-label="유사도"><button data-v="" aria-pressed="true">모든 등급</button><button data-v="상" aria-pressed="false">상</button><button data-v="중" aria-pressed="false">중</button><button data-v="하" aria-pressed="false">하</button></div>
+  <div class="seg" id="activeSeg" role="group" aria-label="활동"><button data-v="" aria-pressed="true">활동 무관</button><button data-v="1" aria-pressed="false">최근 30일 업로드</button></div>
+  <div class="seg" id="status" role="group" aria-label="상태"><button data-v="" aria-pressed="true">전체</button><button data-v="todo" aria-pressed="false">미확인</button><button data-v="seen" aria-pressed="false">열어봄</button><button data-v="good" aria-pressed="false">후보</button><button data-v="skip" aria-pressed="false">제외</button></div>
+  <button class="btn" id="copy">후보 목록 복사</button>
+</div></div>
+<main class="wrap"><div class="progress" id="progress"></div><div class="list" id="list"></div></main>
+<div class="toast" id="toast" hidden></div>
+<script type="application/json" id="data">[{"cat":"tiktok","no":5,"src":"사연 목록","name":"썰극장","url":"https://www.youtube.com/channel/UCB80WYOYZdfGIbFa5CYWFQg","subsT":"7.34만","subs":73400,"nv":"402","grade":"상","op":"🟢","recent":"3시간 전","d":0.125,"m30":"120","avg":10670,"len":"1시간 6분","top":"시모 퇴원하는날 시누들 전부 우리집에 불러 나한테 한마디 상의도 없이 시모를 모시겠다는 남편..시누들이 내게 고맙다며 잘 모셔달라고 할때 내가 한마디 하자 풍비박산 나는데","turl":"https://www.youtube.com/watch?v=gPAyA6xMY5Q","tv":55000,"latest":"(썰극장)시모가 운전면허 도전한다길래 남편차로 시댁에 가려고 네비를 찍었더니 이 주소 어딘가 낯이 익는데? 네비에 찍힌 주소를 따라 가게되고 도착한 순간 경악할 광경이 펼쳐지는데"},{"cat":"tiktok","no":37,"src":"사연 목록","name":"따뜻한 차가움","url":"https://www.youtube.com/channel/UC8SfN_xPgiBaBjMoQyCatcA","subsT":"1.71천","subs":1710,"nv":"312","grade":"상","op":"🟢","recent":"1시간 전","d":0.041666666666666664,"m30":"112","avg":2236,"len":"1시간 58분","top":"친정에서 신혼집을 마련해준다니 시댁 근처에 집을 구해 시부 간병까지 하라는 시모..제대로 한방 먹이고 결국 파혼했습니다","turl":"https://www.youtube.com/watch?v=AkrEZc3f-RM","tv":11000,"latest":"명절에 우리 아들이 회사를 차렸다고 하자 고졸이 무슨 회사를 하냐며 비웃는 동서..옆에서 듣던 시동생이 아들의 회사를 알려주자 동서 얼굴이 새파랗게 질리는데.."},{"cat":"tiktok","no":38,"src":"사연 목록","name":"smokey3030150","url":"https://www.youtube.com/channel/UClJXpPee7eMYaZesEP119YQ","subsT":"1.31천","subs":1310,"nv":"131","grade":"상","op":"🟡","recent":"13일 전","d":13,"m30":"111","avg":2480,"len":"1시간 10분","top":"(썰극장)친정에서 해준 신혼집을 공동명의로 해달라는 시모 다른뜻은 없고 우리 아들 명의로 집이 있으면 좋겠구나 그런데 왜 시댁집을 시숙님한테 준거에요?속내를 알게되고 한방 먹이는데","turl":"https://www.youtube.com/watch?v=-DiTKo2CYww","tv":10000,"latest":"(썰극장)휴일마다 조카들 우리 집으로 보내는 시누 때문에 남편한테 뭐라 했더니 내 동생 힘들게 사는거 몰라? 도와야 할거 아니야! 내가 보여준 사진에 온 시댁이 풍비박산 나는데ㅋ"},{"cat":"tiktok","no":73,"src":"사연 목록","name":"가족의 비밀극장","url":"https://www.youtube.com/channel/UC_H6IsU0btslm9yBn3cZn_Q","subsT":"35","subs":35,"nv":"111","grade":"상","op":"🟢","recent":"5시간 전","d":0.20833333333333331,"m30":"111","avg":108,"len":"1시간 10분","top":"(썰극장)결혼 3년만에 친정에 다녀왔는데 도어락 비번이 바껴서 남편한테 물으니 엄마가 바꾼거 같은데 친정에 가지 말랬잖아ㅎ 다음날 며느리 기강 잡겠다며 찾아온 시모가 싹싹비는데ㅋ","turl":"https://www.youtube.com/watch?v=-8isSJohW0Y","tv":2400,"latest":"(썰극장)시댁집을 사드리고 남편이 해외출장 떠난 사이 시모가 다급하게 전화 오는데 애미야 내집에 누가 이사온다고 하던데 무슨일 있니 당신 아들한테 물어봐 온시댁이 풍비박산 나는데"},{"cat":"tiktok","no":131,"src":"사연 목록","name":"공주 이야기005","url":"https://www.youtube.com/channel/UCObA16iDMaAc0kXevTT8Pxw","subsT":"7.77천","subs":7770,"nv":"3.3천","grade":"중","op":"🔴","recent":"11개월 전","d":330,"m30":"0","avg":204,"len":"40분","top":"(반전사연)남편의 갑작스러운 이혼 선언에 남편회사 비서한테 물어봤더니 여자가 있다는데..상간녀를 확인한 순간 쾌재를 부르며 도장을 찍어주는데ㅋ[라디오드라마][사연라디오][카톡썰]","turl":"https://www.youtube.com/watch?v=p8Q2ku844gY","tv":4100,"latest":"예비 처가댁에 인사하러 갔더니 집 사오고 외벌이하고 주말마다 처가 농사 도와줘야한다는 장모, 결혼직전 사이다  !!! 라디오드라마⧸사연라디오⧸사이다사연⧸썰⧸카톡참교육⧸카톡썰⧸"},{"cat":"tiktok","no":139,"src":"사연 목록","name":"화제의톡톡 166","url":"https://www.youtube.com/channel/UCr7Kwwm0R1EnGC9smwc41YA","subsT":"3.02천","subs":3020,"nv":"714","grade":"중","op":"🔴","recent":"2년 전","d":730,"m30":"0","avg":187,"len":"40분","top":"와이프가 갑자기 임신했다네요  사실 나는 무정자증인데   바람피운 와이프 참교육 들어갑니다  실화사연 라디오사연 참교육 반전","turl":"https://www.youtube.com/watch?v=GD_mqZuTRyI","tv":41000,"latest":"내 결혼식을 내놓으라며 말같지도 않은 소리를 하는 여동생과 엄마 → 끝끝내 남의 결혼식에서 난동을 부린 여동생의 비참한 최후 ㅋㅋㅋ"},{"cat":"tiktok","no":141,"src":"사연 목록","name":"화제의톡톡 167","url":"https://www.youtube.com/channel/UCOb0ayMHHc-CbwSc1UA1X_g","subsT":"2.3천","subs":2300,"nv":"717","grade":"중","op":"🔴","recent":"1년 전","d":365,"m30":"0","avg":84,"len":"37분","top":"속도 위반으로 결혼한 시누이의 혼수가 우리집으로 들어오는데   무개념 시누 참교육","turl":"https://www.youtube.com/watch?v=zrUqzwbn1pg","tv":31000,"latest":"내 전남친을 뻇어간 친구가 자기는 5천만원짜리 결혼식을 한다며 하객으로 와달라고 하길래    → 내 지금 상황을 알려주고 거절했더니 열등감에 발광을 ㅋㅋㅋ"},{"cat":"tiktok","no":145,"src":"사연 목록","name":"톡톡밀크티","url":"https://www.youtube.com/channel/UCqz8KVNrWS7wItb5_Rc4RCQ","subsT":"1.65천","subs":1650,"nv":"853","grade":"중","op":"🔴","recent":"1년 전","d":365,"m30":"0","avg":281,"len":"34분","top":"고아라고 무시당하며 산 며느리 앞에 30년만에 나타난 친아빠의 실체에 인생의 반전이 찾아오는데...","turl":"https://www.youtube.com/watch?v=MRfDIHq3Mig","tv":5400,"latest":"[사이다썰] 아빠가 돌아가시자마자 절연했던 언니로부터 전화가 와서 유언대로 재산은 전부 자기꺼라고 하길래... → 유언장의 최신 버전을 전해준 결과 ㅋㅋ"},{"cat":"tiktok","no":146,"src":"사연 목록","name":"반전 대화","url":"https://www.youtube.com/channel/UC54WVOU3Qd9ack66FaOAg-Q","subsT":"1.59천","subs":1590,"nv":"763","grade":"중","op":"🟢","recent":"1시간 전","d":0.041666666666666664,"m30":"478","avg":94,"len":"46분","top":"(반전사연)친정에서 집을 해주기로해서 남편한테 혼수를 얘기하니 혼수는 당연히 여자가 하는거라는데..한방 먹이고 빠른 파혼 합니다[라디오드라마][사연라디오][카톡썰]","turl":"https://www.youtube.com/watch?v=ELZiQqxeAqU","tv":14000,"latest":"(반전사연)남편 떠나고 30년 동안 가정부 일하며 아들을 의사로 키웠는데 혼주석에 앉지 말라는 사부인..이 소식을 들은 아들이 역대급 참교육을[라디오드라마][사연라디오][카톡썰]"},{"cat":"tiktok","no":150,"src":"사연 목록","name":"인생뒤집기","url":"https://www.youtube.com/channel/UCDBGAsgwvFJTbOCzen9pUQA","subsT":"1.45천","subs":1450,"nv":"484","grade":"중","op":"🟢","recent":"3시간 전","d":0.125,"m30":"400","avg":18,"len":"42분","top":"반전사연시누가 아이를 낳았다며 친정에서 해준 30평 아파트를 시누 15평 아파트랑 바꾸라는 시모  시댁 편드는 남편까지 초토화 시켰습니다라디오드라마사연라디오카톡썰","turl":"https://www.youtube.com/watch?v=hVoGre5zzgI","tv":5400,"latest":"반전사연부자 의뢰인을 만났다며 이혼하자는 변호사 남편  법정에서 보니까 니 수준에 딱 맞더라 상간녀 정체를 알려주자 게거품 물며 졸도하는데ㅋ라디오드라마사연라디오카톡썰"},{"cat":"tiktok","no":151,"src":"사연 목록","name":"사연의 마지막 장면","url":"https://www.youtube.com/channel/UCHJ5TgVGA0k9IJNAH_SvM3g","subsT":"1.41천","subs":1410,"nv":"310","grade":"중","op":"🟡","recent":"2주 전","d":14,"m30":"225","avg":774,"len":"42분","top":"반전사연엄마사업이 힘들다고 하자 파혼하자는 예비남편  엄마를 처음본 예비시부가 엄마한테 인사하자 예비남편놈이 게거품을 무는데ㅋ라디오드라마사연라디오카톡썰","turl":"https://www.youtube.com/watch?v=yioB4pxpYw4","tv":10000,"latest":"반전사연미혼모 시누가 결혼한다며 시누 아이를 친정엄마한테 맡겼다는 시모  예비시매부한테 양육비를 청구하자 시모랑 시누가 게거품을 무는데ㅋ라디오드라마사연라디오카톡썰"},{"cat":"tiktok","no":152,"src":"사연 목록","name":"일상 이야기","url":"https://www.youtube.com/channel/UCa63C_jTXUuqf93l0bAN7SQ","subsT":"1.4천","subs":1400,"nv":"1.1천","grade":"중","op":"🔴","recent":"10개월 전","d":300,"m30":"0","avg":65,"len":"37분","top":"【실화사연】 바람펴서 10년전에 이혼한 예전 아내에게서 다시 합치자는 연락이 왔다... 아직도 상황파악 안되는 그녀의 최후 ㅋㅋ","turl":"https://www.youtube.com/watch?v=J9UQtLzCXr8","tv":2500,"latest":"교통사고를 당한 친정아버지를 간병해드리는 며느리를 날마다 갈구고 비꼬고 방해하던 시모,한치 앞날도 모르는 어리석은 노인네가 지 팔자를 지가 꼬게 되는 꼴이 되고 마는데"},{"cat":"tiktok","no":154,"src":"사연 목록","name":"숨겨진 톡","url":"https://www.youtube.com/channel/UCZvDHgiw0IcITna_gxXt84w","subsT":"1.27천","subs":1270,"nv":"669","grade":"중","op":"🟢","recent":"2시간 전","d":0.08333333333333333,"m30":"468","avg":486,"len":"46분","top":"(반전사연)결혼 전 친정에서 해준 아파트랑 시모가 살고 있는 빌라랑 바꾸자는 예비남편..대리 효도 하려는 남친놈 한방 먹이는데..[라디오드라마][사연라디오][카톡썰]","turl":"https://www.youtube.com/watch?v=Tsx-sMPT_HM","tv":6900,"latest":"(반전사연)사업가 예비남편과 신혼집을 알아보고 있는데 나한테 쪽지를 건네며 결혼을 하지 말라는 중개인..남편 회사에 혼자 갔더니 경악할 광경이[라디오드라마][사연라디오][카톡썰]"},{"cat":"tiktok","no":157,"src":"사연 목록","name":"마지막 대화","url":"https://www.youtube.com/channel/UC6TcvhQ-AQCrwug3ygDIrQg","subsT":"1.26천","subs":1260,"nv":"699","grade":"중","op":"🟢","recent":"2시간 전","d":0.08333333333333333,"m30":"478","avg":37,"len":"46분","top":"(반전사연)상견례에서 친정아빠가 건설현장에서 일한다고 결혼을 반대한 시모..아빠가 타는 고급승용차를 보고 태도가 돌변해서 결혼시키자는데..꺼져라[라디오드라마][사연라디오][카톡썰]","turl":"https://www.youtube.com/watch?v=a7dAbp-U074","tv":9400,"latest":"(반전사연)몸이 불편한 엄마를 보자 상견례장을 박차고 나가려던 예비시모..뒤늦게 도착한 아빠를 본 시부가 시모 뺨을 냅다 갈기는데ㅋ[라디오드라마][사연라디오][카톡썰]"},{"cat":"tiktok","no":162,"src":"사연 목록","name":"톡톡 썰라디오","url":"https://www.youtube.com/channel/UCDv18-oKdmc6MufWV6_rugA","subsT":"1.13천","subs":1130,"nv":"229","grade":"중","op":"🔴","recent":"5개월 전","d":150,"m30":"0","avg":455,"len":"20분","top":"내 여친을 뺏은 전적이 있는 놈에게서 오랜만에 연락이 왔다 → 내 지금 여친이랑 아기가 생겼다고! 정말 너무 고마워! ㅜㅜ","turl":"https://www.youtube.com/watch?v=lLW9s1f69pE","tv":2600,"latest":"(반전사연)내가 재혼한다고 하자 전 남편이 상견례장에 찾아와 깽판을 치는데 .예비시부가 전남편을 부르자 전 남편놈 인생이 나락으로 떨어지는데[라디오드라마][사연라디오][카톡썰]"},{"cat":"tiktok","no":166,"src":"사연 목록","name":"화제의톡톡 169","url":"https://www.youtube.com/channel/UCTIUuXOMOTceoeBtCqmc3dw","subsT":"1.02천","subs":1020,"nv":"180","grade":"중","op":"🔴","recent":"2년 전","d":730,"m30":"0","avg":2,"len":"30분","top":"명문대 나왔다며 고졸인 나를 무시하며 죄다 뺏어가려는 동서 참교육!!'형님, 좋은 말 할때 비번 원래대로 바꿔요  형님가방 내꺼, 내껀 원래 내꺼! 실화사연 라디오사연 참교육 반전","turl":"https://www.youtube.com/watch?v=8pLoWKZNcgI","tv":14000,"latest":"모아보기 김장 200포기 시켜놓고 놀러간 시댁 식구들 참교육 했습니다!  실화사연 라디오사연 참교육 반전"}]</script>
+<script>
+(function(){
+  const items=JSON.parse(document.getElementById('data').textContent);
+  items.forEach(i=>i.id=i.url);
+  const KEY='tiktok-status-v1'; let st={}; try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}};
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt=n=>!n?'-':n>=1e4?(n/1e4).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'만':n.toLocaleString('ko-KR');
+  const label={'':'미확인',seen:'열어봄',good:'후보',skip:'제외'};
+  const gcls={'상':'g-high','중':'g-mid','하':'g-low'};
+  const f={cat:'tiktok',grade:'',active:'',status:''};
+  [['cat','cat'],['gradeSeg','grade'],['activeSeg','active'],['status','status']].forEach(([id,k])=>$(id).addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    $(id).querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); f[k]=b.dataset.v; render();}));
+  ['q','sort'].forEach(id=>$(id).addEventListener('input',render));
+  function progress(pool){
+    const c={'':0,seen:0,good:0,skip:0}; pool.forEach(i=>c[st[i.id]||'']++);
+    const t=pool.length||1,p=k=>c[k]/t*100+'%';
+    $('progress').innerHTML=`<span>이 분류 <b>${pool.length}</b></span><span>미확인 <b>${c['']}</b></span><span>열어봄 <b>${c.seen}</b></span><span>후보 <b>${c.good}</b></span><span>제외 <b>${c.skip}</b></span><span class="meter" aria-hidden="true"><i style="width:${p('good')};background:var(--good)"></i><i style="width:${p('seen')};background:var(--seen)"></i><i style="width:${p('skip')};background:var(--skip)"></i></span>`;
+  }
+  function render(){
+    const q=$('q').value.trim().toLowerCase(), sort=$('sort').value;
+    const pool=items.filter(i=>i.cat===f.cat);
+    let list=pool.filter(i=>{
+      const s=st[i.id]||'';
+      if(f.status==='todo'&&s) return false; if(f.status&&f.status!=='todo'&&s!==f.status) return false;
+      if(f.grade&&i.grade!==f.grade) return false;
+      if(f.active&&!(parseInt(i.m30)>0)) return false;
+      if(q&&!((i.name+' '+i.top+' '+i.latest).toLowerCase().includes(q))) return false;
+      return true;});
+    const srcRank=i=>i.src==='사연 목록'?0:1;
+    const by={no:(a,b)=>srcRank(a)-srcRank(b)||a.no-b.no,subsD:(a,b)=>b.subs-a.subs,subsA:(a,b)=>a.subs-b.subs,avg:(a,b)=>b.avg-a.avg,tv:(a,b)=>b.tv-a.tv,recent:(a,b)=>a.d-b.d};
+    list.sort(by[sort]);
+    $('list').innerHTML=list.length?list.map(i=>{
+      const s=st[i.id]||'';
+      const g=i.grade==='기준 채널'?'<span class="grade">기준 채널</span>':`<span class="grade ${gcls[i.grade]||'g-none'}">유사도 ${esc(i.grade)}</span>`;
+      return `<div class="row st-${s||'todo'}" data-k="${esc(i.id)}"><span class="chip">${label[s]}</span>
+        <div class="main"><div><span class="no">${esc(i.src)} ${i.no}번</span> <a class="name" href="${esc(i.url)}" target="_blank" rel="noopener" data-open="1">${esc(i.name)}</a></div>
+        <div class="meta">${g}<span>구독자 <span class="num">${esc(i.subsT)}</span></span><span>영상 <span class="num">${esc(i.nv)}</span>개</span><span>평균 ${esc(i.len)}</span><span>최근 10개 평균 <span class="num">${fmt(i.avg)}</span>회</span><span>최근 업로드 ${esc(i.recent||'-')} ${i.op?esc(i.op):''}</span><span>최근 30일 ${esc(i.m30||0)}개</span></div>
+        ${i.turl?`<a class="vid" href="${esc(i.turl)}" target="_blank" rel="noopener"><b>${fmt(i.tv)}</b> · ${esc(i.top)}</a>`:''}</div>
+        <div class="act"><button data-set="good" class="${s==='good'?'on-good':''}">후보</button><button data-set="skip" class="${s==='skip'?'on-skip':''}">제외</button><button data-set="">초기화</button></div></div>`;
+    }).join(''):'<p class="empty">조건에 맞는 채널이 없습니다. 필터를 바꿔 보세요.</p>';
+    progress(pool);
+  }
+  $('list').addEventListener('click',e=>{
+    const row=e.target.closest('.row'); if(!row) return; const k=row.dataset.k;
+    if(e.target.closest('a[data-open]')){ if(!st[k]){st[k]='seen';save();setTimeout(render,50);} return; }
+    const b=e.target.closest('button[data-set]'); if(!b) return;
+    if(b.dataset.set) st[k]=b.dataset.set; else delete st[k]; save(); render();
+  });
+  function toast(m){const t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200);}
+  const catName={sayeon:'사연',yadam:'야담',webtoon:'웹툰형',tiktok:'틱톡형',none:'미분류'};
+  $('copy').addEventListener('click',()=>{
+    const g=items.filter(i=>st[i.id]==='good'); if(!g.length){toast('후보로 표시한 채널이 아직 없습니다');return;}
+    const text=g.map(i=>[catName[i.cat],i.src+' '+i.no+'번',i.name,i.subsT,i.url].join('\t')).join('\n');
+    const done=()=>toast(`후보 ${g.length}개를 복사했습니다`);
+    navigator.clipboard.writeText(text).then(done).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');done();}catch(e){toast('복사가 막혀 있습니다. 브라우저 권한을 확인하세요');} ta.remove();});
+  });
+  render();
+})();
+</script>
+</body>
+</html>
