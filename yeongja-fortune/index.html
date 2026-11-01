@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>영자의 오늘 운세</title>
 <meta property="og:title" content="영자의 오늘 운세">
 <meta property="og:description" content="내 띠만 누르면, 영자가 오늘 운세를 봐 드려요.">
@@ -14,6 +15,12 @@
   :root {
     --bg: #f2e8d5;
     --tile: #faf4e8;
+    --border: #c2b08c;
+    --press: #e9dcc2;
+    --picbg: #e6d6b4;
+    --dark-btn: #2b2420;
+    --dark-btn-tx: #fff;
+    --kakao: #f9de4b;
     --ink: #2b2420;
     --sub: #5e5246;
     --line: #d3c4a6;
@@ -31,7 +38,7 @@
 
   /* 영자 */
   .yeongja { display: flex; align-items: center; gap: 14px; }
-  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: #e6d6b4; border: 2px solid var(--line); }
+  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: var(--picbg); border: 2px solid var(--line); }
   .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
   .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
@@ -39,7 +46,7 @@
   /* 1단계 */
   .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 40px; margin: 0 0 16px; }
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
-  .grid button { background: var(--tile); border: 2px solid #c2b08c; border-radius: 12px; padding: 8px 0 10px; }
+  .grid button { background: var(--tile); border: 2px solid var(--border); border-radius: 12px; padding: 8px 0 10px; }
   .grid .emo { display: block; font-size: 46px; line-height: 1.15; }
   .grid .nm { display: block; font-size: 26px; font-weight: 800; }
 
@@ -47,8 +54,8 @@
   .ask { text-align: center; font-size: 30px; font-weight: 800; margin: 8px 0 18px; }
   .ask .emo { display: block; font-size: 64px; line-height: 1.1; }
   .years { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .years button { background: var(--tile); border: 2px solid #c2b08c; border-radius: 12px; padding: 18px 0; font-size: 32px; font-weight: 800; }
-  .grid button:active, .years button:active { background: #e9dcc2; }
+  .years button { background: var(--tile); border: 2px solid var(--border); border-radius: 12px; padding: 18px 0; font-size: 32px; font-weight: 800; }
+  .grid button:active, .years button:active { background: var(--press); }
 
   /* 결과 */
   .who { text-align: center; font-size: 28px; font-weight: 800; }
@@ -72,8 +79,27 @@
 
   .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
-  .btn.kakao { background: #f9de4b; color: #2b2420; }
-  .btn.yt { background: var(--ink); color: #fff; }
+  .btn.kakao { background: var(--kakao); color: #2b2420; }
+  .btn.yt { background: var(--dark-btn); color: var(--dark-btn-tx); }
+
+  /* 휴대폰이 다크 모드일 때만: 진한 갈색 바탕 + 미색 글씨 (눈부심 없게) */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #2a231d;
+      --tile: #382f27;
+      --ink: #efe4cf;
+      --sub: #c9b99e;
+      --line: #5c4e40;
+      --border: #7a6750;
+      --press: #4a3e33;
+      --picbg: #4a3e33;
+      --red: #f08a7e;
+      --green: #93cf9f;
+      --dark-btn: #5c4e40;
+      --dark-btn-tx: #efe4cf;
+      --kakao: #e5c93f;
+    }
+  }
   .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; }
 </style>
 </head>
