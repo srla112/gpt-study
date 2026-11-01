@@ -7,7 +7,7 @@
 <title>영자의 오늘 운세</title>
 <meta property="og:title" content="영자의 오늘 운세">
 <meta property="og:description" content="내 띠만 누르면, 영자가 오늘 운세를 봐 드려요.">
-<meta property="og:image" content="assets/yeongja.png">
+<meta property="og:image" content="assets/yeongja.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;800&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
   /* 영자 */
   .yeongja { display: flex; align-items: center; gap: 14px; }
   .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: var(--picbg); border: 2px solid var(--line); }
-  .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .pic img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
   .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
 
@@ -116,7 +116,7 @@
   <section id="step-animal">
     <h1 class="title">영자의 오늘 운세</h1>
     <div class="yeongja">
-      <div class="pic"><img src="assets/yeongja.png" alt="영자" onerror="noImg(this)"></div>
+      <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
       <p>무슨 띠세요?<br>내 띠를 눌러 주세요.</p>
     </div>
     <div class="grid" id="grid"></div>
@@ -148,7 +148,7 @@
     </div>
 
     <div class="yeongja r-yj">
-      <div class="pic"><img src="assets/yeongja.png" alt="영자" onerror="noImg(this)"></div>
+      <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
       <p id="r-say"></p>
     </div>
 
