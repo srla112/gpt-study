@@ -103,10 +103,9 @@
     '약속 시간', '허리 무리', '지갑 분실', '큰 결정'];
   var CAREFUL_CHUNG = ['급한 운전', '계단·빙판', '큰 결정', '허리 무리', '모르는 전화'];
 
-  // 생일(양력 YYYY-MM-DD), 성별('f'|'m'), 이름, 오늘 날짜(Date)
+  // input: { year: 1960 } — 태어난 해만 받는다. today: Date
   function getFortune(input, today) {
-    var b = input.birth.split('-').map(Number);
-    var by = b[0], bm = b[1], bd = b[2];
+    var by = Number(input.year);
     var t = today || new Date();
     var ty = t.getFullYear(), tm = t.getMonth() + 1, td = t.getDate();
 
@@ -114,7 +113,7 @@
     var day = dayPillar(ty, tm, td);
     var rel = relation(myBranch, day.branch);
 
-    var key = [input.name || '', by, bm, bd, input.gender || '', ty, tm, td].join('|');
+    var key = [by, ty, tm, td].join('|');
     var pick = picker(hash(key));
 
     // 행운 오행: 나를 돕는 기운(인성), 내 기운, 오늘 일간의 기운 중 하나
@@ -130,7 +129,6 @@
     if (careful === good) careful = CAREFUL[0];
 
     return {
-      name: input.name,
       animal: ANIMALS[myBranch],
       emoji: ANIMAL_EMOJI[myBranch],
       yy: String(by).slice(2),
@@ -147,7 +145,7 @@
     };
   }
 
-  var api = { getFortune: getFortune, dayPillar: dayPillar, yearBranch: yearBranch, relation: relation };
+  var api = { ANIMALS: ANIMALS, ANIMAL_EMOJI: ANIMAL_EMOJI, getFortune: getFortune, dayPillar: dayPillar, yearBranch: yearBranch, relation: relation };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.YeongjaFortune = api;
 })(this);
