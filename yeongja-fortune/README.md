@@ -21,4 +21,4 @@
 ## 고치는 곳
 - 영자 그림: `assets/yeongja.png` (배경이 투명한 PNG, 세로형 권장)
 - 문구: `fortune.js` 안의 `TEXT`(사자성어·좋은 일·영자 한마디), `CAREFUL`(조심)
-- 채널 주소: `index.html` 안의 `CHANNEL_URL`
+- 채널 주소: `index.html` 안의 `CHANNEL_URL` (구독하기 버튼은 이 주소 끝에 `?sub_confirmation=1`을 붙여 구독 창을 띄워요)

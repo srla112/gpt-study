@@ -21,6 +21,7 @@
     --dark-btn: #2b2420;
     --dark-btn-tx: #fff;
     --kakao: #f9de4b;
+    --sub-btn: #b2171c;
     --ink: #2b2420;
     --sub: #5e5246;
     --line: #d3c4a6;
@@ -81,6 +82,7 @@
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
   .btn.kakao { background: var(--kakao); color: #2b2420; }
   .btn.yt { background: var(--dark-btn); color: var(--dark-btn-tx); }
+  .btn.sub { background: var(--sub-btn); color: #fff; }
 
   /* 휴대폰이 다크 모드일 때만: 진한 갈색 바탕 + 미색 글씨 (눈부심 없게) */
   @media (prefers-color-scheme: dark) {
@@ -98,6 +100,7 @@
       --dark-btn: #5c4e40;
       --dark-btn-tx: #efe4cf;
       --kakao: #e5c93f;
+      --sub-btn: #a3251f;
     }
   }
   .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; }
@@ -150,7 +153,8 @@
     </div>
 
     <button class="btn kakao" id="share">카톡으로 보내기</button>
-    <a class="btn yt" id="yt" target="_blank" rel="noopener">영자아씨 영상 보러 가기</a>
+    <a class="btn sub" id="sub" target="_blank" rel="noopener">영자아씨 구독하기</a>
+    <a class="btn yt" id="yt" target="_blank" rel="noopener">채널로 바로 가기</a>
     <button class="link" id="again">다른 띠 보기</button>
   </section>
 
@@ -210,6 +214,7 @@
 
   $('back1').onclick = function () { go('step-animal'); };
   $('again').onclick = function () { try { localStorage.removeItem(STORE); } catch (e) {} go('step-animal'); };
+  $('sub').href = CHANNEL_URL + '?sub_confirmation=1';
   $('yt').href = CHANNEL_URL;
 
   $('share').onclick = function () {
