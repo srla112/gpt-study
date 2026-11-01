@@ -12,11 +12,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;800&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fffdf7;
-    --ink: #111;
-    --sub: #555;
-    --line: #d9d2c3;
-    --red: #c4161c;
+    --bg: #f2e8d5;
+    --tile: #faf4e8;
+    --ink: #2b2420;
+    --sub: #5e5246;
+    --line: #d3c4a6;
+    --red: #b2171c;
     --green: #1d6b34;
     --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     --serif: 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
@@ -30,7 +31,7 @@
 
   /* 영자 */
   .yeongja { display: flex; align-items: center; gap: 14px; }
-  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: #f1e6c8; border: 2px solid var(--line); }
+  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: #e6d6b4; border: 2px solid var(--line); }
   .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
   .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
@@ -38,7 +39,7 @@
   /* 1단계 */
   .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 40px; margin: 0 0 16px; }
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
-  .grid button { background: #fff; border: 2px solid #bfb6a3; border-radius: 12px; padding: 8px 0 10px; }
+  .grid button { background: var(--tile); border: 2px solid #c2b08c; border-radius: 12px; padding: 8px 0 10px; }
   .grid .emo { display: block; font-size: 46px; line-height: 1.15; }
   .grid .nm { display: block; font-size: 26px; font-weight: 800; }
 
@@ -46,8 +47,8 @@
   .ask { text-align: center; font-size: 30px; font-weight: 800; margin: 8px 0 18px; }
   .ask .emo { display: block; font-size: 64px; line-height: 1.1; }
   .years { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .years button { background: #fff; border: 2px solid #bfb6a3; border-radius: 12px; padding: 18px 0; font-size: 32px; font-weight: 800; }
-  .grid button:active, .years button:active { background: #f3ecdb; }
+  .years button { background: var(--tile); border: 2px solid #c2b08c; border-radius: 12px; padding: 18px 0; font-size: 32px; font-weight: 800; }
+  .grid button:active, .years button:active { background: #e9dcc2; }
 
   /* 결과 */
   .who { text-align: center; font-size: 28px; font-weight: 800; }
@@ -71,7 +72,7 @@
 
   .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
-  .btn.kakao { background: #fee500; color: #111; }
+  .btn.kakao { background: #f9de4b; color: #2b2420; }
   .btn.yt { background: var(--ink); color: #fff; }
   .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; }
 </style>
