@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>영자의 타로</title>
+<meta property="og:title" content="영자의 타로">
+<meta property="og:description" content="고민 하나 떠올리고, 카드 한 장만 뽑으세요. 영자가 풀어 드려요.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://srla112.github.io/gpt-study/yeongja-tarot/">
+<meta property="og:image" content="https://srla112.github.io/gpt-study/yeongja-tarot/assets/share.jpg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="800">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;800&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2e8d5;
+    --tile: #faf4e8;
+    --ink: #2b2420;
+    --sub: #5e5246;
+    --line: #d3c4a6;
+    --border: #c2b08c;
+    --press: #e9dcc2;
+    --picbg: #e6d6b4;
+    --gold: #8a6420;
+    --red: #b2171c;
+    --navy: #1f2a4d;
+    --navy2: #2c3a66;
+    --foil: #d8b45a;
+    --dark-btn: #2b2420;
+    --dark-btn-tx: #fff;
+    --kakao: #f9de4b;
+    --sub-btn: #b2171c;
+    --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --serif: 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #2a231d; --tile: #382f27; --ink: #efe4cf; --sub: #c9b99e; --line: #5c4e40;
+      --border: #7a6750; --press: #4a3e33; --picbg: #4a3e33; --gold: #e0bd6a; --red: #f08a7e;
+      --dark-btn: #5c4e40; --dark-btn-tx: #efe4cf; --kakao: #e5c93f; --sub-btn: #a3251f;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body { font-family: var(--sans); font-weight: 500; color: var(--ink); background: var(--bg); font-size: 24px; line-height: 1.45; }
+  main { max-width: 480px; margin: 0 auto; padding: 20px 20px 32px; }
+  .hidden { display: none !important; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+
+  .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 42px; margin: 0; letter-spacing: 2px; }
+  .title-sub { text-align: center; font-size: 22px; color: var(--gold); font-weight: 800; margin: 2px 0 18px; }
+  .yeongja { display: flex; align-items: center; gap: 14px; }
+  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: var(--picbg); border: 2px solid var(--line); }
+  .pic img { width: 100%; height: 100%; object-fit: cover; }
+  .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
+  .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
+
+  /* 1단계: 주제 */
+  .ask { font-size: 30px; font-weight: 800; text-align: center; margin: 24px 0 14px; }
+  .topics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .topics button { background: var(--tile); border: 2px solid var(--border); border-radius: 14px; padding: 16px 0 14px; }
+  .topics .ic { display: block; font-size: 44px; line-height: 1.15; }
+  .topics .lb { display: block; font-size: 28px; font-weight: 800; }
+  .topics button:active { background: var(--press); }
+
+  /* 카드 뒷면·앞면 */
+  .tcard { position: relative; aspect-ratio: 7 / 12; perspective: 1000px; border: 0; padding: 0; background: none; }
+  .tcard .inner { position: absolute; inset: 0; transition: transform .8s cubic-bezier(.3,.7,.3,1); transform-style: preserve-3d; }
+  .tcard.flipped .inner { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; border-radius: 12px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    box-shadow: 0 6px 16px rgba(40,25,10,.28); }
+  .back {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(216,180,90,.18) 0 28%, transparent 29%),
+      repeating-linear-gradient(45deg, rgba(216,180,90,.10) 0 2px, transparent 2px 12px),
+      linear-gradient(160deg, var(--navy2), var(--navy));
+    border: 3px solid var(--foil);
+  }
+  .back::before { content: ""; position: absolute; inset: 7px; border: 1.5px solid rgba(216,180,90,.75); border-radius: 7px; }
+  .back .moon { position: absolute; left: 50%; top: 50%; width: 42%; aspect-ratio: 1; transform: translate(-50%, -62%); border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #f6dc8e, var(--foil) 60%, #a8822f); box-shadow: 0 0 18px rgba(246,220,142,.45); }
+  .back .moon::after { content: ""; position: absolute; width: 82%; height: 82%; left: 30%; top: 2%; border-radius: 50%; background: var(--navy2); }
+  .back .star { position: absolute; color: var(--foil); font-size: 18px; line-height: 1; }
+  .back .s1 { left: 14%; top: 10%; } .back .s2 { right: 14%; top: 10%; } .back .s3 { left: 14%; bottom: 10%; } .back .s4 { right: 14%; bottom: 10%; }
+  .back .nm { position: absolute; left: 0; right: 0; bottom: 20%; text-align: center; font-family: var(--serif); font-weight: 900; font-size: 20px; color: var(--foil); letter-spacing: 4px; }
+  .front { transform: rotateY(180deg); background: #f5ecd7; }
+  .front img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* 2단계: 카드 고르기 */
+  .pickhead { text-align: center; font-size: 28px; font-weight: 800; margin: 6px 0 4px; min-height: 2.9em; word-break: keep-all; }
+  .topic-chip { display: block; text-align: center; font-size: 22px; color: var(--gold); font-weight: 800; }
+  .spread { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 10px; }
+  .spread .tcard { animation: deal .55s cubic-bezier(.2,.8,.3,1) both; }
+  .spread .tcard:nth-child(1) { --dx: 115%; animation-delay: .05s; }
+  .spread .tcard:nth-child(2) { --dx: 0%; animation-delay: .25s; }
+  .spread .tcard:nth-child(3) { --dx: -115%; animation-delay: .45s; }
+  @keyframes deal { from { transform: translate(var(--dx), -30px) rotate(-6deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  .spread.ready .tcard:not(.flipped):hover, .spread.ready .tcard:not(.flipped):focus-visible { transform: translateY(-8px); }
+  .spread .tcard { transition: transform .25s, opacity .4s; }
+  .spread.done .tcard:not(.flipped) { opacity: .25; }
+  .hint { text-align: center; font-size: 22px; color: var(--sub); }
+
+  /* 결과 */
+  .result-card { width: 62%; margin: 8px auto 0; }
+  .result-card .tcard { width: 100%; }
+  .result-card .face { box-shadow: 0 10px 26px rgba(40,25,10,.35); border: 3px solid var(--foil); }
+  .rname { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 46px; line-height: 1.15; margin-top: 16px; word-break: keep-all; }
+  .rkey { text-align: center; font-size: 28px; font-weight: 800; color: var(--gold); }
+  .rmsg { margin: 16px 0 0; padding: 18px 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); }
+  .rmsg .lb { font-size: 22px; font-weight: 800; color: var(--sub); }
+  .rmsg .tx { font-size: 32px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
+  .r-yj { margin: 18px 0 6px; }
+  .fade-in { animation: fadein .7s ease both; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
+    font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
+  .btn.kakao { background: var(--kakao); color: #2b2420; }
+  .btn.sub { background: var(--sub-btn); color: #fff; }
+  .btn.yt { background: var(--dark-btn); color: var(--dark-btn-tx); }
+  .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; text-align: center; }
+  .note { text-align: center; font-size: 18px; color: var(--sub); margin-top: 18px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spread .tcard, .fade-in { animation: none; }
+    .tcard .inner { transition: none; }
+  }
+</style>
+</head>
+<body>
+<script>
+  function noImg(img) { var d = document.createElement('div'); d.className = 'noimg'; d.textContent = '영자'; img.replaceWith(d); }
+</script>
+<main>
+
+  <!-- 1단계: 주제 고르기 -->
+  <section id="step-topic">
+    <h1 class="title">영자의 타로</h1>
+    <div class="title-sub">카드 한 장으로 보는 오늘의 답</div>
+    <div class="yeongja">
+      <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
+      <p>고민 하나를<br>떠올려 보세요.</p>
+    </div>
+    <div class="ask">무엇이 궁금하세요?</div>
+    <div class="topics" id="topics"></div>
+  </section>
+
+  <!-- 2단계: 카드 고르기 -->
+  <section id="step-pick" class="hidden">
+    <span class="topic-chip" id="p-topic"></span>
+    <div class="pickhead" id="p-head"></div>
+    <div class="spread" id="spread"></div>
+    <div class="hint" id="p-hint">&nbsp;</div>
+    <button class="link" id="back1">주제 다시 고르기</button>
+  </section>
+
+  <!-- 결과 -->
+  <section id="step-result" class="hidden">
+    <span class="topic-chip" id="r-topic"></span>
+    <div class="result-card fade-in"><div class="tcard flipped" aria-hidden="true"><div class="inner">
+      <div class="face back"></div>
+      <div class="face front"><img id="r-img" alt=""></div>
+    </div></div></div>
+    <div class="fade-in" style="animation-delay:.25s">
+      <div class="rname" id="r-name"></div>
+      <div class="rkey" id="r-key"></div>
+      <div class="rmsg"><div class="lb" id="r-lb"></div><div class="tx" id="r-msg"></div></div>
+      <div class="yeongja r-yj">
+        <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
+        <p id="r-say"></p>
+      </div>
+    </div>
+
+    <button class="btn kakao" id="share">카톡으로 보내기</button>
+    <a class="btn sub" id="sub" target="_blank" rel="noopener">영자아씨 구독하기</a>
+    <a class="btn yt" id="yt" target="_blank" rel="noopener">채널로 바로 가기</a>
+    <button class="link" id="again">다른 고민으로 다시 뽑기</button>
+    <a class="link" href="../yeongja-fortune/">영자의 오늘 운세도 보기</a>
+    <p class="note">카드 그림: 라이더-웨이트 타로(1909)</p>
+  </section>
+
+</main>
+
+<script src="cards.js"></script>
+<script>
+  // ▼ 채널 주소는 여기서 바꾸세요
+  var CHANNEL_URL = 'https://www.youtube.com/@영자아씨';
+  var CARDS = window.TAROT_CARDS, TOPICS = window.TAROT_TOPICS;
+  var $ = function (id) { return document.getElementById(id); };
+  var topic = 'today';
+  var BACK = '<span class="star s1">✦</span><span class="star s2">✦</span><span class="star s3">✦</span><span class="star s4">✦</span><span class="moon"></span><span class="nm">영자</span>';
+  Array.prototype.forEach.call(document.querySelectorAll('.face.back'), function (b) { b.innerHTML = BACK; });
+
+  // 카드 그림 미리 불러오기
+  CARDS.forEach(function (c) { var i = new Image(); i.src = 'cards/' + c.no + '.jpg'; });
+
+  function go(step) {
+    ['step-topic', 'step-pick', 'step-result'].forEach(function (s) { $(s).classList.toggle('hidden', s !== step); });
+    window.scrollTo(0, 0);
+  }
+
+  Object.keys(TOPICS).forEach(function (k) {
+    var b = document.createElement('button');
+    b.innerHTML = '<span class="ic">' + TOPICS[k].icon + '</span><span class="lb">' + TOPICS[k].label + '</span>';
+    b.onclick = function () { startPick(k); };
+    $('topics').appendChild(b);
+  });
+
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
+  function startPick(k) {
+    topic = k;
+    var t = TOPICS[k];
+    $('p-topic').textContent = t.icon + ' ' + t.label;
+    $('p-head').textContent = '카드를 섞고 있어요…';
+    $('p-hint').innerHTML = '&nbsp;';
+    var deal = shuffle(CARDS).slice(0, 3);
+    var spread = $('spread');
+    spread.className = 'spread';
+    spread.innerHTML = '';
+    deal.forEach(function (c, i) {
+      var b = document.createElement('button');
+      b.className = 'tcard';
+      b.setAttribute('aria-label', (i + 1) + '번째 카드');
+      b.innerHTML = '<div class="inner"><div class="face back">' + BACK + '</div><div class="face front"><img src="cards/' + c.no + '.jpg" alt=""></div></div>';
+      b.onclick = function () { pick(b, c); };
+      spread.appendChild(b);
+    });
+    go('step-pick');
+    setTimeout(function () {
+      spread.classList.add('ready');
+      $('p-head').textContent = '마음 가는 카드를 눌러 주세요.';
+      $('p-hint').textContent = '천천히 골라도 괜찮아요.';
+    }, 1100);
+  }
+
+  function pick(el, c) {
+    var spread = $('spread');
+    if (!spread.classList.contains('ready') || spread.classList.contains('done')) return;
+    spread.classList.add('done');
+    el.classList.add('flipped');
+    $('p-head').textContent = c.name + ' 카드가 나왔어요.';
+    $('p-hint').innerHTML = '&nbsp;';
+    setTimeout(function () { showResult(c); }, 1300);
+  }
+
+  function showResult(c) {
+    var t = TOPICS[topic];
+    $('r-topic').textContent = t.icon + ' ' + t.label + '에 대한 카드';
+    $('r-img').src = 'cards/' + c.no + '.jpg';
+    $('r-img').alt = c.name + ' 카드';
+    $('r-name').textContent = c.name;
+    $('r-key').textContent = c.key;
+    $('r-lb').textContent = t.icon + ' ' + t.label;
+    $('r-msg').textContent = c[topic];
+    $('r-say').textContent = '“' + c.say + '”';
+    // 애니메이션 다시 시작
+    Array.prototype.forEach.call(document.querySelectorAll('#step-result .fade-in'), function (e) {
+      e.classList.remove('fade-in'); void e.offsetWidth; e.classList.add('fade-in');
+    });
+    go('step-result');
+  }
+
+  $('back1').onclick = function () { go('step-topic'); };
+  $('again').onclick = function () { go('step-topic'); };
+  $('sub').href = CHANNEL_URL + '?sub_confirmation=1';
+  $('yt').href = CHANNEL_URL;
+
+  $('share').onclick = function () {
+    var url = location.href.split('#')[0].split('?')[0];
+    var text = '영자가 타로 카드로 고민을 풀어 준대요. 한 장만 뽑으면 돼요.';
+    if (navigator.share) { navigator.share({ title: '영자의 타로', text: text, url: url }).catch(function () {}); return; }
+    var done = function () { $('share').textContent = '주소가 복사됐어요!'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(done, function () { prompt('이 주소를 복사하세요', url); });
+    else prompt('이 주소를 복사하세요', url);
+  };
+</script>
+</body>
+</html>
