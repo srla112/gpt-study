@@ -95,9 +95,19 @@
     }
   };
 
-  var GOOD = ['아침 산책', '오랜 친구 연락', '따뜻한 국 한 그릇', '현관 청소', '창문 활짝',
-    '점심 약속', '작은 선물', '통장 정리', '웃는 얼굴', '자식에게 칭찬',
-    '묵은 물건 비우기', '낮잠 한숨', '꽃 한 송이', '장보기', '노래 한 곡'];
+  // 오늘 들어오는 복: [이름, 짧은 설명]
+  var BOK = [
+    ['재물복', '뜻밖의 돈이 들어와요'],
+    ['자식복', '자식에게서 기쁜 소식'],
+    ['손주복', '손주 재롱에 웃어요'],
+    ['건강복', '몸이 가볍고 개운해요'],
+    ['인복', '귀한 사람이 찾아와요'],
+    ['먹을복', '맛있는 걸 얻어먹어요'],
+    ['웃음복', '크게 웃을 일 생겨요'],
+    ['부부복', '배우자와 정이 깊어져요'],
+    ['문서복', '서류 일이 술술 풀려요'],
+    ['나들이복', '바깥바람이 약이 돼요']
+  ];
   var CAREFUL = ['말 한마디', '충동구매', '보증·돈 빌려주기', '찬 음식', '계단·빙판',
     '급한 운전', '남의 일 참견', '모르는 전화', '뜨거운 물', '늦은 밤 과식',
     '약속 시간', '허리 무리', '지갑 분실', '큰 결정'];
@@ -124,9 +134,8 @@
     if ((dayEl + 2) % 5 !== myEl) candidates.push(dayEl); // 오늘 기운이 나를 누르지 않을 때만
     var el = ELEMENTS[pick(candidates)];
 
-    var good = pick(GOOD);
+    var bok = pick(BOK);
     var careful = pick(rel === 'chung' ? CAREFUL_CHUNG : CAREFUL);
-    if (careful === good) careful = CAREFUL[0];
 
     return {
       animal: ANIMALS[myBranch],
@@ -137,7 +146,8 @@
       level: rel,
       head: pick(TEXT[rel].head),
       say: pick(TEXT[rel].say),
-      good: good,
+      bok: bok[0],
+      bokDesc: bok[1],
       careful: careful,
       color: pick(el.colors),
       number: pick(el.numbers),
