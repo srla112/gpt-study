@@ -9,87 +9,71 @@
 <meta property="og:image" content="assets/yeongja.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Song+Myung&family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;800&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f6eedb;
-    --card: #fffaf0;
-    --line: #e2d2ad;
-    --ink: #1f1711;
-    --red: #b3241f;
-    --gold: #a87a22;
-    --brush: 'East Sea Dokdo', 'Song Myung', serif;
-    --myung: 'Song Myung', serif;
-    --sans: 'Noto Sans KR', sans-serif;
+    --bg: #fffdf7;
+    --ink: #111;
+    --sub: #555;
+    --line: #d9d2c3;
+    --red: #c4161c;
+    --green: #1d6b34;
+    --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --serif: 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; }
-  body { font-family: var(--sans); font-weight: 700; color: var(--ink); background: var(--paper); font-size: 26px; line-height: 1.35; }
-  main { max-width: 480px; margin: 0 auto; padding: 18px 18px 36px; }
+  body { font-family: var(--sans); font-weight: 500; color: var(--ink); background: var(--bg); font-size: 24px; line-height: 1.45; }
+  main { max-width: 480px; margin: 0 auto; padding: 20px 20px 32px; }
   .hidden { display: none !important; }
   button { font: inherit; color: inherit; cursor: pointer; }
 
-  /* 영자 + 말풍선 */
-  .yeongja { display: flex; align-items: center; gap: 12px; margin: 4px 0 18px; }
-  .pic { position: relative; width: 112px; height: 128px; flex: none; }
-  .pic::before { content: ""; position: absolute; left: 6px; top: 4px; width: 100px; height: 100px; border-radius: 50%;
-    background: radial-gradient(circle, #f3cd66, #d9a63a 70%, transparent 72%); }
-  .warn .pic::before { background: radial-gradient(circle, #cf4a41, #8e1c1a 70%, transparent 72%); }
-  .pic img { position: relative; width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
-  .noimg { position: relative; height: 108px; display: flex; align-items: center; justify-content: center;
-    font-family: var(--brush); font-size: 46px; }
-  .bubble { position: relative; flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 18px;
-    padding: 14px 16px; font-family: var(--myung); font-weight: 400; font-size: 27px; line-height: 1.35; word-break: keep-all; }
-  .bubble::before { content: ""; position: absolute; left: -13px; top: 50%; margin-top: -8px;
-    border: 8px solid transparent; border-right: 13px solid var(--line); border-left: 0; }
-  .bubble::after { content: ""; position: absolute; left: -10px; top: 50%; margin-top: -7px;
-    border: 7px solid transparent; border-right: 11px solid var(--card); border-left: 0; }
+  /* 영자 */
+  .yeongja { display: flex; align-items: center; gap: 14px; }
+  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: #f1e6c8; border: 2px solid var(--line); }
+  .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
+  .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
 
-  h1 { text-align: center; font-family: var(--brush); font-weight: 400; font-size: 66px; line-height: 1; margin: 6px 0 10px; color: var(--red); }
-  .ask { text-align: center; font-size: 30px; font-weight: 900; margin: 0 0 14px; }
+  /* 1단계 */
+  .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 40px; margin: 0 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+  .grid button { background: #fff; border: 2px solid #bfb6a3; border-radius: 12px; padding: 8px 0 10px; }
+  .grid .emo { display: block; font-size: 46px; line-height: 1.15; }
+  .grid .nm { display: block; font-size: 26px; font-weight: 800; }
 
-  /* 1단계: 띠 고르기 */
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .grid button { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 10px 2px 12px; }
-  .grid .emo { display: block; font-size: 50px; line-height: 1.1; }
-  .grid .nm { display: block; font-size: 26px; font-weight: 900; }
-  .grid button:active, .years button:active { background: #f1e3c2; }
-
-  /* 2단계: 년생 고르기 */
-  .picked { text-align: center; font-size: 72px; line-height: 1; margin-bottom: 4px; }
+  /* 2단계 */
+  .ask { text-align: center; font-size: 30px; font-weight: 800; margin: 8px 0 18px; }
+  .ask .emo { display: block; font-size: 64px; line-height: 1.1; }
   .years { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .years button { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 18px 4px; font-size: 32px; font-weight: 900; }
+  .years button { background: #fff; border: 2px solid #bfb6a3; border-radius: 12px; padding: 18px 0; font-size: 32px; font-weight: 800; }
+  .grid button:active, .years button:active { background: #f3ecdb; }
 
   /* 결과 */
-  .who { text-align: center; font-size: 32px; font-weight: 900; }
-  .date { text-align: center; font-size: 24px; color: #6d5b43; }
-  .saja { text-align: center; background: var(--card); border: 2px solid var(--line); border-radius: 22px; padding: 16px 10px 20px; margin: 12px 0; }
-  .saja-word { font-family: var(--brush); font-weight: 400; font-size: 92px; line-height: 1; color: var(--red); letter-spacing: 2px; }
-  .saja.normal .saja-word { color: var(--ink); }
-  .saja-hanja { font-family: var(--myung); font-weight: 400; font-size: 26px; color: #8a7558; letter-spacing: 8px; margin-top: 2px; }
-  .saja-mean { font-size: 30px; font-weight: 900; margin-top: 8px; word-break: keep-all; }
-  .row { display: flex; align-items: center; gap: 14px; background: var(--card); border: 2px solid var(--line);
-    border-radius: 20px; padding: 16px 18px; margin-bottom: 12px; }
-  .row .tag { flex: none; color: #fff; font-size: 24px; font-weight: 900; padding: 6px 12px; border-radius: 12px; }
-  .row .val { font-size: 36px; font-weight: 900; line-height: 1.2; word-break: keep-all; }
-  .row { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .row .tag { font-size: 22px; padding: 4px 12px; }
-  .row .val { font-size: 32px; }
-  .good .tag { background: #2c6a3a; }
-  .bad .tag { background: var(--red); }
-  .bad .val { color: var(--red); }
-  .lucky { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
-  .lucky > div { background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 12px 6px; text-align: center; }
-  .lucky small { display: block; font-size: 22px; color: #6d5b43; }
-  .lucky b { display: block; font-size: 40px; font-weight: 900; line-height: 1.2; }
-  .dot { display: inline-block; width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(0,0,0,.25); vertical-align: -3px; margin-right: 6px; }
+  .who { text-align: center; font-size: 28px; font-weight: 800; }
+  .who small { display: block; font-size: 22px; font-weight: 500; color: var(--sub); }
+  .saja { text-align: center; padding: 18px 0 20px; margin: 14px 0 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); }
+  .saja-word { font-family: var(--serif); font-weight: 900; font-size: 64px; line-height: 1.1; letter-spacing: 6px; }
+  .saja-hanja { font-family: var(--serif); font-weight: 700; font-size: 24px; color: var(--sub); letter-spacing: 10px; }
+  .saja-mean { font-size: 30px; font-weight: 800; margin-top: 6px; word-break: keep-all; }
+  .line { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .line .lb { font-size: 22px; font-weight: 800; }
+  .line .tx { font-size: 32px; font-weight: 800; line-height: 1.3; word-break: keep-all; }
+  .line.good .lb { color: var(--green); }
+  .line.bad .lb, .line.bad .tx { color: var(--red); }
+  .lucky { display: flex; padding: 16px 0; border-bottom: 3px solid var(--ink); }
+  .lucky > div { flex: 1; text-align: center; }
+  .lucky > div + div { border-left: 1px solid var(--line); }
+  .lucky .lb { font-size: 22px; color: var(--sub); font-weight: 800; }
+  .lucky .tx { font-size: 34px; font-weight: 800; }
+  .dot { display: inline-block; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #888; vertical-align: -2px; margin-right: 6px; }
+  .r-yj { margin: 18px 0 6px; }
 
-  .btn { display: block; width: 100%; border: 0; border-radius: 20px; padding: 18px; margin-top: 12px;
-    font-size: 28px; font-weight: 900; text-align: center; text-decoration: none; }
-  .btn.kakao { background: #fee500; color: #191600; }
-  .btn.yt { background: var(--red); color: #fff; }
-  .btn.plain { background: transparent; border: 2px solid var(--line); font-size: 24px; padding: 14px; }
-  .note { text-align: center; font-size: 20px; color: #8a7558; margin-top: 16px; }
+  .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
+    font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
+  .btn.kakao { background: #fee500; color: #111; }
+  .btn.yt { background: var(--ink); color: #fff; }
+  .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -100,49 +84,47 @@
 
   <!-- 1단계: 띠 고르기 -->
   <section id="step-animal">
-    <h1>영자의 오늘 운세</h1>
+    <h1 class="title">영자의 오늘 운세</h1>
     <div class="yeongja">
       <div class="pic"><img src="assets/yeongja.png" alt="영자" onerror="noImg(this)"></div>
-      <div class="bubble">무슨 띠세요?<br>눌러 보세요.</div>
+      <p>무슨 띠세요?<br>내 띠를 눌러 주세요.</p>
     </div>
     <div class="grid" id="grid"></div>
   </section>
 
   <!-- 2단계: 년생 고르기 -->
   <section id="step-year" class="hidden">
-    <div class="picked" id="picked"></div>
-    <p class="ask" id="ask"></p>
+    <div class="ask" id="ask"></div>
     <div class="years" id="years"></div>
-    <button class="btn plain" id="back1">← 띠 다시 고르기</button>
+    <button class="link" id="back1">띠 다시 고르기</button>
   </section>
 
   <!-- 결과 -->
   <section id="step-result" class="hidden">
     <div class="who" id="r-who"></div>
-    <div class="date" id="r-date"></div>
-    <div class="saja" id="r-saja">
+
+    <div class="saja">
       <div class="saja-word" id="r-word"></div>
       <div class="saja-hanja" id="r-hanja"></div>
       <div class="saja-mean" id="r-mean"></div>
     </div>
 
-    <div class="row good"><span class="tag">좋은 일</span><span class="val" id="r-good"></span></div>
-    <div class="row bad"><span class="tag">조심</span><span class="val" id="r-bad"></span></div>
+    <div class="line good"><div class="lb">◎ 좋은 일</div><div class="tx" id="r-good"></div></div>
+    <div class="line bad"><div class="lb">▲ 조심</div><div class="tx" id="r-bad"></div></div>
 
     <div class="lucky">
-      <div><small>행운의 색</small><b id="r-color"></b></div>
-      <div><small>행운의 숫자</small><b id="r-num"></b></div>
+      <div><div class="lb">행운의 색</div><div class="tx" id="r-color"></div></div>
+      <div><div class="lb">행운의 숫자</div><div class="tx" id="r-num"></div></div>
     </div>
 
-    <div class="yeongja" id="r-yj">
+    <div class="yeongja r-yj">
       <div class="pic"><img src="assets/yeongja.png" alt="영자" onerror="noImg(this)"></div>
-      <div class="bubble" id="r-say"></div>
+      <p id="r-say"></p>
     </div>
 
     <button class="btn kakao" id="share">카톡으로 보내기</button>
     <a class="btn yt" id="yt" target="_blank" rel="noopener">영자아씨 영상 보러 가기</a>
-    <button class="btn plain" id="again">다른 띠 보기</button>
-    <p class="note">내일 또 오세요. 영자가 기다릴게요.</p>
+    <button class="link" id="again">다른 띠 보기</button>
   </section>
 
 </main>
@@ -170,8 +152,7 @@
 
   // 띠를 누르면 그 띠의 년생 버튼(1930~2001년생)
   function pickAnimal(i) {
-    $('picked').textContent = F.ANIMAL_EMOJI[i];
-    $('ask').textContent = F.ANIMALS[i] + '띠, 몇 년생이세요?';
+    $('ask').innerHTML = '<span class="emo">' + F.ANIMAL_EMOJI[i] + '</span>' + F.ANIMALS[i] + '띠, 몇 년생이세요?';
     $('years').innerHTML = '';
     for (var y = 1930; y <= 2001; y++) {
       if (F.yearBranch(y) !== i) continue;
@@ -188,18 +169,15 @@
   function showResult(year) {
     try { localStorage.setItem(STORE, year); } catch (e) {}
     var f = F.getFortune({ year: year }, new Date());
-    $('r-who').textContent = f.emoji + ' ' + f.yy + '년생 ' + f.animal + '띠';
-    $('r-date').textContent = f.date + ' 오늘의 운세';
+    $('r-who').innerHTML = f.yy + '년생 ' + f.animal + '띠 ' + f.emoji + '<small>' + f.date + ' 오늘의 운세</small>';
     $('r-word').textContent = f.saja[0];
     $('r-hanja').textContent = f.saja[1];
     $('r-mean').textContent = f.saja[2];
-    $('r-saja').className = 'saja ' + f.level;
     $('r-good').textContent = f.good;
     $('r-bad').textContent = f.careful;
     $('r-color').innerHTML = '<span class="dot" style="background:' + f.color.c + '"></span>' + f.color.n;
     $('r-num').textContent = f.number;
-    $('r-say').textContent = f.say;
-    $('r-yj').classList.toggle('warn', f.level === 'chung' || f.level === 'wonjin');
+    $('r-say').textContent = '“' + f.say + '”';
     go('step-result');
   }
 
@@ -209,7 +187,7 @@
 
   $('share').onclick = function () {
     var url = location.href.split('#')[0].split('?')[0];
-    var text = '영자가 오늘 운세 봐 준대요. 띠만 누르면 돼요 🔮';
+    var text = '영자가 오늘 운세 봐 준대요. 띠만 누르면 돼요.';
     if (navigator.share) { navigator.share({ title: '영자의 오늘 운세', text: text, url: url }).catch(function () {}); return; }
     var done = function () { $('share').textContent = '주소가 복사됐어요!'; };
     if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(done, function () { prompt('이 주소를 복사하세요', url); });
