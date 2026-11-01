@@ -135,6 +135,10 @@
   .fade-in { animation: fadein .7s ease both; }
   @keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
+  .speak { display: block; margin: 12px auto 0; font-size: 24px; font-weight: 800; padding: 10px 22px; border-radius: 999px; background: transparent; }
+  .speak.on { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .55; } }
+  .speak { color: var(--gold); border: 2px solid var(--gold); }
   .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
   .btn.kakao { background: var(--kakao); color: #2b2420; }
@@ -188,6 +192,7 @@
       <div class="rname" id="r-name"></div>
       <div class="rkey" id="r-key"></div>
       <div class="rmsg"><div class="lb" id="r-lb"></div><div class="tx" id="r-msg"></div></div>
+      <button class="speak" id="speak">🔊 소리로 듣기</button>
       <div class="yeongja r-yj">
         <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
         <p id="r-say"></p>
@@ -218,6 +223,7 @@
   CARDS.forEach(function (c) { var i = new Image(); i.src = 'cards/' + c.no + '.jpg'; });
 
   function go(step) {
+    if (window.stopSpeak) stopSpeak();
     ['step-topic', 'step-pick', 'step-result'].forEach(function (s) { $(s).classList.toggle('hidden', s !== step); });
     window.scrollTo(0, 0);
   }
@@ -285,8 +291,36 @@
     Array.prototype.forEach.call(document.querySelectorAll('#step-result .fade-in'), function (e) {
       e.classList.remove('fade-in'); void e.offsetWidth; e.classList.add('fade-in');
     });
+    SPEECH = t.label + '에 대한 카드는 ' + c.name + ' 카드입니다. ' + c.key + '. '
+      + c[topic] + ' ' + c.say;
     go('step-result');
   }
+
+  // ── 소리로 듣기: 휴대폰에 들어 있는 읽어 주기 기능(음성 합성)을 쓴다 ──
+  var SPEECH = '';
+  var canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  function koVoice() {
+    var vs = canSpeak ? speechSynthesis.getVoices() : [];
+    for (var i = 0; i < vs.length; i++) if (/^ko/i.test(vs[i].lang)) return vs[i];
+    return null;
+  }
+  function stopSpeak() {
+    if (canSpeak) speechSynthesis.cancel();
+    var b = $('speak'); if (b) { b.classList.remove('on'); b.textContent = '🔊 소리로 듣기'; }
+  }
+  function speak() {
+    if (!canSpeak) return;
+    if (speechSynthesis.speaking) { stopSpeak(); return; }
+    var u = new SpeechSynthesisUtterance(SPEECH);
+    u.lang = 'ko-KR'; u.rate = 0.85; u.pitch = 1.05;
+    var v = koVoice(); if (v) u.voice = v;
+    u.onend = u.onerror = stopSpeak;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+    $('speak').classList.add('on'); $('speak').textContent = '■ 그만 듣기';
+  }
+  if (!canSpeak) $('speak').classList.add('hidden');
+  else { speechSynthesis.getVoices(); $('speak').onclick = speak; }
 
   $('back1').onclick = function () { go('step-topic'); };
   $('again').onclick = function () { go('step-topic'); };

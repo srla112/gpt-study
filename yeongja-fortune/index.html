@@ -82,6 +82,10 @@
   .dot { display: inline-block; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #888; vertical-align: -2px; margin-right: 6px; }
   .r-yj { margin: 18px 0 6px; }
 
+  .speak { display: block; margin: 12px auto 0; font-size: 24px; font-weight: 800; padding: 10px 22px; border-radius: 999px; background: transparent; }
+  .speak.on { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .55; } }
+  .speak { color: var(--ink); border: 2px solid var(--ink); }
   .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 18px; margin-top: 12px;
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
   .btn.kakao { background: var(--kakao); color: #2b2420; }
@@ -136,6 +140,7 @@
   <!-- 결과 -->
   <section id="step-result" class="hidden">
     <div class="who" id="r-who"></div>
+    <button class="speak" id="speak">🔊 소리로 듣기</button>
 
     <div class="saja">
       <div class="saja-word" id="r-word"></div>
@@ -174,6 +179,7 @@
   var $ = function (id) { return document.getElementById(id); };
 
   function go(step) {
+    if (window.stopSpeak) stopSpeak();
     ['step-animal', 'step-year', 'step-result'].forEach(function (s) { $(s).classList.toggle('hidden', s !== step); });
     window.scrollTo(0, 0);
   }
@@ -214,8 +220,40 @@
     $('r-color').innerHTML = '<span class="dot" style="background:' + f.color.c + '"></span>' + f.color.n;
     $('r-num').textContent = f.number;
     $('r-say').textContent = '“' + f.say + '”';
+    SPEECH = f.yy + '년생 ' + f.animal + '띠, ' + f.date + ' 오늘의 운세입니다. '
+      + f.saja[0] + '. ' + f.saja[2] + '입니다. '
+      + '좋은 일. ' + f.good + ' '
+      + '조심하실 일. ' + f.careful + ' '
+      + '행운의 색은 ' + f.color.n + ', 행운의 숫자는 ' + f.number + '입니다. '
+      + f.say;
     go('step-result');
   }
+
+  // ── 소리로 듣기: 휴대폰에 들어 있는 읽어 주기 기능(음성 합성)을 쓴다 ──
+  var SPEECH = '';
+  var canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  function koVoice() {
+    var vs = canSpeak ? speechSynthesis.getVoices() : [];
+    for (var i = 0; i < vs.length; i++) if (/^ko/i.test(vs[i].lang)) return vs[i];
+    return null;
+  }
+  function stopSpeak() {
+    if (canSpeak) speechSynthesis.cancel();
+    var b = $('speak'); if (b) { b.classList.remove('on'); b.textContent = '🔊 소리로 듣기'; }
+  }
+  function speak() {
+    if (!canSpeak) return;
+    if (speechSynthesis.speaking) { stopSpeak(); return; }
+    var u = new SpeechSynthesisUtterance(SPEECH);
+    u.lang = 'ko-KR'; u.rate = 0.85; u.pitch = 1.05;
+    var v = koVoice(); if (v) u.voice = v;
+    u.onend = u.onerror = stopSpeak;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+    $('speak').classList.add('on'); $('speak').textContent = '■ 그만 듣기';
+  }
+  if (!canSpeak) $('speak').classList.add('hidden');
+  else { speechSynthesis.getVoices(); $('speak').onclick = speak; }
 
   $('back1').onclick = function () { go('step-animal'); };
   $('again').onclick = function () { try { localStorage.removeItem(STORE); } catch (e) {} go('step-animal'); };
