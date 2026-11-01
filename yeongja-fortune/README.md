@@ -19,6 +19,6 @@
 - 휴대폰이 다크 모드일 때만 자동으로 진한 갈색 바탕에 미색 글씨로 바뀌어요.
 
 ## 고치는 곳
-- 영자 그림: `assets/yeongja.jpg` (채널 프로필 사진에서 얼굴 부분을 잘라 씀)
+- 영자 그림: `assets/yeongja.jpg` (앱용 영자 이미지를 300×300으로 잘라 씀)
 - 문구: `fortune.js` 안의 `TEXT`(사자성어·좋은 일·영자 한마디), `CAREFUL`(조심)
 - 채널 주소: `index.html` 안의 `CHANNEL_URL` (구독하기 버튼은 이 주소 끝에 `?sub_confirmation=1`을 붙여 구독 창을 띄워요)
