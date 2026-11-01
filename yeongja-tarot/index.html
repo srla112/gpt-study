@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#141a31">
 <title>영자의 타로</title>
 <meta property="og:title" content="영자의 타로">
 <meta property="og:description" content="고민 하나 떠올리고, 카드 한 장만 뽑으세요. 영자가 풀어 드려요.">
@@ -16,51 +17,68 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;800&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
 <style>
+  /* 타로는 밤하늘 테마 하나만 쓴다 (깊은 남색 + 금빛 별, 미색 글씨) */
   :root {
-    --bg: #f2e8d5;
-    --tile: #faf4e8;
-    --ink: #2b2420;
-    --sub: #5e5246;
-    --line: #d3c4a6;
-    --border: #c2b08c;
-    --press: #e9dcc2;
-    --picbg: #e6d6b4;
-    --gold: #8a6420;
-    --red: #b2171c;
-    --navy: #1f2a4d;
-    --navy2: #2c3a66;
-    --foil: #d8b45a;
-    --dark-btn: #2b2420;
-    --dark-btn-tx: #fff;
+    --bg: #141a31;
+    --tile: #212a4e;
+    --ink: #f3e9d2;
+    --sub: #c8bfa8;
+    --line: #3b4672;
+    --border: #b8933f;
+    --press: #2b3663;
+    --picbg: #2b3663;
+    --gold: #e6c46e;
+    --red: #f08a7e;
+    --navy: #3d0f1c;
+    --navy2: #6e1d31;
+    --foil: #e2bd62;
     --kakao: #f9de4b;
     --sub-btn: #b2171c;
     --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     --serif: 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #2a231d; --tile: #382f27; --ink: #efe4cf; --sub: #c9b99e; --line: #5c4e40;
-      --border: #7a6750; --press: #4a3e33; --picbg: #4a3e33; --gold: #e0bd6a; --red: #f08a7e;
-      --dark-btn: #5c4e40; --dark-btn-tx: #efe4cf; --kakao: #e5c93f; --sub-btn: #a3251f;
-    }
-  }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; }
-  body { font-family: var(--sans); font-weight: 500; color: var(--ink); background: var(--bg); font-size: 24px; line-height: 1.45; }
+  body { font-family: var(--sans); font-weight: 500; color: var(--ink); font-size: 24px; line-height: 1.45; min-height: 100vh;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 70% 38% at 50% -4%, rgba(230,196,110,.22), transparent 70%),
+      radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,240,200,.8), transparent 60%),
+      radial-gradient(1.2px 1.2px at 82% 12%, rgba(255,240,200,.7), transparent 60%),
+      radial-gradient(1.8px 1.8px at 68% 34%, rgba(255,240,200,.6), transparent 60%),
+      radial-gradient(1.2px 1.2px at 28% 46%, rgba(255,240,200,.5), transparent 60%),
+      radial-gradient(1.5px 1.5px at 90% 58%, rgba(255,240,200,.55), transparent 60%),
+      radial-gradient(1.2px 1.2px at 8% 72%, rgba(255,240,200,.5), transparent 60%),
+      radial-gradient(1.6px 1.6px at 52% 84%, rgba(255,240,200,.45), transparent 60%),
+      radial-gradient(1.2px 1.2px at 76% 92%, rgba(255,240,200,.45), transparent 60%),
+      linear-gradient(180deg, #1b2342 0%, #141a31 45%, #10152a 100%);
+    background-attachment: fixed; }
   main { max-width: 480px; margin: 0 auto; padding: 20px 20px 32px; }
   .hidden { display: none !important; }
   button { font: inherit; color: inherit; cursor: pointer; }
 
-  .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 42px; margin: 0; letter-spacing: 2px; }
-  .title-sub { text-align: center; font-size: 22px; color: var(--gold); font-weight: 800; margin: 2px 0 18px; }
+  .title { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 42px; margin: 4px 0 0; letter-spacing: 2px; color: var(--gold); text-shadow: 0 0 18px rgba(230,196,110,.35); }
+  .title::before, .title::after { content: '✦'; font-size: 22px; vertical-align: 12px; margin: 0 10px; }
+  .title-sub { text-align: center; font-size: 22px; color: var(--sub); font-weight: 800; margin: 2px 0 18px; }
   .yeongja { display: flex; align-items: center; gap: 14px; }
-  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: var(--picbg); border: 2px solid var(--line); }
+  .pic { width: 92px; height: 92px; flex: none; border-radius: 50%; overflow: hidden; background: var(--picbg); border: 3px solid var(--gold); box-shadow: 0 0 14px rgba(230,196,110,.35); }
   .pic img { width: 100%; height: 100%; object-fit: cover; }
   .noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; }
   .yeongja p { margin: 0; font-size: 26px; font-weight: 800; word-break: keep-all; }
 
+  /* 첫 화면 부채꼴 카드 */
+  .fan { position: relative; height: 150px; margin: 0 0 18px; }
+  .fan .face { width: 76px; height: 130px; left: 50%; top: 10px; right: auto; bottom: auto; margin-left: -38px; border-radius: 9px; transform-origin: 50% 110%; }
+  .fan .face:nth-child(1) { z-index: 1; transform: rotate(-28deg) translateY(6px); }
+  .fan .face:nth-child(2) { z-index: 2; transform: rotate(-14deg); }
+  .fan .face:nth-child(3) { z-index: 3; transform: rotate(0deg) translateY(-6px); box-shadow: 0 0 22px rgba(230,196,110,.45), 0 8px 20px rgba(0,0,0,.55); }
+  .fan .face:nth-child(4) { z-index: 2; transform: rotate(14deg); }
+  .fan .face:nth-child(5) { z-index: 1; transform: rotate(28deg) translateY(6px); }
+  .fan .back .star { font-size: 11px; } .fan .back .nm { font-size: 12px; letter-spacing: 2px; }
+  .fan .back::before { inset: 4px; }
+
   /* 1단계: 주제 */
-  .ask { font-size: 30px; font-weight: 800; text-align: center; margin: 24px 0 14px; }
+  .ask { font-size: 30px; font-weight: 800; text-align: center; margin: 22px 0 14px; }
   .topics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .topics button { background: var(--tile); border: 2px solid var(--border); border-radius: 14px; padding: 16px 0 14px; }
   .topics .ic { display: block; font-size: 44px; line-height: 1.15; }
@@ -72,7 +90,7 @@
   .tcard .inner { position: absolute; inset: 0; transition: transform .8s cubic-bezier(.3,.7,.3,1); transform-style: preserve-3d; }
   .tcard.flipped .inner { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; border-radius: 12px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    box-shadow: 0 6px 16px rgba(40,25,10,.28); }
+    box-shadow: 0 8px 20px rgba(0,0,0,.55); }
   .back {
     background:
       radial-gradient(circle at 50% 50%, rgba(216,180,90,.18) 0 28%, transparent 29%),
@@ -107,10 +125,10 @@
   /* 결과 */
   .result-card { width: 62%; margin: 8px auto 0; }
   .result-card .tcard { width: 100%; }
-  .result-card .face { box-shadow: 0 10px 26px rgba(40,25,10,.35); border: 3px solid var(--foil); }
-  .rname { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 46px; line-height: 1.15; margin-top: 16px; word-break: keep-all; }
-  .rkey { text-align: center; font-size: 28px; font-weight: 800; color: var(--gold); }
-  .rmsg { margin: 16px 0 0; padding: 18px 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); }
+  .result-card .face { box-shadow: 0 0 28px rgba(230,196,110,.35), 0 12px 28px rgba(0,0,0,.6); border: 3px solid var(--foil); }
+  .rname { text-align: center; font-family: var(--serif); font-weight: 900; font-size: 46px; color: var(--gold); line-height: 1.15; margin-top: 16px; word-break: keep-all; }
+  .rkey { text-align: center; font-size: 28px; font-weight: 800; color: var(--ink); }
+  .rmsg { margin: 16px 0 0; padding: 18px 0; border-top: 2px solid var(--gold); border-bottom: 1px solid var(--line); }
   .rmsg .lb { font-size: 22px; font-weight: 800; color: var(--sub); }
   .rmsg .tx { font-size: 32px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
   .r-yj { margin: 18px 0 6px; }
@@ -121,7 +139,7 @@
     font-size: 28px; font-weight: 800; text-align: center; text-decoration: none; }
   .btn.kakao { background: var(--kakao); color: #2b2420; }
   .btn.sub { background: var(--sub-btn); color: #fff; }
-  .btn.yt { background: var(--dark-btn); color: var(--dark-btn-tx); }
+  .btn.yt { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
   .link { display: block; margin: 18px auto 0; background: none; border: 0; font-size: 24px; color: var(--sub); text-decoration: underline; text-align: center; }
   .note { text-align: center; font-size: 18px; color: var(--sub); margin-top: 18px; }
 
@@ -141,6 +159,7 @@
   <section id="step-topic">
     <h1 class="title">영자의 타로</h1>
     <div class="title-sub">카드 한 장으로 보는 오늘의 답</div>
+    <div class="fan" aria-hidden="true"><div class="face back"></div><div class="face back"></div><div class="face back"></div><div class="face back"></div><div class="face back"></div></div>
     <div class="yeongja">
       <div class="pic"><img src="assets/yeongja.jpg" alt="영자" onerror="noImg(this)"></div>
       <p>고민 하나를<br>떠올려 보세요.</p>
