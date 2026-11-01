@@ -63,19 +63,19 @@
   /* 결과 */
   .who { text-align: center; font-size: 32px; font-weight: 900; }
   .date { text-align: center; font-size: 24px; color: #6d5b43; }
-  .head { text-align: center; font-family: var(--brush); font-weight: 400; font-size: 70px; line-height: 1.05;
-    margin: 8px 0 16px; word-break: keep-all; color: var(--red); }
-  .head.normal { color: var(--ink); }
+  .saja { text-align: center; background: var(--card); border: 2px solid var(--line); border-radius: 22px; padding: 16px 10px 20px; margin: 12px 0; }
+  .saja-word { font-family: var(--brush); font-weight: 400; font-size: 92px; line-height: 1; color: var(--red); letter-spacing: 2px; }
+  .saja.normal .saja-word { color: var(--ink); }
+  .saja-hanja { font-family: var(--myung); font-weight: 400; font-size: 26px; color: #8a7558; letter-spacing: 8px; margin-top: 2px; }
+  .saja-mean { font-size: 30px; font-weight: 900; margin-top: 8px; word-break: keep-all; }
   .row { display: flex; align-items: center; gap: 14px; background: var(--card); border: 2px solid var(--line);
     border-radius: 20px; padding: 16px 18px; margin-bottom: 12px; }
   .row .tag { flex: none; color: #fff; font-size: 24px; font-weight: 900; padding: 6px 12px; border-radius: 12px; }
   .row .val { font-size: 36px; font-weight: 900; line-height: 1.2; word-break: keep-all; }
-  .bok { background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 14px 12px 18px; margin-bottom: 12px; text-align: center; }
-  .bok-title { font-size: 24px; color: #6d5b43; }
-  .bok-seal { display: inline-block; margin: 10px 0 8px; padding: 10px 26px 14px; background: var(--red); color: #fff4dc;
-    font-family: var(--myung); font-weight: 400; font-size: 52px; line-height: 1.1; border-radius: 14px; transform: rotate(-3deg);
-    box-shadow: inset 0 0 0 4px #b3241f, inset 0 0 0 7px #f3c9a8; }
-  .bok-desc { font-size: 28px; font-weight: 900; word-break: keep-all; }
+  .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .row .tag { font-size: 22px; padding: 4px 12px; }
+  .row .val { font-size: 32px; }
+  .good .tag { background: #2c6a3a; }
   .bad .tag { background: var(--red); }
   .bad .val { color: var(--red); }
   .lucky { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
@@ -120,13 +120,13 @@
   <section id="step-result" class="hidden">
     <div class="who" id="r-who"></div>
     <div class="date" id="r-date"></div>
-    <div class="head" id="r-head"></div>
-
-    <div class="bok">
-      <div class="bok-title">오늘 들어오는 복</div>
-      <div class="bok-seal" id="r-bok"></div>
-      <div class="bok-desc" id="r-bokdesc"></div>
+    <div class="saja" id="r-saja">
+      <div class="saja-word" id="r-word"></div>
+      <div class="saja-hanja" id="r-hanja"></div>
+      <div class="saja-mean" id="r-mean"></div>
     </div>
+
+    <div class="row good"><span class="tag">좋은 일</span><span class="val" id="r-good"></span></div>
     <div class="row bad"><span class="tag">조심</span><span class="val" id="r-bad"></span></div>
 
     <div class="lucky">
@@ -190,10 +190,11 @@
     var f = F.getFortune({ year: year }, new Date());
     $('r-who').textContent = f.emoji + ' ' + f.yy + '년생 ' + f.animal + '띠';
     $('r-date').textContent = f.date + ' 오늘의 운세';
-    $('r-head').textContent = f.head;
-    $('r-head').className = 'head ' + f.level;
-    $('r-bok').textContent = f.bok;
-    $('r-bokdesc').textContent = f.bokDesc;
+    $('r-word').textContent = f.saja[0];
+    $('r-hanja').textContent = f.saja[1];
+    $('r-mean').textContent = f.saja[2];
+    $('r-saja').className = 'saja ' + f.level;
+    $('r-good').textContent = f.good;
     $('r-bad').textContent = f.careful;
     $('r-color').innerHTML = '<span class="dot" style="background:' + f.color.c + '"></span>' + f.color.n;
     $('r-num').textContent = f.number;
