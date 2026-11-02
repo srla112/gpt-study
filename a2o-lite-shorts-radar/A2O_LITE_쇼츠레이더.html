@@ -85,7 +85,7 @@ footer{color:var(--muted);font-size:12.5px;padding-block:0 40px}
  <div class="muted" id="quota"></div></div>
 </details>
 </main>
-<footer class="wrap"><p>A2O LITE 쇼츠는 제목에 A2O LITE·에이투오 라이트·에투라 같은 그룹명이 있거나, 제목에 멤버 이름이나 NEON이 있고 제목·설명·태그에 A2O가 함께 있는 영상입니다(A2O LITE 공식 채널 영상은 모두 포함). 쇼츠는 길이 3분 이하인 영상으로 판단합니다(YouTube API에는 쇼츠 표시가 없어 3분 이하 일반 영상이 섞일 수 있습니다). 채널마다 최근 영상 20개를 확인합니다. 전날 대비는 24시간 전에 가장 가까운 수집 기록과 비교하고, 그 뒤에 올라온 영상은 지금 조회수 전체를 증가량으로 봅니다. 수집 기록은 이 컴퓨터의 이 브라우저에만 저장됩니다. YouTube API 무료 한도는 하루 10,000 단위이며 한국 시간 오후 4~5시에 초기화됩니다.</p></footer>
+<footer class="wrap"><p>A2O LITE 쇼츠는 제목에 A2O LITE·에이투오 라이트·에투라 같은 그룹명이 있거나, 제목에 멤버 이름이나 NEON이 있고 제목·설명·태그에 A2O가 함께 있는 영상입니다(A2O LITE 공식 채널 영상은 모두 포함). 쇼츠는 길이 3분 이하인 영상으로 판단합니다(YouTube API에는 쇼츠 표시가 없어 3분 이하 일반 영상이 섞일 수 있습니다). 채널마다 최근 영상 20개와, 최근 N일(위에서 정한 일수) 안에 올라온 영상을 모두 확인합니다. 전날 대비는 24시간 전에 가장 가까운 수집 기록과 비교하고, 그 뒤에 올라온 영상은 지금 조회수 전체를 증가량으로 봅니다. 수집 기록은 이 컴퓨터의 이 브라우저에만 저장됩니다. YouTube API 무료 한도는 하루 10,000 단위이며 한국 시간 오후 4~5시에 초기화됩니다.</p></footer>
 
 <script>
 const DEFAULT_KEY="";
@@ -154,8 +154,18 @@ async function collect(){
  try{
   msg('info',`${GN[g]} 채널 ${n(total)}개의 최근 영상 목록을 가져오는 중…`);
   await pool(chans,8,async c=>{
-   const j=await api('playlistItems',{part:'contentDetails',maxResults:20,playlistId:'UU'+c[1].slice(2),fields:'items(contentDetails(videoId,videoPublishedAt))'});
-   if(!j)missing++;else (j.items||[]).forEach(it=>vids.set(it.contentDetails.videoId,c[1]));
+   // 최근 20개 + 최근 N일 안에 올라온 영상 전부 (더 많은 쪽)
+   const cutoff=t0-Math.max(1,S.days)*86400e3;let page='',idx=0,first=true,more=true;
+   while(more){
+    const p={part:'contentDetails',maxResults:50,playlistId:'UU'+c[1].slice(2),fields:'nextPageToken,items(contentDetails(videoId,videoPublishedAt))'};if(page)p.pageToken=page;
+    const j=await api('playlistItems',p);
+    if(!j){if(first)missing++;break;}
+    first=false;more=false;
+    for(const it of (j.items||[])){const cd=it.contentDetails;const pub=Date.parse(cd.videoPublishedAt||'');
+     if(idx<20||pub>=cutoff){vids.set(cd.videoId,c[1]);idx++;more=true;}else{more=false;break;}}
+    page=j.nextPageToken||'';if(!page||(j.items||[]).length<50)more=false;
+    if(more){const last=(j.items||[]).at(-1);if(!(Date.parse(last?.contentDetails?.videoPublishedAt||'')>=cutoff))more=false;}
+   }
    done++;prog(done/total*0.6);
   });
   const ids=[...vids.keys()];const chunks=[];for(let i=0;i<ids.length;i+=50)chunks.push(ids.slice(i,i+50));
