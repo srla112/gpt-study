@@ -8,7 +8,7 @@
 --body:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:ui-monospace,Consolas,Menlo,monospace}
 @media (prefers-color-scheme:dark){:root{--bg:#111317;--surface:#1a1d23;--fg:#e8eaef;--muted:#9aa1ae;--line:#2b2f38;--accent:#ff7a63;--soft:#3a201b;--bar:#6b3127;
 --up:#5fd39a;--upsoft:#173326;--down:#9aa1ae;--downsoft:#262a31;--hot:#f0a65a;--hotsoft:#3a2a17;--new:#86aef5;--newsoft:#1c2840;color-scheme:dark}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
 .wrap{max-width:1100px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right))}
 h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 10px;max-width:90ch}
 .warn{background:var(--soft);color:var(--accent);border-radius:8px;padding:8px 12px;margin:0 0 12px;font-size:13px}
@@ -53,6 +53,8 @@ h4{margin:10px 0 6px;font-size:13px}
  <button data-v="kw" aria-pressed="true">핵심 키워드</button>
  <button data-v="cat" aria-pressed="false">분류별</button>
  <button data-v="auto" aria-pressed="false">새로 뜨는 키워드</button>
+ <button data-v="story" aria-pressed="false">같은 이야기 묶음</button>
+ <button data-v="rise" aria-pressed="false">급상승 새 영상</button>
  <button data-v="out" aria-pressed="false">터진 영상</button>
  <button data-v="org" aria-pressed="false">해외 원본 선점</button>
  <button data-v="star" aria-pressed="false">★ 관심 키워드</button>
@@ -77,6 +79,7 @@ const KEY='haeoe-trend-stars'; let stars=new Set(); try{stars=new Set(JSON.parse
 const saveStars=()=>{try{localStorage.setItem(KEY,JSON.stringify([...stars]));}catch(e){}};
 $('sub').textContent=`${D.base} → ${D.cur} (${D.span}일) 동안 늘어난 조회수로 해외반응 키워드를 분석했습니다. 해외반응 영상 ${D.nkr.toLocaleString('ko-KR')}개, 해외 원본 ${D.norg.toLocaleString('ko-KR')}개를 추적 중입니다.`;
 if(D.span<3){$('warn').hidden=false;$('warn').textContent=D.span<1?'아직 비교할 이전 기록이 없습니다. 내일 다시 실행하면 하루치 변화가 나오고, 3일이 쌓이면 최근 3일 순위가 됩니다.':`아직 기록이 ${D.span}일치라 ${D.span}일 동안의 변화입니다. 매일 실행하면 3일치가 쌓인 뒤 최근 3일 순위가 됩니다.`;}
+if(D.health&&D.health.length){$('warn').hidden=false;$('warn').textContent=D.health.join(' ')+' ';}
 if(!D.prev){$('warn').hidden=false;$('warn').textContent+=(($('warn').textContent)?' ':'')+'상승률과 단계(상승·하락)는 기록이 6일 이상 쌓이면 나옵니다.';}
 let tab='kw',sort='g',cat=Object.keys(D.kw.reduce((a,k)=>(a[k.c]=1,a),{}))[0]||'',open=new Set();
 const HELP={kw:'사전에 있는 세부 키워드 순위입니다. 기회 점수는 늘어난 조회수를 최근 올라온 영상 수로 나눈 값으로, 조회수는 몰리는데 영상이 아직 적은 키워드일수록 높습니다. 키워드를 누르면 잘 된 제목과 영상이 펼쳐집니다.',
@@ -84,7 +87,9 @@ const HELP={kw:'사전에 있는 세부 키워드 순위입니다. 기회 점수
  auto:'사전에 없는데 여러 채널(3곳 이상)의 조회수 늘어난 영상 제목에 함께 나온 단어입니다. 새 드라마 제목, 새로 뜬 사람 이름 같은 새 소재가 여기에 잡힙니다.',
  out:'채널 평소 조회수(최근 영상 중앙값)보다 3배 이상 터진 영상입니다. 채널 힘이 아니라 소재 덕분에 터졌을 가능성이 큰 영상이라, 제목의 소재를 눈여겨보세요.',
  org:'최근 2주 안에 영어권에서 올라온 한국 관련 원본 영상을 하루 평균 조회수 순으로 보여 줍니다. 한국 해외반응 채널들이 다루기 전에 먼저 잡을 수 있는 소재입니다.',
- star:'★를 누른 키워드만 모아 봅니다. 표시는 이 브라우저에 저장됩니다.'};
+ star:'★를 누른 키워드만 모아 봅니다. 표시는 이 브라우저에 저장됩니다.',
+ story:'최근 7일 동안 여러 채널이 같은 소재로 올린 영상을 제목이 비슷한 것끼리 묶었습니다. 지금 시장이 몰리는 구체적인 이야기입니다. 묶음을 누르면 영상이 펼쳐집니다.',
+ rise:'올라온 지 3일 안 된 영상을 하루 평균 조회수가 빠른 순으로 보여 줍니다. 다음에 뜰 소재를 가장 먼저 보여 주는 신호입니다.'};
 function spark(arr){if(!arr||arr.length<2||!Math.max(...arr))return '<svg class="spark" viewBox="0 0 150 34" aria-hidden="true"></svg>';
  const m=Math.max(...arr),w=150,h=34,st=w/(arr.length-1);const pts=arr.map((v,i)=>[i*st,h-2-(v/m)*(h-6)]);
  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
@@ -102,6 +107,7 @@ function card(s,i){const isOpen=open.has(s.k);const rise=s.rise==null?'':`<span 
  ${isOpen?`<div class="body"><div class="links"><button class="star" data-star="${esc(s.k)}" aria-pressed="${stars.has(s.k)}">★ 관심</button>
   <a href="${yt('해외반응 '+s.k.split('·')[0])}" target="_blank" rel="noopener">유튜브에서 ‘해외반응 ${esc(s.k.split('·')[0])}’ 검색</a>
   <a href="${yt(s.en)}" target="_blank" rel="noopener">해외 원본 찾기: ${esc(s.en)}</a></div>
+  ${s.hook&&s.hook.length?`<h4>잘 된 제목에 많이 쓴 방식</h4><div class="meta" style="margin-bottom:8px">${s.hook.map(h=>`<span>${esc(h[0])} <b>${h[1]}%</b></span>`).join('')}</div>`:''}
   <h4>조회수가 많이 늘어난 영상</h4><ul class="vids">${s.v.slice(0,15).map(vrow).join('')}</ul></div>`:''}</li>`;}
 function sorter(a,b){if(sort==='opp')return b.opp-a.opp;if(sort==='rise')return (b.rise??-1e9)-(a.rise??-1e9)||b.g-a.g;return b.g-a.g;}
 function render(){
@@ -114,6 +120,14 @@ function render(){
   if(tab==='cat'){const cats=[...new Set(D.kw.map(s=>s.c))];$('cats').innerHTML=cats.map(c=>`<button data-c="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join('');L=L.filter(s=>s.c===cat);}
   if(q)L=L.filter(s=>s.k.toLowerCase().includes(q)||s.v.some(v=>v[1].toLowerCase().includes(q)));
   L=[...L].sort(sorter);html=L.map(card).join('')||`<p class="empty">${tab==='star'?'아직 ★를 누른 키워드가 없습니다. 키워드를 펼쳐서 ★ 관심을 누르세요.':'조건에 맞는 키워드가 없습니다.'}</p>`;
+ }else if(tab==='story'){
+  const L=(D.stories||[]).filter(g=>!q||g.label.toLowerCase().includes(q)||g.v.some(v=>v[1].toLowerCase().includes(q)));
+  html=L.map((g,i)=>{const k='story:'+i,isOpen=open.has(k);return `<li class="card"><div class="head" data-k="${k}" role="button" tabindex="0" aria-expanded="${isOpen}"><span class="rank">${i+1}</span>
+   <div><span class="kw">${esc(g.label)}</span><div class="meta"><span>영상 <b>${g.n}</b>개</span><span>채널 <b>${g.nch}</b>곳</span></div></div><span></span>
+   <div class="gain"><b>+${fmt(g.g)}</b><small>늘어난 조회수</small></div></div>${isOpen?`<div class="body"><ul class="vids">${g.v.map(vrow).join('')}</ul></div>`:''}</li>`;}).join('')||'<p class="empty">최근 7일 동안 여러 채널이 같이 다룬 이야기가 아직 없습니다.</p>';
+ }else if(tab==='rise'){
+  const L=(D.rising||[]).filter(v=>!q||v[1].toLowerCase().includes(q));
+  html=L.length?`<li class="card"><div class="body" style="padding-left:14px"><ul class="vids">${L.map(v=>vrow(v).replace(/<div class="vg"><b>\+[^<]*<\/b>/,`<div class="vg"><b>하루 ${fmt(v[10])}</b>`)).join('')}</ul></div></li>`:'<p class="empty">최근 3일 안에 올라온 영상이 아직 없습니다.</p>';
  }else if(tab==='out'){
   const L=D.out.filter(v=>!q||v[1].toLowerCase().includes(q));
   html=L.length?`<li class="card"><div class="body" style="padding-left:14px"><ul class="vids">${L.map(vrow).join('')}</ul></div></li>`:'<p class="empty">아직 터진 영상이 없습니다.</p>';

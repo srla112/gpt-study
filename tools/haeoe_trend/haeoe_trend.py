@@ -55,6 +55,22 @@ def log(*a):
     print(time.strftime('%H:%M:%S'), *a, flush=True)
 
 
+HEALTH = []   # 수집이 이상하게 적을 때 결과 화면에 띄울 경고
+
+
+def detect_version():
+    """유튜브 첫 화면에서 현재 웹 버전 번호를 읽어 와 씁니다 (유튜브가 바뀌어도 덜 멈추도록)."""
+    try:
+        req = urllib.request.Request('https://www.youtube.com/?hl=ko', headers={'User-Agent': UA, 'Accept-Language': 'ko'})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            m = re.search(r'"INNERTUBE_CLIENT_VERSION":"([\d.]+)"', r.read().decode('utf-8', 'ignore'))
+        if m:
+            CLIENT['client']['clientVersion'] = CLIENT_EN['client']['clientVersion'] = m.group(1)
+            log('유튜브 버전', m.group(1))
+    except Exception:
+        log('유튜브 버전을 읽지 못해 기본값으로 진행합니다')
+
+
 # ---------------- YouTube ----------------
 def api(endpoint, body, ctx=CLIENT):
     data = json.dumps(dict(body, context=ctx)).encode()
@@ -229,14 +245,18 @@ def collect(con, quick=False):
         chids = chids[:60]
     log(f'1/4 해외반응 채널 {len(chids)}개의 최근 업로드 확인')
     got = []
+    ok_ch = 0
     with ThreadPoolExecutor(8) as ex:
         for chid, name, subs, vids in ex.map(channel_latest, chids):
+            ok_ch += bool(vids)
             views = [v['views'] for v in vids if v['views']]
             med = int(statistics.median(views)) if views else None
             con.execute('update channel set name=coalesce(?,name), subs=coalesce(?,subs), median=coalesce(?,median), updated=? where chid=?',
                         (name or None, subs, med, TODAY.isoformat(), chid))
             got += [v for v in vids if v['views'] >= MIN_TRACK and is_kr_reaction(v)]
-    log('    새로 넣은 영상', add_videos(con, got, 'kr'), '개')
+    log('    새로 넣은 영상', add_videos(con, got, 'kr'), '개', f'(영상 목록을 읽은 채널 {ok_ch}/{len(chids)}곳)')
+    if chids and ok_ch < 0.5 * len(chids):
+        HEALTH.append(f'채널 {len(chids)}곳 중 {ok_ch}곳만 영상 목록을 읽었습니다. 유튜브 구조가 바뀌었거나 인터넷이 불안정했을 수 있습니다.')
     # 1-2 해외반응 검색 (최신순)
     jobs = [(q, sp, 2) for q in BROAD for sp in ('CAISBBABGAM=', 'CAISBBABGAI=')]
     for cat in CATS.values():
@@ -246,9 +266,13 @@ def collect(con, quick=False):
         jobs = jobs[:30]
     log(f'2/4 해외반응 검색 {len(jobs)}번 (최신순)')
     got = []
+    nres = 0
     with ThreadPoolExecutor(6) as ex:
         for res in ex.map(lambda a: search(*a), jobs):
+            nres += len(res)
             got += [v for v in res if v['views'] >= MIN_TRACK and is_kr_reaction(v)]
+    if jobs and nres < 5 * len(jobs):
+        HEALTH.append(f'해외반응 검색 {len(jobs)}번에서 결과가 {nres}개뿐입니다. 유튜브 검색 구조가 바뀌었을 수 있습니다.')
     for v in got:   # 처음 보는 채널도 다음부터 채널 확인 대상에 넣음
         if v['chid']:
             con.execute('insert or ignore into channel(chid,name) values(?,?)', (v['chid'], v['ch']))
@@ -275,11 +299,12 @@ def refresh(con, quick=False):
     if quick:
         ids = ids[:300]
     log(f'4/4 정확한 조회수 가져오기 {len(ids)}개 (몇 분~수십 분)')
-    n = 0
+    n = okn = 0
     with ThreadPoolExecutor(8) as ex:
         for vid, info in ex.map(video_info, ids):
             n += 1
             if info and info['views'] is not None:
+                okn += 1
                 con.execute('insert or replace into snap values(?,?,?)', (vid, TODAY.isoformat(), info['views']))
                 if info['date']:
                     con.execute('update video set date=? where id=?', (info['date'], vid))
@@ -287,6 +312,8 @@ def refresh(con, quick=False):
                 con.commit()
                 log('   ', n, '/', len(ids))
     con.commit()
+    if ids and okn < 0.7 * len(ids):
+        HEALTH.append(f'조회수를 {len(ids)}개 중 {okn}개만 가져왔습니다. 일부 키워드 수치가 실제보다 작을 수 있습니다.')
 
 
 # ---------------- 3. 분석 ----------------
@@ -345,15 +372,16 @@ def analyze(con):
         if not sv:
             continue
         g = gain_between(sv, base, cur, date)
-        if g is None:
-            continue
+        nog = g is None          # 비교할 이전 기록이 아직 없음 (오늘 처음 찾은 영상 등)
+        if nog:
+            g = 0
         gp = gain_between(sv, prev, base, date) if prev else None
         last = sv[max(sv)]
         c = chan.get(chid, {})
         upd = dt.date.fromisoformat(date) if date else None
         age = (TODAY - upd).days if upd else None
         V.append({'id': vid, 't': title, 'ch': ch or c.get('name') or '', 'chid': chid, 'date': date, 'kind': kind, 'views': last, 'g': g, 'gp': gp,
-                  'new': bool(date and date > base), 'age': age, 'subs': c.get('subs'), 'med': c.get('median'), 'sv': sv})
+                  'new': bool(date and date > base), 'nog': nog, 'age': age, 'subs': c.get('subs'), 'med': c.get('median'), 'sv': sv})
     KR = [v for v in V if v['kind'] == 'kr']
     ORG = [v for v in V if v['kind'] == 'org']
     # 일별 증가 (그래프용)
@@ -401,7 +429,7 @@ def analyze(con):
             stage = '유지'
         opp = g / (len(recent) + 2)
         top = sorted(vs, key=lambda v: -v['g'])
-        return {'k': name, 'c': cat, 'g': g, 'gp': gp, 'rise': rise, 'n': len(vs), 'nr': len(recent), 'nch': nch, 'opp': opp,
+        return {'hook': hooks(top), 'k': name, 'c': cat, 'g': g, 'gp': gp, 'rise': rise, 'n': len(vs), 'nr': len(recent), 'nch': nch, 'opp': opp,
                 'small': len(small), 'out': len(outl), 'stage': stage, 'en': en,
                 'nat': [[n, x] for n, x in nat.most_common(4) if x > 0], 'daily': daily(vs),
                 'v': [vid_row(v) for v in top[:40]]}
@@ -429,10 +457,16 @@ def analyze(con):
                 toks.add(m)
                 quoted.add(m)
         toks.update(HASHTAG.findall(t))
+        words = []
         for w in re.findall(r'[가-힣A-Za-z0-9]{2,12}', t):
             w2 = JOSA.sub('', w)
-            if len(w2) >= 2 and not VERBISH.search(w2) and not re.fullmatch(r'\d+[가-힣A-Za-z]{0,2}', w2):
+            good = len(w2) >= 2 and not VERBISH.search(w2) and not re.fullmatch(r'\d+[가-힣A-Za-z]{0,2}', w2) and w2 not in STOP
+            words.append(w2 if good else None)
+            if good:
                 toks.add(w2)
+        for a, b in zip(words, words[1:]):     # 두 단어 표현
+            if a and b:
+                toks.add(f'{a} {b}')
         return {x for x in toks if x not in STOP and x.lower() not in STOP}
     allc = Counter()
     for v in KR:
@@ -488,8 +522,57 @@ def analyze(con):
         kw = next((name for terms in CATS.values() for name, (rx, en) in terms.items()
                    if any(len(w) >= 5 and re.search(r'\b' + re.escape(w) + r'\b', v['t'], re.I) for w in en.split() if w.lower() not in GENERIC_EN)), '')
         org_rows.append([v['id'], v['t'], v['ch'], v['date'], v['views'], int(v['vel']), kw])
-    return {'cur': cur, 'base': base, 'prev': prev, 'span': span, 'days': day_list, 'kw': kws, 'auto': auto2,
+    # 급상승 새 영상: 올라온 지 3일 이내, 하루 평균 조회수
+    fresh = [v for v in KR if v['age'] is not None and v['age'] <= 3]
+    for v in fresh:
+        v['vel'] = v['views'] / (v['age'] + 1)
+    rising = [vid_row(v) + [int(v['vel'])] for v in sorted(fresh, key=lambda v: -v['vel'])[:120]]
+    # 같은 이야기 묶음: 최근 7일 영상을 제목 단어가 비슷한 것끼리 묶음
+    for v in KR:
+        v['score'] = v['views'] if (v['nog'] or v['new']) else v['g']   # 최근 영상은 조회수 자체가 최근 관심
+    recent7 = sorted([v for v in KR if v['age'] is not None and v['age'] <= 7], key=lambda v: -v['score'])
+    groups = []
+    for v in recent7:
+        tv = tokens(v['t'])
+        tv = {x for x in tv if ' ' not in x}
+        if len(tv) < 2:
+            continue
+        best, bj = None, 0
+        for gr in groups:
+            common = len(tv & gr['tok'])
+            j = common / min(len(tv), len(gr['tok']))
+            if common >= 2 and j > bj:
+                best, bj = gr, j
+        if best and bj >= 0.4:
+            best['vs'].append(v)
+            best['cnt'].update(tv)
+        else:
+            groups.append({'tok': tv, 'vs': [v], 'cnt': Counter(tv)})
+    stories = []
+    for gr in groups:
+        chs = {v['chid'] for v in gr['vs']}
+        if len(gr['vs']) < 3 or len(chs) < 2:
+            continue
+        label = ' · '.join(w for w, c in gr['cnt'].most_common(6) if c >= 2 and w not in STOP)[:60]
+        stories.append({'label': label or gr['vs'][0]['t'][:30], 'g': sum(v['score'] for v in gr['vs']), 'n': len(gr['vs']), 'nch': len(chs),
+                        'v': [vid_row(dict(v, g=v['score'])) for v in gr['vs'][:20]]})
+    stories.sort(key=lambda x: -x['g'])
+    return {'health': HEALTH, 'rising': rising, 'stories': stories[:60],
+            'cur': cur, 'base': base, 'prev': prev, 'span': span, 'days': day_list, 'kw': kws, 'auto': auto2,
             'out': [vid_row(v) for v in outliers], 'org': org_rows, 'nkr': len(KR), 'norg': len(ORG)}
+
+
+HOOKS = [('따옴표로 시작', r'^\s*[\"“‘\'「《]'), ('"~한 이유"', r'이유'), ('"처음 먹어본/타본/가본"', r'처음|난생'), ('"경악·충격"', r'경악|충격'),
+         ('"난리·발칵"', r'난리|발칵|뒤집'), ('"눈물·감동"', r'눈물|감동|울컥'), ('"부러워"', r'부러'), ('"결국"', r'결국'), ('"정체"', r'정체'),
+         ('숫자 넣기', r'\d'), ('국적 넣기', '|'.join(NATIONS.values())), ('가족·부모님', r'가족|부모님|엄마|아빠|장모|장인|아내|남편')]
+
+
+def hooks(vs):
+    vs = vs[:20]
+    if not vs:
+        return []
+    out = [(name, sum(1 for v in vs if re.search(rx, v['t'])) * 100 // len(vs)) for name, rx in HOOKS]
+    return [[n, p] for n, p in sorted(out, key=lambda x: -x[1]) if p >= 30][:5]
 
 
 GENERIC_EN = set('korean korea first time reaction travel vlog trying try in the of and vs fans food live market street store family school mountain river train island national team cold noodles soup'.split())
@@ -521,6 +604,7 @@ def main():
     con = db()
     load_seed(con)
     if not a.report:
+        detect_version()
         collect(con, a.quick)
         refresh(con, a.quick)
     res = analyze(con)
