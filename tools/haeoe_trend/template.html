@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>해외반응 키워드 트렌드</title>
+<style>
+/* Layout: summary line, then a ranked list of 36 topics with a growth bar; each topic expands to its fastest-growing videos */
+:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--bar:#e9b4aa;--new:#1f7a4d;--newsoft:#e2f3ea;
+--body:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:ui-monospace,Consolas,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--bar:#6b3127;--new:#5fd39a;--newsoft:#173326;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
+.wrap{max-width:1000px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-left)) 40px max(16px,env(safe-area-inset-right))}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 14px;max-width:80ch}
+.warn{background:var(--soft);color:var(--accent);border-radius:8px;padding:8px 12px;margin:0 0 14px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+input[type=search]{flex:1 1 220px;min-width:0;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tp{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.tp>button{all:unset;cursor:pointer;display:grid;grid-template-columns:2.4em minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;box-sizing:border-box;padding:11px 14px}
+.tp>button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+.rank{font-family:var(--num);color:var(--accent);text-align:right;font-size:15px}
+.name{font-weight:700;font-size:15px}.meta{color:var(--muted);font-size:12.5px}
+.track{height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden}.track i{display:block;height:100%;background:var(--bar)}
+.gain{text-align:right;font-family:var(--num);white-space:nowrap}.gain b{display:block;color:var(--accent);font-size:16px;font-weight:600}.gain small{color:var(--muted);font-size:11px}
+ul{list-style:none;margin:0;padding:0 14px 12px calc(2.4em + 26px);display:flex;flex-direction:column;gap:6px}
+li.v{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;border-top:1px solid var(--line);padding-top:6px}
+li.v a.t{color:var(--fg);text-decoration:none}li.v a.t:hover{color:var(--accent);text-decoration:underline}
+.vm{color:var(--muted);font-size:12px}.vm a{color:inherit}
+.badge{font-size:11px;background:var(--newsoft);color:var(--new);border-radius:999px;padding:0 7px;margin-right:4px}
+.vg{font-family:var(--num);text-align:right;white-space:nowrap}.vg b{color:var(--accent);font-weight:600}.vg small{display:block;color:var(--muted);font-size:11px}
+@media (max-width:600px){ul{padding-left:14px}.tp>button{grid-template-columns:2em minmax(0,1fr)}.gain{grid-column:2;text-align:left}.gain b{display:inline;margin-right:6px}}
+</style></head><body><div class="wrap">
+<h1>해외반응 키워드 트렌드</h1>
+<p class="sub" id="sub"></p>
+<p class="warn" id="warn" hidden></p>
+<div class="bar"><input type="search" id="q" placeholder="주제·영상 제목 검색" aria-label="검색"></div>
+<ol id="list"></ol>
+</div>
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n>=1e4?(n/1e4).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'만':n.toLocaleString('ko-KR');
+$('sub').textContent=`${D.base} → ${D.cur} (${D.span}일) 동안 늘어난 조회수를 36개 주제별로 더한 순위입니다. 주제를 누르면 가장 많이 늘어난 영상이 펼쳐집니다. 초록 '새 영상'은 이 기간에 올라온 영상입니다.`;
+if(D.span<3){$('warn').hidden=false;$('warn').textContent=D.span<1?'아직 비교할 이전 기록이 없습니다. 내일 다시 실행하면 하루치 변화가 나오고, 3일이 쌓이면 최근 3일 순위가 됩니다.':`아직 기록이 ${D.span}일치뿐이라 ${D.span}일 동안의 변화입니다. 매일 실행하면 3일치가 쌓인 뒤 최근 3일 순위가 됩니다.`;}
+const max=Math.max(1,...D.t.map(t=>t.gain));
+const open=new Set();
+function render(){
+ const q=$('q').value.trim().toLowerCase();
+ $('list').innerHTML=D.t.map((t,i)=>{
+  const vs=q&&!t.t.toLowerCase().includes(q)?t.v.filter(v=>v[0].toLowerCase().includes(q)):t.v;
+  if(q&&!vs.length&&!t.t.toLowerCase().includes(q))return '';
+  const isOpen=open.has(t.t)||(q&&vs.length);
+  return `<li class="tp"><button aria-expanded="${!!isOpen}" data-t="${esc(t.t)}"><span class="rank">${i+1}</span>
+   <span><span class="name">${esc(t.t)}</span> <span class="meta">· 늘어난 영상 ${t.n}개${t.new?` · 새 영상 ${t.new}개`:''}</span><span class="track"><i style="width:${(t.gain/max*100).toFixed(1)}%"></i></span></span>
+   <span class="gain"><b>+${fmt(t.gain)}</b><small>${t.gain.toLocaleString('ko-KR')}회</small></span></button>
+   ${isOpen?`<ul>${vs.slice(0,50).map(v=>`<li class="v"><div><a class="t" href="https://www.youtube.com/watch?v=${v[6]}" target="_blank" rel="noopener">${v[7]?'<span class="badge">새 영상</span>':''}${esc(v[0])}</a>
+     <div class="vm">${v[2]?`<a href="https://www.youtube.com/channel/${esc(v[2])}" target="_blank" rel="noopener">${esc(v[1])}</a>`:esc(v[1])} · ${esc(v[3]||'날짜 미상')}</div></div>
+     <div class="vg"><b>+${fmt(v[5])}</b><small>전체 ${fmt(v[4])}회</small></div></li>`).join('')||'<li class="vm">이 기간에 늘어난 영상이 없습니다.</li>'}</ul>`:''}</li>`;}).join('');
+}
+$('list').addEventListener('click',e=>{const b=e.target.closest('button[data-t]');if(!b)return;const t=b.dataset.t;open.has(t)?open.delete(t):open.add(t);render();});
+$('q').addEventListener('input',render);
+render();
+})();
+</script></body></html>
