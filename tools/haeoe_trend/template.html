@@ -2,36 +2,67 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>해외반응 키워드 트렌드</title>
 <style>
-/* Layout: summary line, then a ranked list of 36 topics with a growth bar; each topic expands to its fastest-growing videos */
-:root{--bg:#f5f6f8;--surface:#fff;--fg:#1a1d23;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--bar:#e9b4aa;--new:#1f7a4d;--newsoft:#e2f3ea;
+/* Layout: header summary, tab bar, then ranked cards; each keyword card shows growth, stage, sparkline, and expands to titles/videos */
+:root{--bg:#f4f5f7;--surface:#fff;--fg:#171a20;--muted:#5d6472;--line:#e1e4ea;--accent:#d6402b;--soft:#fbe9e6;--bar:#eab3a8;
+--up:#1f7a4d;--upsoft:#e2f3ea;--down:#7a7f89;--downsoft:#eceef2;--hot:#b5650d;--hotsoft:#fbefdf;--new:#2f5fb3;--newsoft:#e6eefb;
 --body:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--num:ui-monospace,Consolas,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root{--bg:#121418;--surface:#1b1e24;--fg:#e7e9ee;--muted:#9aa1ae;--line:#2c3039;--accent:#ff7a63;--soft:#3a201b;--bar:#6b3127;--new:#5fd39a;--newsoft:#173326;color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root{--bg:#111317;--surface:#1a1d23;--fg:#e8eaef;--muted:#9aa1ae;--line:#2b2f38;--accent:#ff7a63;--soft:#3a201b;--bar:#6b3127;
+--up:#5fd39a;--upsoft:#173326;--down:#9aa1ae;--downsoft:#262a31;--hot:#f0a65a;--hotsoft:#3a2a17;--new:#86aef5;--newsoft:#1c2840;color-scheme:dark}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body)}
-.wrap{max-width:1000px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-left)) 40px max(16px,env(safe-area-inset-right))}
-h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 14px;max-width:80ch}
-.warn{background:var(--soft);color:var(--accent);border-radius:8px;padding:8px 12px;margin:0 0 14px;font-size:13px}
-.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.wrap{max-width:1100px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right))}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 10px;max-width:90ch}
+.warn{background:var(--soft);color:var(--accent);border-radius:8px;padding:8px 12px;margin:0 0 12px;font-size:13px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tabs button,.chips button,.sort button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 13px;cursor:pointer}
+.tabs button[aria-pressed=true],.chips button[aria-pressed=true],.sort button[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 input[type=search]{flex:1 1 220px;min-width:0;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.tp{background:var(--surface);border:1px solid var(--line);border-radius:10px}
-.tp>button{all:unset;cursor:pointer;display:grid;grid-template-columns:2.4em minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;box-sizing:border-box;padding:11px 14px}
-.tp>button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+.sort,.chips{display:flex;flex-wrap:wrap;gap:4px}
+.help{color:var(--muted);font-size:12.5px;margin:0 0 10px;max-width:95ch}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px}
+.head{display:grid;grid-template-columns:2.3em minmax(0,1fr) 150px auto;gap:12px;align-items:center;padding:11px 14px;cursor:pointer}
 .rank{font-family:var(--num);color:var(--accent);text-align:right;font-size:15px}
-.name{font-weight:700;font-size:15px}.meta{color:var(--muted);font-size:12.5px}
-.track{height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden}.track i{display:block;height:100%;background:var(--bar)}
-.gain{text-align:right;font-family:var(--num);white-space:nowrap}.gain b{display:block;color:var(--accent);font-size:16px;font-weight:600}.gain small{color:var(--muted);font-size:11px}
-ul{list-style:none;margin:0;padding:0 14px 12px calc(2.4em + 26px);display:flex;flex-direction:column;gap:6px}
-li.v{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;border-top:1px solid var(--line);padding-top:6px}
-li.v a.t{color:var(--fg);text-decoration:none}li.v a.t:hover{color:var(--accent);text-decoration:underline}
+.kw{font-weight:700;font-size:16px}.cat{color:var(--muted);font-size:12px;margin-left:6px}
+.badge{display:inline-block;font-size:11px;border-radius:999px;padding:0 8px;margin-left:6px;vertical-align:2px}
+.s-새싹{background:var(--newsoft);color:var(--new)}.s-상승{background:var(--upsoft);color:var(--up)}.s-과열{background:var(--hotsoft);color:var(--hot)}.s-하락{background:var(--downsoft);color:var(--down)}.s-유지{background:var(--downsoft);color:var(--muted)}
+.meta{color:var(--muted);font-size:12.5px;margin-top:3px;display:flex;flex-wrap:wrap;gap:2px 12px}
+.meta b{color:var(--fg);font-weight:600}.meta .good{color:var(--up)}
+svg.spark{width:150px;height:34px}svg.spark path{fill:none;stroke:var(--accent);stroke-width:1.6}svg.spark .area{fill:var(--soft);stroke:none}
+.gain{text-align:right;font-family:var(--num);white-space:nowrap}.gain b{display:block;color:var(--accent);font-size:17px;font-weight:600}.gain small{color:var(--muted);font-size:11.5px}
+.body{border-top:1px solid var(--line);padding:10px 14px 14px calc(2.3em + 26px)}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.links a,.links button{font:inherit;font-size:12.5px;text-decoration:none;color:var(--fg);border:1px solid var(--line);background:var(--bg);border-radius:7px;padding:4px 10px;cursor:pointer}
+.links a:hover,.links button:hover{border-color:var(--accent);color:var(--accent)}
+.star[aria-pressed=true]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+h4{margin:10px 0 6px;font-size:13px}
+.vids{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.v{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:10px;align-items:center}
+.v img{width:96px;height:54px;object-fit:cover;border-radius:6px;background:var(--line)}
+.v a.t{color:var(--fg);text-decoration:none;font-size:13.5px}.v a.t:hover{color:var(--accent);text-decoration:underline}
 .vm{color:var(--muted);font-size:12px}.vm a{color:inherit}
-.badge{font-size:11px;background:var(--newsoft);color:var(--new);border-radius:999px;padding:0 7px;margin-right:4px}
-.vg{font-family:var(--num);text-align:right;white-space:nowrap}.vg b{color:var(--accent);font-weight:600}.vg small{display:block;color:var(--muted);font-size:11px}
-@media (max-width:600px){ul{padding-left:14px}.tp>button{grid-template-columns:2em minmax(0,1fr)}.gain{grid-column:2;text-align:left}.gain b{display:inline;margin-right:6px}}
+.tag{font-size:11px;border-radius:999px;padding:0 7px;margin-right:4px;background:var(--newsoft);color:var(--new)}.tag.x{background:var(--hotsoft);color:var(--hot)}.tag.sm{background:var(--upsoft);color:var(--up)}
+.vg{font-family:var(--num);text-align:right;white-space:nowrap;font-size:13px}.vg b{color:var(--accent);font-weight:600}.vg small{display:block;color:var(--muted);font-size:11px}
+.empty{color:var(--muted);padding:24px 0;text-align:center}
+@media (max-width:700px){.head{grid-template-columns:2em minmax(0,1fr)}.head svg.spark,.head .gain{grid-column:2}.gain{text-align:left}.gain b{display:inline;margin-right:6px}.body{padding-left:14px}.v{grid-template-columns:72px minmax(0,1fr)}.v img{width:72px;height:40px}.v .vg{grid-column:2;text-align:left}}
 </style></head><body><div class="wrap">
 <h1>해외반응 키워드 트렌드</h1>
 <p class="sub" id="sub"></p>
 <p class="warn" id="warn" hidden></p>
-<div class="bar"><input type="search" id="q" placeholder="주제·영상 제목 검색" aria-label="검색"></div>
+<div class="tabs" id="tabs" role="tablist">
+ <button data-v="kw" aria-pressed="true">핵심 키워드</button>
+ <button data-v="cat" aria-pressed="false">분류별</button>
+ <button data-v="auto" aria-pressed="false">새로 뜨는 키워드</button>
+ <button data-v="out" aria-pressed="false">터진 영상</button>
+ <button data-v="org" aria-pressed="false">해외 원본 선점</button>
+ <button data-v="star" aria-pressed="false">★ 관심 키워드</button>
+</div>
+<div class="tools">
+ <input type="search" id="q" placeholder="키워드·영상 제목 검색" aria-label="검색">
+ <div class="sort" id="sort" role="group" aria-label="정렬"><button data-v="g" aria-pressed="true">늘어난 조회수</button><button data-v="opp" aria-pressed="false">기회 점수</button><button data-v="rise" aria-pressed="false">상승률</button></div>
+</div>
+<div class="chips" id="cats" hidden></div>
+<p class="help" id="help"></p>
 <ol id="list"></ol>
 </div>
 <script type="application/json" id="data">__DATA__</script>
@@ -40,26 +71,68 @@ li.v a.t{color:var(--fg);text-decoration:none}li.v a.t:hover{color:var(--accent)
 const D=JSON.parse(document.getElementById('data').textContent);
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const fmt=n=>n>=1e4?(n/1e4).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'만':n.toLocaleString('ko-KR');
-$('sub').textContent=`${D.base} → ${D.cur} (${D.span}일) 동안 늘어난 조회수를 36개 주제별로 더한 순위입니다. 주제를 누르면 가장 많이 늘어난 영상이 펼쳐집니다. 초록 '새 영상'은 이 기간에 올라온 영상입니다.`;
-if(D.span<3){$('warn').hidden=false;$('warn').textContent=D.span<1?'아직 비교할 이전 기록이 없습니다. 내일 다시 실행하면 하루치 변화가 나오고, 3일이 쌓이면 최근 3일 순위가 됩니다.':`아직 기록이 ${D.span}일치뿐이라 ${D.span}일 동안의 변화입니다. 매일 실행하면 3일치가 쌓인 뒤 최근 3일 순위가 됩니다.`;}
-const max=Math.max(1,...D.t.map(t=>t.gain));
-const open=new Set();
+const fmt=n=>n>=1e8?(n/1e8).toFixed(1).replace(/\.0$/,'')+'억':n>=1e4?(n/1e4).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'만':Math.round(n).toLocaleString('ko-KR');
+const yt=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+const KEY='haeoe-trend-stars'; let stars=new Set(); try{stars=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));}catch(e){}
+const saveStars=()=>{try{localStorage.setItem(KEY,JSON.stringify([...stars]));}catch(e){}};
+$('sub').textContent=`${D.base} → ${D.cur} (${D.span}일) 동안 늘어난 조회수로 해외반응 키워드를 분석했습니다. 해외반응 영상 ${D.nkr.toLocaleString('ko-KR')}개, 해외 원본 ${D.norg.toLocaleString('ko-KR')}개를 추적 중입니다.`;
+if(D.span<3){$('warn').hidden=false;$('warn').textContent=D.span<1?'아직 비교할 이전 기록이 없습니다. 내일 다시 실행하면 하루치 변화가 나오고, 3일이 쌓이면 최근 3일 순위가 됩니다.':`아직 기록이 ${D.span}일치라 ${D.span}일 동안의 변화입니다. 매일 실행하면 3일치가 쌓인 뒤 최근 3일 순위가 됩니다.`;}
+if(!D.prev){$('warn').hidden=false;$('warn').textContent+=(($('warn').textContent)?' ':'')+'상승률과 단계(상승·하락)는 기록이 6일 이상 쌓이면 나옵니다.';}
+let tab='kw',sort='g',cat=Object.keys(D.kw.reduce((a,k)=>(a[k.c]=1,a),{}))[0]||'',open=new Set();
+const HELP={kw:'사전에 있는 세부 키워드 순위입니다. 기회 점수는 늘어난 조회수를 최근 올라온 영상 수로 나눈 값으로, 조회수는 몰리는데 영상이 아직 적은 키워드일수록 높습니다. 키워드를 누르면 잘 된 제목과 영상이 펼쳐집니다.',
+ cat:'분류를 고르면 그 안에서 어떤 세부 키워드가 뜨는지 봅니다.',
+ auto:'사전에 없는데 여러 채널(3곳 이상)의 조회수 늘어난 영상 제목에 함께 나온 단어입니다. 새 드라마 제목, 새로 뜬 사람 이름 같은 새 소재가 여기에 잡힙니다.',
+ out:'채널 평소 조회수(최근 영상 중앙값)보다 3배 이상 터진 영상입니다. 채널 힘이 아니라 소재 덕분에 터졌을 가능성이 큰 영상이라, 제목의 소재를 눈여겨보세요.',
+ org:'최근 2주 안에 영어권에서 올라온 한국 관련 원본 영상을 하루 평균 조회수 순으로 보여 줍니다. 한국 해외반응 채널들이 다루기 전에 먼저 잡을 수 있는 소재입니다.',
+ star:'★를 누른 키워드만 모아 봅니다. 표시는 이 브라우저에 저장됩니다.'};
+function spark(arr){if(!arr||arr.length<2||!Math.max(...arr))return '<svg class="spark" viewBox="0 0 150 34" aria-hidden="true"></svg>';
+ const m=Math.max(...arr),w=150,h=34,st=w/(arr.length-1);const pts=arr.map((v,i)=>[i*st,h-2-(v/m)*(h-6)]);
+ const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+ return `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-label="일별 증가 추이"><path class="area" d="${d} L ${w} ${h} L 0 ${h} Z"/><path d="${d}"/></svg>`;}
+function vrow(v){const [id,t,ch,chid,date,views,g,isNew,subs,x]=v;
+ return `<li class="v"><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""></a>
+ <div><a class="t" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">${isNew?'<span class="tag">새 영상</span>':''}${x>=3?`<span class="tag x">평소의 ${x}배</span>`:''}${subs&&subs<10000&&views>=50000?'<span class="tag sm">작은 채널</span>':''}${esc(t)}</a>
+ <div class="vm">${chid?`<a href="https://www.youtube.com/channel/${esc(chid)}" target="_blank" rel="noopener">${esc(ch)}</a>`:esc(ch)}${subs?` · 구독자 ${fmt(subs)}`:''} · ${esc(date||'날짜 미상')}</div></div>
+ <div class="vg"><b>+${fmt(g)}</b><small>전체 ${fmt(views)}회</small></div></li>`;}
+function card(s,i){const isOpen=open.has(s.k);const rise=s.rise==null?'':`<span class="${s.rise>=0?'good':''}">이전 대비 ${s.rise>=0?'+':''}${Math.round(s.rise)}%</span>`;
+ return `<li class="card"><div class="head" data-k="${esc(s.k)}" role="button" tabindex="0" aria-expanded="${isOpen}"><span class="rank">${i+1}</span>
+ <div><span class="kw">${stars.has(s.k)?'★ ':''}${esc(s.k)}</span><span class="cat">${esc(s.c)}</span><span class="badge s-${esc(s.stage)}">${esc(s.stage)}</span>
+ <div class="meta"><span>기회 점수 <b>${fmt(s.opp)}</b></span><span>최근 ${D.span||3}일 영상 <b>${s.n}</b>개</span><span>최근 2주 올라온 영상 <b>${s.nr}</b>개 · 채널 ${s.nch}곳</span>${s.small?`<span class="good">작은 채널 성공 ${s.small}</span>`:''}${s.out?`<span class="good">터진 영상 ${s.out}</span>`:''}${s.nat.length?`<span>잘 되는 국적: ${s.nat.map(n=>esc(n[0])).join(', ')}</span>`:''}${rise}</div></div>
+ ${spark(s.daily)}<div class="gain"><b>+${fmt(s.g)}</b><small>늘어난 조회수</small></div></div>
+ ${isOpen?`<div class="body"><div class="links"><button class="star" data-star="${esc(s.k)}" aria-pressed="${stars.has(s.k)}">★ 관심</button>
+  <a href="${yt('해외반응 '+s.k.split('·')[0])}" target="_blank" rel="noopener">유튜브에서 ‘해외반응 ${esc(s.k.split('·')[0])}’ 검색</a>
+  <a href="${yt(s.en)}" target="_blank" rel="noopener">해외 원본 찾기: ${esc(s.en)}</a></div>
+  <h4>조회수가 많이 늘어난 영상</h4><ul class="vids">${s.v.slice(0,15).map(vrow).join('')}</ul></div>`:''}</li>`;}
+function sorter(a,b){if(sort==='opp')return b.opp-a.opp;if(sort==='rise')return (b.rise??-1e9)-(a.rise??-1e9)||b.g-a.g;return b.g-a.g;}
 function render(){
  const q=$('q').value.trim().toLowerCase();
- $('list').innerHTML=D.t.map((t,i)=>{
-  const vs=q&&!t.t.toLowerCase().includes(q)?t.v.filter(v=>v[0].toLowerCase().includes(q)):t.v;
-  if(q&&!vs.length&&!t.t.toLowerCase().includes(q))return '';
-  const isOpen=open.has(t.t)||(q&&vs.length);
-  return `<li class="tp"><button aria-expanded="${!!isOpen}" data-t="${esc(t.t)}"><span class="rank">${i+1}</span>
-   <span><span class="name">${esc(t.t)}</span> <span class="meta">· 늘어난 영상 ${t.n}개${t.new?` · 새 영상 ${t.new}개`:''}</span><span class="track"><i style="width:${(t.gain/max*100).toFixed(1)}%"></i></span></span>
-   <span class="gain"><b>+${fmt(t.gain)}</b><small>${t.gain.toLocaleString('ko-KR')}회</small></span></button>
-   ${isOpen?`<ul>${vs.slice(0,50).map(v=>`<li class="v"><div><a class="t" href="https://www.youtube.com/watch?v=${v[6]}" target="_blank" rel="noopener">${v[7]?'<span class="badge">새 영상</span>':''}${esc(v[0])}</a>
-     <div class="vm">${v[2]?`<a href="https://www.youtube.com/channel/${esc(v[2])}" target="_blank" rel="noopener">${esc(v[1])}</a>`:esc(v[1])} · ${esc(v[3]||'날짜 미상')}</div></div>
-     <div class="vg"><b>+${fmt(v[5])}</b><small>전체 ${fmt(v[4])}회</small></div></li>`).join('')||'<li class="vm">이 기간에 늘어난 영상이 없습니다.</li>'}</ul>`:''}</li>`;}).join('');
+ document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===tab));
+ $('help').textContent=HELP[tab];$('sort').hidden=!['kw','cat','auto','star'].includes(tab);$('cats').hidden=tab!=='cat';
+ let html='';
+ if(['kw','cat','auto','star'].includes(tab)){
+  let L=tab==='auto'?D.auto:tab==='star'?[...D.kw,...D.auto].filter(s=>stars.has(s.k)):D.kw;
+  if(tab==='cat'){const cats=[...new Set(D.kw.map(s=>s.c))];$('cats').innerHTML=cats.map(c=>`<button data-c="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join('');L=L.filter(s=>s.c===cat);}
+  if(q)L=L.filter(s=>s.k.toLowerCase().includes(q)||s.v.some(v=>v[1].toLowerCase().includes(q)));
+  L=[...L].sort(sorter);html=L.map(card).join('')||`<p class="empty">${tab==='star'?'아직 ★를 누른 키워드가 없습니다. 키워드를 펼쳐서 ★ 관심을 누르세요.':'조건에 맞는 키워드가 없습니다.'}</p>`;
+ }else if(tab==='out'){
+  const L=D.out.filter(v=>!q||v[1].toLowerCase().includes(q));
+  html=L.length?`<li class="card"><div class="body" style="padding-left:14px"><ul class="vids">${L.map(vrow).join('')}</ul></div></li>`:'<p class="empty">아직 터진 영상이 없습니다.</p>';
+ }else if(tab==='org'){
+  const L=D.org.filter(v=>!q||v[1].toLowerCase().includes(q));
+  html=L.length?`<li class="card"><div class="body" style="padding-left:14px"><ul class="vids">${L.map(([id,t,ch,date,views,vel,kw])=>`<li class="v"><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""></a>
+   <div><a class="t" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">${kw?`<span class="tag">${esc(kw)}</span>`:''}${esc(t)}</a><div class="vm">${esc(ch)} · ${esc(date||'')}</div></div>
+   <div class="vg"><b>하루 ${fmt(vel)}</b><small>전체 ${fmt(views)}회</small></div></li>`).join('')}</ul></div></li>`:'<p class="empty">아직 모은 해외 원본이 없습니다.</p>';
+ }
+ $('list').innerHTML=html;
 }
-$('list').addEventListener('click',e=>{const b=e.target.closest('button[data-t]');if(!b)return;const t=b.dataset.t;open.has(t)?open.delete(t):open.add(t);render();});
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tab=b.dataset.v;render();});
+$('sort').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sort=b.dataset.v;$('sort').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+$('cats').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cat=b.dataset.c;render();});
 $('q').addEventListener('input',render);
+$('list').addEventListener('click',e=>{
+ const st=e.target.closest('[data-star]');if(st){const k=st.dataset.star;stars.has(k)?stars.delete(k):stars.add(k);saveStars();render();return;}
+ const h=e.target.closest('.head');if(!h)return;const k=h.dataset.k;open.has(k)?open.delete(k):open.add(k);render();});
+$('list').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('head')){e.preventDefault();e.target.click();}});
 render();
 })();
 </script></body></html>
