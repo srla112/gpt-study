@@ -97,7 +97,7 @@ function vrow(v){const [id,t,ch,chid,date,views,g,isNew,subs,x]=v;
 function card(s,i){const isOpen=open.has(s.k);const rise=s.rise==null?'':`<span class="${s.rise>=0?'good':''}">이전 대비 ${s.rise>=0?'+':''}${Math.round(s.rise)}%</span>`;
  return `<li class="card"><div class="head" data-k="${esc(s.k)}" role="button" tabindex="0" aria-expanded="${isOpen}"><span class="rank">${i+1}</span>
  <div><span class="kw">${stars.has(s.k)?'★ ':''}${esc(s.k)}</span><span class="cat">${esc(s.c)}</span><span class="badge s-${esc(s.stage)}">${esc(s.stage)}</span>
- <div class="meta"><span>기회 점수 <b>${fmt(s.opp)}</b></span><span>최근 ${D.span||3}일 영상 <b>${s.n}</b>개</span><span>최근 2주 올라온 영상 <b>${s.nr}</b>개 · 채널 ${s.nch}곳</span>${s.small?`<span class="good">작은 채널 성공 ${s.small}</span>`:''}${s.out?`<span class="good">터진 영상 ${s.out}</span>`:''}${s.nat.length?`<span>잘 되는 국적: ${s.nat.map(n=>esc(n[0])).join(', ')}</span>`:''}${rise}</div></div>
+ <div class="meta"><span>기회 점수 <b>${fmt(s.opp)}</b></span><span>조회수 늘어난 영상 <b>${s.n}</b>개</span><span>최근 2주 올라온 영상 <b>${s.nr}</b>개 · 채널 ${s.nch}곳</span>${s.small?`<span class="good">작은 채널 성공 ${s.small}</span>`:''}${s.out?`<span class="good">터진 영상 ${s.out}</span>`:''}${s.lift?`<span>평소보다 <b>${s.lift}배</b> 자주 등장</span>`:''}${s.nat.length?`<span>잘 되는 국적: ${s.nat.map(n=>esc(n[0])).join(', ')}</span>`:''}${rise}</div></div>
  ${spark(s.daily)}<div class="gain"><b>+${fmt(s.g)}</b><small>늘어난 조회수</small></div></div>
  ${isOpen?`<div class="body"><div class="links"><button class="star" data-star="${esc(s.k)}" aria-pressed="${stars.has(s.k)}">★ 관심</button>
   <a href="${yt('해외반응 '+s.k.split('·')[0])}" target="_blank" rel="noopener">유튜브에서 ‘해외반응 ${esc(s.k.split('·')[0])}’ 검색</a>

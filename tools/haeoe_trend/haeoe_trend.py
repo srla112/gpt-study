@@ -156,7 +156,7 @@ ASCII_TITLE = re.compile(r'^[\x00-\x7F\u2000-\u206F\u2600-\u27BF\U0001F000-\U000
 def is_kr_reaction(v):
     t = v.get('title') or ''
     return secs(v.get('len')) > 180 and HANGUL.search(t) and FOREIGN.search(t) and REACT2.search(t) and KOREA.search(t) \
-        and not BADCH.search(v.get('ch') or '') and not re.search(r'직캠|fancam|^\s*\d{6}\s', t, re.I)
+        and not BADCH.search(v.get('ch') or '') and not re.search(r'직캠|fancam|^\s*\d{6}\s|감동\s?사연|해외감동|사연\]', t, re.I)
 
 
 KOREA_EN = re.compile(r'korea|seoul|busan|jeju|hanwoo|kimchi|k-?pop|bts|blackpink|soju|bibimbap|bulgogi|tteokbokki|kimbap|incheon|hongdae|gangnam|myeongdong', re.I)
@@ -164,7 +164,9 @@ KOREA_EN = re.compile(r'korea|seoul|busan|jeju|hanwoo|kimchi|k-?pop|bts|blackpin
 
 def is_foreign_original(v):
     t = v.get('title') or ''
-    return secs(v.get('len')) > 180 and not re.search(r'[가-힣]', t) and KOREA_EN.search(t) and not BADCH.search(v.get('ch') or '')
+    return secs(v.get('len')) > 180 and not re.search(r'[가-힣]', t) and KOREA_EN.search(t) and not BADCH.search(v.get('ch') or '') \
+        and not re.search(r'\bLIVE\b|\[LIVE\]|Qualification|Court \d|Day \d+ \||full match|highlights|news|arrival|airport.*BTS|BTS.*airport', t, re.I) \
+        and not re.search(r'스타뉴스|디스패치|Dispatch|RNX|BWF|뉴스|News|TV조선|연합|YTN|Arirang|KBS|MBC|SBS', v.get('ch') or '', re.I)
 
 
 # ---------------- 저장소 ----------------
@@ -296,6 +298,7 @@ STOP = set('''반응 외국인 외국인들 해외 해외반응 한국 한국인
 JOSA = re.compile(r'(은|는|이|가|을|를|의|에|에서|에게|께|로|으로|와|과|도|만|까지|부터|이랑|랑|한테|보다|처럼|이라|라고|이다|입니다|했다|하는)$')
 QUOTE = re.compile(r'[《「『\[‘\'"“]([^《》「」『』\[\]‘’\'"“”]{2,20})[》」』\]’\'"”]')
 HASHTAG = re.compile(r'#([0-9A-Za-z가-힣_]{2,20})')
+VERBISH = re.compile(r'(난|던|된|한|인|받|운|는|를|했|하|해|되|돼|져|진|친|쳤|운|줬|봤|갔|왔|있|없|싶|같|겠|요|죠|네|다|니|까|게|며|면|서|고)$')
 
 
 def series(con, ids):
@@ -334,7 +337,10 @@ def analyze(con):
     rows = con.execute('select id, title, ch, chid, date, kind from video').fetchall()
     S = series(con, [r[0] for r in rows])
     V = []
+    SAGA = re.compile(r'감동\s?사연|해외감동|사연\]')
     for vid, title, ch, chid, date, kind in rows:
+        if SAGA.search(title or ''):
+            continue
         sv = S.get(vid)
         if not sv:
             continue
@@ -412,57 +418,81 @@ def analyze(con):
             st = stats(name, cat, vs, en)
             if st:
                 kws.append(st)
-    # 자동 발견: 사전에 없는 단어
+    # 자동 발견: 사전에 없는 단어 중, 평소 제목에서는 드문데 최근 조회수가 늘어난 영상에 몰린 단어
+    quoted = set()
+
+    def tokens(t):
+        toks = set()
+        for m in QUOTE.findall(t):
+            m = m.strip()
+            if 2 <= len(m) <= 14 and not re.fullmatch(r'[\d\s.,!?~%]+', m) and ' ' in m or (2 <= len(m) <= 14 and re.search(r'[가-힣]{2}', m) and len(m) >= 4):
+                toks.add(m)
+                quoted.add(m)
+        toks.update(HASHTAG.findall(t))
+        for w in re.findall(r'[가-힣A-Za-z0-9]{2,12}', t):
+            w2 = JOSA.sub('', w)
+            if len(w2) >= 2 and not VERBISH.search(w2) and not re.fullmatch(r'\d+[가-힣A-Za-z]{0,2}', w2):
+                toks.add(w2)
+        return {x for x in toks if x not in STOP and x.lower() not in STOP}
+    allc = Counter()
+    for v in KR:
+        allc.update(tokens(v['t']))
     pool = [v for v in KR if v['g'] > 0]
     cand = defaultdict(list)
     for v in pool:
-        toks = set()
-        for m in QUOTE.findall(v['t']):
-            m = m.strip()
-            if 2 <= len(m) <= 14 and not re.fullmatch(r'[\d\s.,!?~]+', m):
-                toks.add(m)
-        toks.update(HASHTAG.findall(v['t']))
-        for w in re.findall(r'[가-힣A-Za-z0-9]{2,10}', v['t']):
-            w2 = JOSA.sub('', w)
-            if len(w2) >= 2:
-                toks.add(w2)
-        for t in toks:
-            if t in STOP or t.lower() in STOP:
-                continue
+        for t in tokens(v['t']):
             cand[t].append(v)
+    N_all = max(len(KR), 1)
+    G_all = max(sum(v['g'] for v in pool), 1)
     auto = []
     for t, vs in cand.items():
-        if len({v['chid'] for v in vs}) < 3:
+        hot = [v for v in vs if v['g'] >= 3000]
+        if len({v['chid'] for v in hot}) < 3:
+            continue
+        if t not in quoted and allc[t] > 0.003 * N_all:   # 원래 제목에 흔한 말
+            continue
+        # 이 단어가 가져간 증가 조회수 몫 ÷ 이 단어가 전체 제목에서 차지하는 몫
+        lift = (sum(v['g'] for v in vs) / G_all) / (allc[t] / N_all)
+        if lift < (2 if t in quoted else 4):
             continue
         if any(re.search(rx, t, re.I) for terms in CATS.values() for rx, _ in terms.values()):
             continue
         st = stats(t, '새로 뜨는 키워드', vs, t)
         if st and st['g'] > 0:
+            st['lift'] = round(lift, 1)
             auto.append(st)
     auto.sort(key=lambda s: -s['g'])
-    # 비슷한 단어 겹침 줄이기 (같은 영상 묶음이면 긴 쪽만)
+    # 같은 영상 묶음을 가리키는 단어는 하나만
     seen, auto2 = [], []
-    for s in auto:
-        ids = {x[0] for x in s['v'][:10]}
-        if any(len(ids & o) >= 0.7 * len(ids) for o in seen):
+    for s_ in auto:
+        ids = {x[0] for x in s_['v'][:10]}
+        if any(len(ids & o) >= 0.6 * len(ids) for o in seen):
             continue
         seen.append(ids)
-        auto2.append(s)
+        auto2.append(s_)
         if len(auto2) >= 60:
             break
     # 터진 영상(아웃라이어)
     outliers = sorted([v for v in KR if v['med'] and v['views'] >= 50000 and v['views'] / v['med'] >= OUTLIER_X and v['g'] > 0],
                       key=lambda v: -(v['g']))[:150]
     # 해외 원본: 하루 평균 조회수
+    ORG = [v for v in ORG if not re.search(r'\bLIVE\b|\[LIVE\]|Qualification|Court \d|Day \d+ \||full match|highlights|\bnews\b|arrival|airport', v['t'], re.I)
+           and not re.search(r'스타뉴스|디스패치|Dispatch|RNX|BWF|뉴스|News|TV조선|연합|YTN|Arirang|KBS|MBC|SBS', v['ch'] or '', re.I)
+           and re.search(r'korea|seoul|busan|jeju|hanwoo|kimchi|k-?pop|bts|blackpink|soju|bibimbap|bulgogi|tteokbokki|kimbap|incheon|hongdae|gangnam|myeongdong', v['t'], re.I)
+           and not re.search(r'north korea', v['t'], re.I)]
     for v in ORG:
         v['vel'] = v['views'] / max(1, (v['age'] if v['age'] is not None else 7))
     orgs = sorted([v for v in ORG if v['age'] is not None and v['age'] <= 14], key=lambda v: -v['vel'])[:150]
     org_rows = []
     for v in orgs:
-        kw = next((name for terms in CATS.values() for name, (rx, en) in terms.items() if re.search(en.split()[0], v['t'], re.I)), '')
+        kw = next((name for terms in CATS.values() for name, (rx, en) in terms.items()
+                   if any(len(w) >= 5 and re.search(r'\b' + re.escape(w) + r'\b', v['t'], re.I) for w in en.split() if w.lower() not in GENERIC_EN)), '')
         org_rows.append([v['id'], v['t'], v['ch'], v['date'], v['views'], int(v['vel']), kw])
     return {'cur': cur, 'base': base, 'prev': prev, 'span': span, 'days': day_list, 'kw': kws, 'auto': auto2,
             'out': [vid_row(v) for v in outliers], 'org': org_rows, 'nkr': len(KR), 'norg': len(ORG)}
+
+
+GENERIC_EN = set('korean korea first time reaction travel vlog trying try in the of and vs fans food live market street store family school mountain river train island national team cold noodles soup'.split())
 
 
 def write(res):
