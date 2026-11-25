@@ -442,7 +442,7 @@
    ]
   },
   {
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "type": "OST",
    "album": "헥스: 마녀왕국 OST",
    "title_tracks": [
@@ -451,10 +451,11 @@
    "tracks": [
     "Magic"
    ],
-   "notes": "나무위키 미러 단일 출처.",
+   "notes": "나무위키 미러 단일 출처. (11/24은 Disney VEVO 업로드의 UTC 시각, 국내 공개는 11/25 0시 — YTN star)",
    "sources": [
     "https://namu.moe/w/RESCENE"
-   ]
+   ],
+   "detail": "나무위키 미러 단일 출처. (11/24은 Disney VEVO 업로드의 UTC 시각, 국내 공개는 11/25 0시 — YTN star)"
   }
  ],
  "timeline": [
