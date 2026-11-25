@@ -1,0 +1,749 @@
+{
+ "records": [
+  {
+   "date": "2026-05-03",
+   "chart": "멜론 일간차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "545위",
+   "detail": "역주행 출발점으로 보도된 순위. 이후 5월 25일 116위까지 상승 (기사에 월 표기 없음, 2026-05-30 기사 기준 5월로 판단)",
+   "country": "한국",
+   "sources": [
+    "https://www.wikitree.co.kr/articles/1139041"
+   ]
+  },
+  {
+   "date": "2026-05-28",
+   "chart": "멜론 TOP100 (실시간)",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "98위 (TOP100 진입)",
+   "detail": "28일 오전 1시 TOP100 98위 진입, 338일 만의 TOP100 재진입. 29일에는 '719계단 역주행' 기록 보도",
+   "country": "한국",
+   "sources": [
+    "https://www.wikitree.co.kr/articles/1139041",
+    "https://mobile.newsis.com/view/NISX20260707_0003699839"
+   ]
+  },
+  {
+   "date": "2026-06-30",
+   "chart": "멜론 TOP100",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "5위",
+   "detail": "6월 30일 기준 멜론 TOP100 5위. 같은 기사: 원이 유튜브 채널 개설(2월) 대비 스트리밍 최대 2,019%·청취자 977% 증가, '거제 야호' 밈 이후 멜론 '리센느' 검색 사용자 6,550% 증가",
+   "country": "한국",
+   "sources": [
+    "https://mobile.newsis.com/view/NISX20260707_0003699839",
+    "https://www.koreajoongangdaily.com/entertainment/melon-names-rescene-the-standout-act-of-2026s-first-half-for-a-twoyear-old-song-powered-by-a-meme/12764073"
+   ]
+  },
+  {
+   "date": "2026-07-08",
+   "chart": "멜론 TOP100 (실시간)",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위",
+   "detail": "7월 8일 오후 10시 기준 아이오아이 '갑자기'를 제치고 1위. 2024년 8월 발매 후 약 2년 만. 2024년 9월 멜론 일간 904위로 첫 등장했던 곡",
+   "country": "한국",
+   "sources": [
+    "https://mobile.newsis.com/view/NISX20260707_0003699839",
+    "https://sports.khan.co.kr/article/202607090722003",
+    "https://www.koreajoongangdaily.com/entertainment/melon-names-rescene-the-standout-act-of-2026s-first-half-for-a-twoyear-old-song-powered-by-a-meme/12764073"
+   ]
+  },
+  {
+   "date": "2026-07-09",
+   "chart": "멜론 일간 / FLO / 지니 / 벅스",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "멜론 일간 3위, FLO 3위, 지니 실시간 4위·일간 5위, 벅스 실시간·일간 4위",
+   "detail": "멜론 TOP100 1위 직후 다른 플랫폼 순위 (7월 9일 기사). 같은 날 'Pretty Girl'은 멜론 HOT100 1위·TOP100 4위",
+   "country": "한국",
+   "sources": [
+    "https://sports.khan.co.kr/article/202607090722003"
+   ]
+  },
+  {
+   "date": "2026-07-13~2026-09-20",
+   "chart": "멜론 주간차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 10주 연속",
+   "detail": "주간 순위 흐름: 5/25~31 87위 → 6/1~7 19위 → 6/8~14 9위 → 6/15~21 6위 → 6/22~28 5위 → 6/29~7/5 5위 → 7/6~12 3위 → 7/13~19 첫 1위 → 9/14~20까지 10주 연속 1위 → 9/21~27 2위",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20260525&endDay=20260531",
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20260713&endDay=20260719",
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20260914&endDay=20260920",
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20260921&endDay=20260927"
+   ]
+  },
+  {
+   "date": "2026-06~2026-10",
+   "chart": "멜론 월간차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "6월 8위 → 7월 2위 → 8월 1위 → 9월 1위 → 10월 2위",
+   "detail": "멜론 월간 1위 2개월 연속(8·9월). 5월 월간 TOP100에는 없음",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202606",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202607",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202608",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202609",
+    "https://www.melon.com/chart/month/index.htm",
+    "https://enews.imbc.com/News/RetrieveNewsInfo/518231"
+   ]
+  },
+  {
+   "date": "2026-07~2026-10",
+   "chart": "멜론 월간차트",
+   "song_or_album": "Pretty Girl",
+   "position_or_value": "7월 14위 → 8월 5위 → 9월 4위 → 10월 7위",
+   "detail": "KARA 리메이크 싱글(2026-07-08 발매) 월간 최고 4위",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202607",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202608",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202609",
+    "https://www.melon.com/chart/month/index.htm"
+   ]
+  },
+  {
+   "date": "2026-07~2026-10",
+   "chart": "멜론 월간차트",
+   "song_or_album": "Deja Vu",
+   "position_or_value": "7월 30위 → 8월 8위 → 9월 6위 → 10월 6위",
+   "detail": "2025년 7월 곡이 LOVE ATTACK과 함께 동반 역주행, 월간 최고 6위",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202607",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202608",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202609",
+    "https://www.melon.com/chart/month/index.htm"
+   ]
+  },
+  {
+   "date": "2026-07~2026-10",
+   "chart": "멜론 월간차트",
+   "song_or_album": "Runaway",
+   "position_or_value": "7월 79위 → 8월 67위 → 9월 64위 → 10월 55위",
+   "detail": "2026년 4월 발매곡, 월간 TOP100 4개월 연속 차트인",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202607",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202608",
+    "https://www.melon.com/chart/month/index.htm?classCd=GN0000&moved=Y&rankMonth=202609",
+    "https://www.melon.com/chart/month/index.htm"
+   ]
+  },
+  {
+   "date": "2026-07-09",
+   "chart": "멜론 2026 상반기 결산",
+   "song_or_album": "RESCENE",
+   "position_or_value": "상반기 주목할 아티스트(standout act)",
+   "detail": "멜론이 7월 9일 발표한 상반기 결산에서 리센느를 상반기 가장 눈에 띈 아티스트로 선정",
+   "country": "한국",
+   "sources": [
+    "https://www.koreajoongangdaily.com/entertainment/melon-names-rescene-the-standout-act-of-2026s-first-half-for-a-twoyear-old-song-powered-by-a-meme/12764073"
+   ]
+  },
+  {
+   "date": "2026-06~2026-10",
+   "chart": "지니 월간차트 TOP200",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "6월 17위 → 7월 3위 → 8월 1위 → 9월 1위 → 10월 2위",
+   "detail": "지니 월간 1위 2개월 연속. 지니 일간차트는 5월 193위로 첫 진입 후 98일 만에 일간 1위(이즈플러스)",
+   "country": "한국",
+   "sources": [
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260601&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260701&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260801&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260901&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20261001&hh=&rtm=N&pg=1",
+    "https://isplus.com/article/view/isp202609300053"
+   ]
+  },
+  {
+   "date": "2026-07~2026-10",
+   "chart": "지니 월간차트 TOP200",
+   "song_or_album": "Pretty Girl / Deja Vu",
+   "position_or_value": "Pretty Girl 최고 7위(8월), Deja Vu 최고 10위(10월)",
+   "detail": "Pretty Girl: 7월 29→8월 7→9월 9→10월 9위 / Deja Vu: 8월 23→9월 14→10월 10위",
+   "country": "한국",
+   "sources": [
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260701&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260801&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20260901&hh=&rtm=N&pg=1",
+    "https://www.genie.co.kr/chart/top200?ditc=M&ymd=20261001&hh=&rtm=N&pg=1"
+   ]
+  },
+  {
+   "date": "2026-07-12~2026-07-18",
+   "chart": "써클차트 주간 디지털차트 (29주차)",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 (써클지수 17,601,702)",
+   "detail": "데뷔 후 첫 써클 주간 디지털 1위. 2026년 21주차(5/17~23) 167위로 첫 진입 → 22주 61위 → 23주 15위 → 24주 6위 → 25~27주 5위 → 28주 3위 → 29주 1위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=21",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=28",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=29"
+   ]
+  },
+  {
+   "date": "2026-07-12~2026-09-19",
+   "chart": "써클차트 주간 디지털차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 통산 7주 (29~34주차 6주 연속 + 38주차)",
+   "detail": "35~37주차 2위로 밀렸다가 38주차(9/13~19, 지수 13,973,384)에 1위 탈환. 39주차부터 소연 '퇴사할게여'에 1위 내줌. 46주차(11/8~14)에도 6위 유지",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=29",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=34",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=35",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=38",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=39",
+    "https://www.issueinsight.co.kr/news/articleView.html?idxno=3055"
+   ]
+  },
+  {
+   "date": "2026-07-19~2026-09-19",
+   "chart": "써클차트 주간 스트리밍차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 9주 연속 (30~38주차)",
+   "detail": "주간 스트리밍차트는 29주차 2위 → 30주차부터 38주차까지 9주 연속 1위 → 39~42주차 2위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1040&termGbn=week&hitYear=2026&targetTime=30",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1040&termGbn=week&hitYear=2026&targetTime=38",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1040&termGbn=week&hitYear=2026&targetTime=39"
+   ]
+  },
+  {
+   "date": "2026-08",
+   "chart": "써클차트 월간 디지털차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 (써클지수 67,919,418)",
+   "detail": "8월 월간 디지털·스트리밍 1위. 월간 디지털 흐름: 5월 135위 → 6월 6위 → 7월 2위 → 8월 1위 → 9월 1위 → 10월 3위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=month&hitYear=2026&targetTime=08",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1040&termGbn=month&hitYear=2026&targetTime=08",
+    "https://www.issueinsight.co.kr/news/articleView.html?idxno=3055",
+    "https://www.gpkorea.com/news/articleView.html?idxno=148795"
+   ]
+  },
+  {
+   "date": "2026-09",
+   "chart": "써클차트 월간 디지털차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "1위 (써클지수 60,438,259)",
+   "detail": "9월 월간 디지털·스트리밍 1위 → 2개월 연속 월간 1위. 같은 달 Deja Vu 4위, Pretty Girl 5위 (리센느 3곡 월간 톱5)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=month&hitYear=2026&targetTime=09",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1040&termGbn=month&hitYear=2026&targetTime=09",
+    "https://www.issueinsight.co.kr/news/articleView.html?idxno=3055"
+   ]
+  },
+  {
+   "date": "2026-10",
+   "chart": "써클차트 월간 디지털차트",
+   "song_or_album": "LOVE ATTACK / Deja Vu / Pretty Girl",
+   "position_or_value": "3위 / 5위 / 9위",
+   "detail": "10월에도 리센느 3곡이 월간 톱10",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=month&hitYear=2026&targetTime=10"
+   ]
+  },
+  {
+   "date": "2026-07-26~2026-08-01",
+   "chart": "써클차트 주간 다운로드차트",
+   "song_or_album": "LOVE ATTACK / Pretty Girl",
+   "position_or_value": "LOVE ATTACK 최고 3위(30주차) / Pretty Girl 최고 2위(28주차)",
+   "detail": "2026년 다운로드차트 최고 순위: LOVE ATTACK 3위(7/19~25), Pretty Girl 2위(7/5~11, 발매 주)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2026&targetTime=30",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2026&targetTime=28"
+   ]
+  },
+  {
+   "date": "2026-07-12~2026-07-18",
+   "chart": "써클차트 주간 글로벌 K-pop 차트",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "13위 (최고)",
+   "detail": "글로벌 K-pop 차트 21주차 116위로 진입 → 29주차 13위 최고. 46주차까지 꾸준히 차트인",
+   "country": "글로벌",
+   "sources": [
+    "https://circlechart.kr/page_chart/global.circle?termGbn=week&yyyymmdd=20260517",
+    "https://circlechart.kr/page_chart/global.circle?termGbn=week&yyyymmdd=20260712",
+    "https://circlechart.kr/page_chart/global.circle?termGbn=week&yyyymmdd=20261108"
+   ]
+  },
+  {
+   "date": "2025-04-27~2025-05-03",
+   "chart": "써클차트 주간 디지털차트 (2025년 18주차)",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "62위 (2025년 최고)",
+   "detail": "2026년 대역주행 이전, 2025년 봄에 1차 역주행으로 디지털차트 최고 62위. 발매 당시 2024년에는 최고 122위(41주차)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2025&targetTime=18",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2024&targetTime=41"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "chart": "멜론 TOP100 / HOT100",
+   "song_or_album": "With",
+   "position_or_value": "1위 (발매 2시간 만)",
+   "detail": "11월 3일 오후 6시 발매, 오후 8시경 TOP100·HOT100 1위. HOT100에서는 수록곡 5곡이 1~5위 줄세우기",
+   "country": "한국",
+   "sources": [
+    "https://khan.co.kr/article/202611041020001",
+    "https://www.complex.com/music/a/alex-ocho/rescene-pulse-korean-charts-top-10"
+   ]
+  },
+  {
+   "date": "2026-11-04",
+   "chart": "멜론 TOP100",
+   "song_or_album": "With 외 수록곡",
+   "position_or_value": "With 1위, 백화요란 5위, Finest Thing 7위, MEME 10위, Dragon 11위",
+   "detail": "11월 4일 오전 10시 기준",
+   "country": "한국",
+   "sources": [
+    "https://khan.co.kr/article/202611041020001"
+   ]
+  },
+  {
+   "date": "2026-11-08",
+   "chart": "멜론 TOP100 / HOT100",
+   "song_or_album": "With",
+   "position_or_value": "1위 6일째",
+   "detail": "11월 8일 오전 9시 기준 실시간 TOP100·HOT100 1위, 발매 후 6일째 선두",
+   "country": "한국",
+   "sources": [
+    "https://news.mtn.co.kr/article/2026110612273080411"
+   ]
+  },
+  {
+   "date": "2026-11-02~2026-11-22",
+   "chart": "멜론 주간차트",
+   "song_or_album": "With",
+   "position_or_value": "3위 (3주 연속)",
+   "detail": "11/2~8, 11/9~15, 11/16~22 모두 3위. 같은 기간 LOVE ATTACK 5→6→7위. 11/16~22 주간 TOP100에 리센느 10곡",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20261102&endDay=20261108",
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20261109&endDay=20261115",
+    "https://www.melon.com/chart/week/index.htm?classCd=GN0000&moved=Y&startDay=20261116&endDay=20261122"
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "chart": "멜론 TOP100 (실시간) 스냅샷",
+   "song_or_album": "RESCENE 전체",
+   "position_or_value": "TOP100 내 10곡 (With 2위, LOVE ATTACK 6위, 백화요란 7위, Deja Vu 8위)",
+   "detail": "2026-11-25 23시 페이지 기준. Pretty Girl 11위, Runaway 16위, Finest Thing 21위, MEME 22위, Pinball 28위, Dragon 29위. 이날 발매된 OST 'Magic'은 TOP100에 없음. 11/24 일간차트도 리센느 10곡 차트인(With 3위)",
+   "country": "한국",
+   "sources": [
+    "https://www.melon.com/chart/index.htm",
+    "https://www.melon.com/chart/day/index.htm"
+   ]
+  },
+  {
+   "date": "2026-11-01~2026-11-07",
+   "chart": "써클차트 주간 디지털차트 (45주차)",
+   "song_or_album": "With",
+   "position_or_value": "2위 (써클지수 18,941,389)",
+   "detail": "발매 첫 주(11/3 발매) 2위, 1위는 A2O 'NEON'",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=45"
+   ]
+  },
+  {
+   "date": "2026-11-08~2026-11-14",
+   "chart": "써클차트 주간 디지털차트 (46주차)",
+   "song_or_album": "With",
+   "position_or_value": "1위 (써클지수 20,169,618)",
+   "detail": "두 번째 주에 1위. 리센느 곡 주간 지수 중 최고치(LOVE ATTACK 최고 17,601,702)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=ALL&termGbn=week&hitYear=2026&targetTime=46",
+    "https://www.gpkorea.com/news/articleView.html?idxno=148795"
+   ]
+  },
+  {
+   "date": "2026-11-01~2026-11-07",
+   "chart": "써클차트 주간 다운로드차트 (45주차)",
+   "song_or_album": "PULSE 수록곡",
+   "position_or_value": "1~5위 독식 (With 1위, 백화요란 2위, Finest Thing 3위, MEME 4위, Dragon 5위)",
+   "detail": "46주차에는 With 2위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2026&targetTime=45",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2026&targetTime=46"
+   ]
+  },
+  {
+   "date": "2026-11-01~2026-11-07",
+   "chart": "써클차트 주간 BGM차트 (45주차)",
+   "song_or_album": "With",
+   "position_or_value": "2위",
+   "detail": "BGM차트에서 수록곡도 13·17·19·21위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1060&termGbn=week&hitYear=2026&targetTime=45"
+   ]
+  },
+  {
+   "date": "2026-11-08~2026-11-14",
+   "chart": "써클차트 주간 글로벌 K-pop 차트",
+   "song_or_album": "With",
+   "position_or_value": "7위 (최고)",
+   "detail": "45주차 8위 → 46주차 7위. 백화요란 32위 → 23위",
+   "country": "글로벌",
+   "sources": [
+    "https://circlechart.kr/page_chart/global.circle?termGbn=week&yyyymmdd=20261101",
+    "https://circlechart.kr/page_chart/global.circle?termGbn=week&yyyymmdd=20261108"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "chart": "한터차트 일간 음반",
+   "song_or_album": "PULSE",
+   "position_or_value": "131,893장 (발매 첫날)",
+   "detail": "첫날 판매량만으로 전작 'lip bomb' 초동(104,406장) 초과",
+   "country": "한국",
+   "sources": [
+    "https://www.complex.com/music/a/alex-ocho/rescene-pulse-korean-charts-top-10",
+    "https://sports.khan.co.kr/en/article/202611101026007"
+   ]
+  },
+  {
+   "date": "2026-11-03~2026-11-09",
+   "chart": "한터차트 초동(발매 첫 주)",
+   "song_or_album": "PULSE",
+   "position_or_value": "602,688장",
+   "detail": "데뷔 첫 하프 밀리언셀러. 전작 'lip bomb' 초동 104,406장 대비 498,282장 증가(약 5.8배). 2026년 하반기 걸그룹 초동 1위로 보도",
+   "country": "한국",
+   "sources": [
+    "https://www.topstarnews.net/news/articleView.html?idxno=16276366",
+    "https://sports.khan.co.kr/en/article/202611101026007",
+    "https://www.fnnews.com/news/202611230830015965"
+   ]
+  },
+  {
+   "date": "2026-11-01~2026-11-14",
+   "chart": "써클차트 주간 앨범차트",
+   "song_or_album": "PULSE",
+   "position_or_value": "45주차: WITHVUU 버전 3위(336,916장)·일반 8위(93,900장)·MINIRECORD 14위(22,770장)",
+   "detail": "써클은 버전별로 따로 집계. 46주차: 일반 15위(56,000장)·WITHVUU 25위·MINIRECORD 26위. 46주차 기준 누적: 일반 150,000 / WITHVUU 349,997 / MINIRECORD 44,273장",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2026&targetTime=45",
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2026&targetTime=46"
+   ]
+  },
+  {
+   "date": "2026-11-22",
+   "chart": "음악방송",
+   "song_or_album": "With",
+   "position_or_value": "SBS 인기가요 2주 연속 1위, 통산 5관왕",
+   "detail": "활동 종료 후 출연 없이 1위. With로 더쇼·쇼챔피언·음악중심·인기가요(2회) 5관왕",
+   "country": "한국",
+   "sources": [
+    "https://www.fnnews.com/news/202611230830015965"
+   ]
+  },
+  {
+   "date": "2026-07~2026-08",
+   "chart": "음악방송",
+   "song_or_album": "LOVE ATTACK / Pretty Girl",
+   "position_or_value": "통산 6관왕 (LOVE ATTACK 2회, Pretty Girl 4회)",
+   "detail": "7/25 MBC 음악중심 'Pretty Girl' 지상파 첫 1위, 7/26 SBS 인기가요 'LOVE ATTACK' 1위",
+   "country": "한국",
+   "sources": [
+    "https://mobile.newsis.com/view/NISX20260726_0003723797",
+    "https://sports.khan.co.kr/en/article/202608171710007",
+    "https://enews.imbc.com/News/RetrieveNewsInfo/518231"
+   ]
+  },
+  {
+   "date": "2026-06",
+   "chart": "한터차트 월간 디지털 음원",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "9위 (디지털 지수 251,171)",
+   "detail": "1~5월 차트 밖에 있다가 6월 월간 9위로 재진입, 자체 최고 지수",
+   "country": "한국",
+   "sources": [
+    "https://www.hanteonews.com/en/article/93403"
+   ]
+  },
+  {
+   "date": "2024-03-24~2024-03-30",
+   "chart": "써클차트 주간 앨범차트",
+   "song_or_album": "Re:Scene (데뷔 싱글, 'UhUh')",
+   "position_or_value": "15위 (22,796장)",
+   "detail": "데뷔 앨범 발매 주. 2024년 3월 월간 앨범 35위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2024&targetTime=13",
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=month&hitYear=2024&targetTime=03"
+   ]
+  },
+  {
+   "date": "2024-08-25~2024-08-31",
+   "chart": "써클차트 주간 앨범차트",
+   "song_or_album": "SCENEDROME (미니 1집, 'LOVE ATTACK')",
+   "position_or_value": "12위 (19,511장)",
+   "detail": "발매 주 순위. 한터 기준 판매량 36,134장(한터뉴스)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2024&targetTime=35",
+    "https://www.hanteonews.com/en/article/93403"
+   ]
+  },
+  {
+   "date": "2025-02",
+   "chart": "써클차트 월간 앨범차트",
+   "song_or_album": "Glow Up (미니 2집)",
+   "position_or_value": "45위 (14,340장)",
+   "detail": "한터 기준 판매량 44,537장(한터뉴스). 타이틀곡 'Glow Up'은 써클 주간 다운로드 25위(2025/2/2~8)",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=month&hitYear=2025&targetTime=02",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2025&targetTime=06",
+    "https://www.hanteonews.com/en/article/93403"
+   ]
+  },
+  {
+   "date": "2025-06-29~2025-07-05",
+   "chart": "써클차트 주간 앨범차트",
+   "song_or_album": "Dearest ('Deja Vu')",
+   "position_or_value": "WITHVUU 버전 8위(33,854장) / 일반 9위(24,406장)",
+   "detail": "한터 기준 판매량 89,594장(한터뉴스). 'Deja Vu'는 발매 당시 써클 다운로드 최고 30위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2025&targetTime=27",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2025&targetTime=27",
+    "https://www.hanteonews.com/en/article/93403"
+   ]
+  },
+  {
+   "date": "2025-11-30~2025-12-06",
+   "chart": "써클차트 주간 앨범차트",
+   "song_or_album": "lip bomb (미니 3집, 'Heart Drop'·'Bloom' 수록)",
+   "position_or_value": "WITHVUU 버전 6위(38,831장)",
+   "detail": "한터 초동 104,406장(첫 10만 장 돌파). 'Bloom' 써클 다운로드 최고 42위, 'Heart Drop' 87위",
+   "country": "한국",
+   "sources": [
+    "https://circlechart.kr/page_chart/album.circle?nationGbn=T&termGbn=week&hitYear=2025&targetTime=49",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2025&targetTime=48",
+    "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020&termGbn=week&hitYear=2025&targetTime=45",
+    "https://sports.khan.co.kr/en/article/202611101026007"
+   ]
+  },
+  {
+   "date": "2026-07-25",
+   "chart": "Billboard Global Excl. U.S.",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "167위 (1주)",
+   "detail": "2026년 7월 25일 자 차트에 신규 진입, 1주 차트인. Global 200에는 진입 기록 없음(5/30~11/7 차트 확인)",
+   "country": "글로벌",
+   "sources": [
+    "https://www.billboard.com/charts/billboard-global-excl-us/2026-07-25/"
+   ]
+  },
+  {
+   "date": "2026-11-14~2026-11-28",
+   "chart": "Billboard Global Excl. U.S.",
+   "song_or_album": "With",
+   "position_or_value": "91위 → 22위 → 67위 (최고 22위)",
+   "detail": "11/14 자 91위 첫 진입 → 11/21 자 22위 → 11/28 자 67위. 11/21 자에는 수록곡 '백화요란(Inside Out)'도 121위 진입",
+   "country": "글로벌",
+   "sources": [
+    "https://www.billboard.com/charts/billboard-global-excl-us/2026-11-14/",
+    "https://www.billboard.com/charts/billboard-global-excl-us/2026-11-21/",
+    "https://www.billboard.com/charts/billboard-global-excl-us/2026-11-28/"
+   ]
+  },
+  {
+   "date": "2026-11-21",
+   "chart": "Billboard Global 200",
+   "song_or_album": "With",
+   "position_or_value": "58위 (첫 진입)",
+   "detail": "리센느 첫 Global 200 진입. 11/28 자 154위(2주째)",
+   "country": "글로벌",
+   "sources": [
+    "https://www.billboard.com/charts/billboard-global-200/2026-11-21/",
+    "https://www.billboard.com/charts/billboard-global-200/2026-11-28/",
+    "https://www.fnnews.com/news/202611230830015965"
+   ]
+  },
+  {
+   "date": "2026-11-06~2026-11-12",
+   "chart": "YouTube 주간 인기곡 차트 (한국)",
+   "song_or_album": "With",
+   "position_or_value": "1위 (8,217,662회)",
+   "detail": "같은 주 백화요란 5위, LOVE ATTACK 11위, Pretty Girl 16위, Deja Vu 18위 등 리센느 9곡 차트인 (주간 종료 2026/11/12)",
+   "country": "한국",
+   "sources": [
+    "https://kworb.net/youtube/insights/kr.html"
+   ]
+  },
+  {
+   "date": "2026-11-12 기준",
+   "chart": "YouTube 주간 인기곡 차트 (한국) 누적",
+   "song_or_album": "LOVE ATTACK",
+   "position_or_value": "최고 1위(2주), 46주 차트인, 누적 86,781,027회",
+   "detail": "Pretty Girl 최고 3위·누적 46,042,746회 / Deja Vu 최고 8위·42,162,899회 / Pinball 최고 19위·19,367,007회",
+   "country": "한국",
+   "sources": [
+    "https://kworb.net/youtube/insights/kr_stats.html"
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "chart": "YouTube 뮤직비디오 조회수 (스냅샷)",
+   "song_or_album": "공식 MV",
+   "position_or_value": "LOVE ATTACK 33,550,420 / Pretty Girl SV 33,974,435 / With 32,089,570 / Deja Vu 27,395,023 / Runaway 22,828,793 / Pinball 11,834,551",
+   "detail": "2026-11-25 유튜브 검색 결과 표시 조회수. With MV는 11/3 공개 후 약 3주 만에 3천만 회 돌파",
+   "country": "글로벌",
+   "sources": [
+    "https://www.youtube.com/watch?v=9XttLI0oH0I",
+    "https://www.youtube.com/watch?v=qZlu2j2SiBA",
+    "https://www.youtube.com/watch?v=pey3E47eSc8",
+    "https://www.youtube.com/watch?v=ZbO9PBdFRdc",
+    "https://www.youtube.com/watch?v=rsZwrTNklos",
+    "https://www.youtube.com/watch?v=B8JJ8RNM-60"
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "chart": "kworb 스트리밍 서비스 종합 (스냅샷)",
+   "song_or_album": "With / LOVE ATTACK / PULSE",
+   "position_or_value": "Spotify 한국 With 4위·LOVE ATTACK 9위 / Shazam 한국 With 2위 / Apple Music 홍콩 앨범 23위·대만 39위",
+   "detail": "kworb 아티스트 페이지(2026-11-25 09:20 EST). With는 Spotify 대만 68위·홍콩 106위, Apple Music 대만 38위·홍콩 56위",
+   "country": "글로벌",
+   "sources": [
+    "https://kworb.net/itunes/artist/rescene.html"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "chart": "Billboard Japan Hot Albums",
+   "song_or_album": "PULSE",
+   "position_or_value": "70위 (첫 진입)",
+   "detail": "11월 16일 자 차트 첫 진입",
+   "country": "일본",
+   "sources": [
+    "https://www.billboard-japan.com/charts/detail?a=hot_albums&year=2026&month=11&day=16"
+   ]
+  },
+  {
+   "date": "2026-11-23",
+   "chart": "Billboard Japan Hot Albums",
+   "song_or_album": "PULSE",
+   "position_or_value": "67위 (2주째)",
+   "detail": "전주 70위에서 상승. Billboard Japan Hot 100(2026/1/26~11/23 자)과 Top Albums Sales(10/26~11/23 자)에는 리센느 기록 없음",
+   "country": "일본",
+   "sources": [
+    "https://www.billboard-japan.com/charts/detail?a=hot_albums&year=2026&month=11&day=23",
+    "https://www.billboard-japan.com/charts/detail?a=hot100&year=2026&month=11&day=23",
+    "https://www.billboard-japan.com/charts/detail?a=top_albums&year=2026&month=11&day=23"
+   ]
+  },
+  {
+   "date": "2026-11-06~2026-11-12",
+   "chart": "YouTube 주간 인기곡 차트 (일본)",
+   "song_or_album": "With",
+   "position_or_value": "59위 (849,484회)",
+   "detail": "주간 차트 신규 진입(NEW), 주간 종료 2026/11/12",
+   "country": "일본",
+   "sources": [
+    "https://kworb.net/youtube/insights/jp.html",
+    "https://kworb.net/youtube/insights/jp_stats.html"
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "chart": "Shazam 일본 (kworb 스냅샷)",
+   "song_or_album": "LOVE ATTACK / With",
+   "position_or_value": "LOVE ATTACK 115위 / With 132위",
+   "detail": "kworb 아티스트 페이지 2026-11-25 기준. YouTube 일본 일간 With 59위",
+   "country": "일본",
+   "sources": [
+    "https://kworb.net/itunes/artist/rescene.html"
+   ]
+  },
+  {
+   "date": "2026-02-04",
+   "chart": "YouTube 일간 쇼츠 인기곡 차트 (일본)",
+   "song_or_album": "ピンボール (Pinball) 일본어 버전",
+   "position_or_value": "38위",
+   "detail": "2026년 1월 21일 발매 일본어 디지털 싱글. 한국 쇼츠 차트는 2월 8일 37위. 일본어판 MV 조회수 181,802회(2026-11-25)",
+   "country": "일본",
+   "sources": [
+    "https://isplus.com/article/view/isp202602190035",
+    "https://www.youtube.com/watch?v=ou2Y2vGKCyY"
+   ]
+  },
+  {
+   "date": "2026-11-16~2026-11-23",
+   "chart": "오리콘 주간 앨범 랭킹",
+   "song_or_album": "PULSE",
+   "position_or_value": "TOP50 밖",
+   "detail": "오리콘 주간 앨범 랭킹 2026-11-16 자·11-23 자 1~50위에 리센느 없음. 2026-02-02·02-09 자 디지털 싱글 랭킹 1~50위에도 Pinball 없음",
+   "country": "일본",
+   "sources": [
+    "https://www.oricon.co.jp/rank/ja/w/2026-11-16/",
+    "https://www.oricon.co.jp/rank/ja/w/2026-11-23/",
+    "https://www.oricon.co.jp/rank/dis/w/2026-02-02/"
+   ]
+  }
+ ],
+ "highlights": [
+  "'LOVE ATTACK'은 2026년 5월 멜론 일간 545위에서 출발해 7월 8일 밤 10시 멜론 TOP100 1위에 올랐습니다. 발매 약 2년 만입니다. (출처: 위키트리·뉴시스)",
+  "5월 28일 새벽 1시, 'LOVE ATTACK'은 338일 만에 멜론 TOP100에 98위로 다시 들어왔습니다. (출처: 위키트리)",
+  "'LOVE ATTACK'은 멜론 주간차트에서 7월 13일 주부터 9월 20일 주까지 10주 연속 1위를 지켰습니다. (출처: 멜론 주간차트)",
+  "'LOVE ATTACK'은 멜론 월간차트에서 8월과 9월 두 달 연속 1위를 했습니다. (출처: 멜론 월간차트)",
+  "써클차트 주간 디지털 1위는 2026년 29주차(7/12~18)가 처음이었습니다. 6주 연속 1위 뒤 38주차에 1위를 되찾아 통산 7주 1위를 기록했습니다. (출처: 써클차트)",
+  "써클차트 주간 스트리밍차트에서는 30~38주차 9주 연속 1위를 했습니다. (출처: 써클차트)",
+  "써클차트 월간 디지털 1위를 8월(써클지수 67,919,418)과 9월(60,438,259) 연속으로 차지했습니다. (출처: 써클차트·이슈인사이트)",
+  "역주행의 배경으로 원이의 유튜브 채널 개설 이후 스트리밍이 최대 2,019% 늘었고, '거제 야호' 밈 이후 멜론 검색 사용자가 6,550% 늘었다는 보도가 있습니다. (출처: 뉴시스)",
+  "9월 써클 월간 디지털차트에서는 LOVE ATTACK 1위, Deja Vu 4위, Pretty Girl 5위로 톱5 안에 리센느 곡이 세 곡이었습니다. (출처: 써클차트)",
+  "미니 4집 'PULSE'는 한터차트 초동 602,688장으로 데뷔 첫 하프 밀리언셀러가 됐습니다. 전작 초동 104,406장의 약 5.8배입니다. (출처: 톱스타뉴스·스포츠경향)",
+  "'PULSE'는 발매 첫날에만 131,893장이 팔려, 하루 만에 전작의 일주일 판매량을 넘었습니다. (출처: Complex·스포츠경향)",
+  "타이틀곡 'With'는 발매 2시간 만에 멜론 TOP100·HOT100 1위에 올랐습니다. HOT100에서는 수록곡 5곡이 1~5위를 모두 차지했습니다. (출처: 경향신문)",
+  "'With'는 써클 주간 디지털 1위(46주차)에 올랐고, 써클지수 20,169,618은 리센느 곡 가운데 최고치입니다. (출처: 써클차트)",
+  "'With'는 빌보드 Global 200에 58위로 처음 진입했습니다. Global Excl. U.S.에서는 91위에서 22위까지 올랐습니다. (출처: Billboard)",
+  "'LOVE ATTACK'도 역주행 한창이던 7월 25일 자 빌보드 Global Excl. U.S.에 167위로 진입했습니다. (출처: Billboard)",
+  "유튜브 한국 주간 인기곡 차트에서 'LOVE ATTACK'은 46주 동안 차트에 머물렀고 누적 8,678만 회를 기록했습니다. 'With'는 차트인 2주 만에 1위를 했습니다. (출처: kworb)",
+  "'With' 공식 뮤직비디오는 공개 약 3주 만에 조회수 3,208만 회를 넘었습니다(11/25 기준). (출처: YouTube)",
+  "일본에서는 'PULSE'가 빌보드 재팬 Hot Albums에 70위로 진입한 뒤 67위로 올랐고, 'With'는 유튜브 일본 주간 차트 59위에 들었습니다. (출처: Billboard JAPAN·kworb)",
+  "11월 25일 밤 11시 멜론 TOP100에는 'With'(2위)를 비롯한 리센느 곡 10곡이 있었습니다. (출처: 멜론)"
+ ],
+ "japan": "일본 주요 차트 성적은 아직 제한적입니다. Billboard JAPAN에서는 미니 4집 'PULSE'가 Hot Albums에 2026년 11월 16일 자 70위로 처음 진입했고, 11월 23일 자 67위로 올랐습니다. Billboard JAPAN Hot 100(2026년 1월 26일~11월 23일 자 전 주 확인)과 Top Albums Sales(10월 26일~11월 23일 자)에는 리센느 기록이 없습니다. 오리콘에서도 주간 앨범 랭킹 11월 16일·23일 자 1~50위에 'PULSE'가 없고, 디지털 싱글 랭킹 2월 2일·9일 자 1~50위에 일본어 싱글 'ピンボール(Pinball)'이 없습니다. 무료로 볼 수 있는 50위까지만 확인했습니다. 스트리밍 계열에서는 유튜브 일본 주간 인기곡 차트에 'With'가 59위(849,484회, 11/6~12 주)로 들었습니다. 일본어판 'Pinball'은 유튜브 일본 일간 쇼츠 인기곡 차트 38위(2/4)를 기록했습니다. Shazam 일본에서는 11월 25일 기준 LOVE ATTACK 115위, With 132위입니다(kworb). 차트 외 일본 활동으로는 2026년 11월 20일 교세라돔 오사카 'MAMA AWARDS' 출연(오리콘 뉴스 보도), 미나미의 일본 드라마 '메리베리러브' 삽입곡 참여가 있습니다. 정리하면 한국에서처럼 1위급 기록은 없습니다. 영상에서는 'With'로 빌보드 재팬 앨범 차트와 유튜브 일본 차트에 처음 이름을 올렸다는 정도로 쓰는 것이 정확합니다.",
+ "blocked": [
+  "search.oricon.co.jp / oricon.co.jp 검색(search/result.php): 연결 실패·403. 아티스트 DB 검색 불가, 랭킹 페이지만 확인",
+  "oricon.co.jp 랭킹: 한 페이지에서 429(요청 과다)가 나와 간격을 두고 1회만 재시도. 스트리밍 랭킹(rank/sts)은 302 리다이렉트로 열람 불가",
+  "music.bugs.co.kr: 연결 실패(000). 벅스 수치는 기사 인용만 사용",
+  "kworb.net Spotify 페이지: 지시대로 접근하지 않음(403 사이트)",
+  "music-flo.com: JS 앱이라 정적 HTML에 차트 데이터 없음. FLO 수치는 기사 인용만 사용",
+  "hanteochart.com: 접속은 되지만(200) JS 렌더링 사이트라 수치 추출 불가. 한터 수치는 기사 인용",
+  "billboard.com south-korea-songs-hotw / japan-songs-hotw: 404(해당 URL 차트 없음)",
+  "kworb.net/youtube/video/{id}: 리센느 MV는 추적 대상이 아니라 404. MV 조회수는 YouTube 검색 결과 표시값 사용"
+ ],
+ "unverified": [
+  "2026-06-01 기준 멜론 순위가 기사마다 다릅니다. 마이데일리는 TOP100 22위·일간 65위, 코리아헤럴드는 TOP100 28위·일간 68위로 보도했습니다.",
+  "멜론 일간 최고 순위: 뉴시스(7/7)는 '일간 최고 3위'로 보도했습니다. 7/26 뉴시스는 '멜론 톱100과 일간 차트 1위'로 보도해 이후 일간 1위를 했을 가능성이 큽니다. 멜론 과거 일간차트는 날짜를 지정해 조회할 수 없어 직접 확인하지 못했습니다.",
+  "'With' 써클 46주차 써클지수: 차트 데이터는 20,169,618, 지피코리아 기사는 '2019만1618'로 다릅니다. 차트 값을 우선했습니다.",
+  "지니 9월 월간 'Deja Vu' 순위: 이즈플러스 기사는 15위, 지니 월간차트 페이지는 14위입니다. 레코드에는 차트 페이지 값을 썼습니다.",
+  "'lip bomb' 판매량: 스포츠경향·Complex·톱스타뉴스는 초동 104,406장, 한터뉴스는 106,513장(기준 미표기)으로 보도했습니다.",
+  "'PULSE' 리미티드·가디언 버전 취소/환불 보도(톱스타뉴스)가 있습니다. 한터 초동 602,688장이 사후 조정됐는지는 확인되지 않았습니다.",
+  "'719계단 역주행, K팝 최초'는 기사·소속사 표현이고 공식 차트 기록 집계는 아닙니다.",
+  "한국 YouTube 주간 차트 'LOVE ATTACK' 누적 스트림이 kworb 페이지 시점에 따라 다르게 보입니다(검색 요약 약 8,200만, 페이지 직접 확인 86,781,027). 레코드에는 직접 확인한 값을 썼습니다.",
+  "'Magic'(11/25 발매, 디즈니 '헥스: 마녀왕국' OST)은 발매 당일이라 차트 기록이 아직 없습니다. 벅스 아티스트 페이지에는 발매일이 2026.11.24로 표기돼 있습니다.",
+  "Billboard JAPAN Hot Albums는 10/26 이전 날짜를 조회하지 않았습니다. 이전 앨범의 차트인 여부는 미확인입니다.",
+  "써클 2024~2025년 일부 주차는 네트워크 오류로 앨범차트가 빠졌을 수 있습니다. 앨범 레코드는 발매 주 위주로만 확인했습니다."
+ ]
+}
